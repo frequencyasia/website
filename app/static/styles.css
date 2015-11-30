@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+}
+
+.c-player {
+  display: flex;
+  flex-direction: row;
+  height: 10vh;
+  background-color: #333;
+}
+
+.c-player__logo {
+  width: 10vw;
+  background-color: red;
+}
+
+.c-player__button {
+  border: none;
+  background: none;
+  color: white;
+  padding: 0 2em;
+}
+
+.c-nav {
+  height: 5vh;
+  background-color: green;
+  display: flex;
+  align-items: center;
+}
+
+.c-nav__item {
+  display: flex;
+  align-items: center;
+  height: 5vh;
+  padding: 0 1em;
+}
+
+.c-container {
+  display: flex;
+  height: 85vh;
+  overflow-y: scroll;
+}
+
