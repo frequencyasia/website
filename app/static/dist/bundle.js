@@ -70,7 +70,7 @@ module.exports = Backbone.Router.extend({
 var Backbone = require('backbone');
 var _ = require("lodash");
 
-var template = "";
+var template = "<section class=\"c-about\">\n  <p>Frequency Asia. Tune In.</p>\n  <p>Frequency Asia is a podcast, label and radio frequency. We’re a platform-community focused on artists sculpting sound in the largest most populous continent in the world.</p>\n  <p>We love to connect musical dots but we thrive on contributions too. We want to get closer to the music in your head – your influences, first loves and lifesavers – we want to help you share the knowledge and passion you have for the music in Asia.</p>\n  <p>Frequency Asia’s main goal is to showcase emerging music across the continent but also provide a context for its evolution. Expect the unexpected with us past, present and future.</p>\n  <p>From Indonesian subtropical punk, to the great walls of Beijing’s future bass clubs, grabbing some Japan blues along the way and stretching over to 70s Iran for some Farsi funk and bospherous beats from Turkey.</p>\n  <p>We are 100% funded by our content creators who are mostly local experts and scene makers themselves meaning you get an honest opinion on what we and they believe is the best music flowing out of Asia today.</p>\n</section>";
 
 module.exports = Backbone.View.extend({
   render: function render() {
@@ -141,13 +141,9 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  setNowPlaying: function setNowPlaying(text, hasError) {
-    this.$('.js-stream-text').text(text);
-  },
-
   getNowPlaying: function getNowPlaying() {
-    var setNowPlaying = function(text) {
-      this.setNowPlaying(text);
+    var setNowPlaying = function(text, hasError) {
+      $('.js-stream-text').text(text);
     };
     $.getJSON("http://airtime.frequency.asia/api/live-info")
       .done(function(data) {
@@ -165,10 +161,49 @@ module.exports = Backbone.View.extend({
 
 });
 },{"backbone":9,"jquery":11,"lodash":12}],7:[function(require,module,exports){
-arguments[4][3][0].apply(exports,arguments)
-},{"backbone":9,"dup":3,"lodash":12}],8:[function(require,module,exports){
-arguments[4][3][0].apply(exports,arguments)
-},{"backbone":9,"dup":3,"lodash":12}],9:[function(require,module,exports){
+'use strict';
+
+var Backbone = require('backbone');
+var _ = require("lodash");
+var $ = require("jquery");
+
+var template = "<% for (var i = 0; i < data.length; i++) { %>\n  <div><%= data[i].name %></div>\n<% } %>";
+
+module.exports = Backbone.View.extend({
+
+  shows: [],
+
+  initialize: function() {
+    var _this = this;
+    $.getJSON("http://127.0.0.1:5000/api/shows/")
+      .done(function(data) {
+        console.log('done');
+        _this.shows = data.shows;
+        _this.render();
+      });
+  },
+
+  render: function render() {
+    console.log(this.shows);
+    this.$el.html(_.template(template)({"data": this.shows}));
+    return this;
+  },
+});
+},{"backbone":9,"jquery":11,"lodash":12}],8:[function(require,module,exports){
+'use strict';
+
+var Backbone = require('backbone');
+var _ = require("lodash");
+
+var template = "";
+
+module.exports = Backbone.View.extend({
+  render: function render() {
+    this.$el.html(_.template(template));
+    return this;
+  }
+});
+},{"backbone":9,"lodash":12}],9:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.3
 
