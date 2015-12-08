@@ -6,8 +6,9 @@ var PlayerView = require('./views/playerView');
 var NavView = require('./views/navView');
 
 window.app = {
+	apiURL: "http://127.0.0.1:5000",
 	init: function () {
-		console.log("init");
+		console.log("init!!");
 		this.views = {
 			playerView: new PlayerView({
 				el: $("#player-container"),
@@ -38,7 +39,7 @@ module.exports = Backbone.Router.extend({
 	routes: {
     "": "loadMainView",
 		"shows": "loadShowListView",
-		"shows/:showId": "loadShowView",
+		"shows/:showSlug": "loadShowView",
 		"about": "loadAboutView",
 	},
 	currentView: null,
@@ -53,8 +54,10 @@ module.exports = Backbone.Router.extend({
 		$("#main-container").html(view.render().el);
   },
 
-	loadShowView: function () {
-		var view = new ShowView();
+	loadShowView: function (showSlug) {
+		var view = new ShowView({
+			slug: showSlug,
+		});
 		$("#main-container").html(view.render().el);
   },
 
@@ -98,7 +101,7 @@ module.exports = Backbone.View.extend({
 var Backbone = require('backbone');
 var _ = require("lodash");
 
-var template = "<div class=\"c-nav__item\">\n  <a href=\"#\">Now Playing</a>\n</div>\n<div class=\"c-nav__item\">\n  <a href=\"#shows\">Shows</a>\n</div>\n<div class=\"c-nav__item\">\n  <a href=\"#about\">About</a>\n</div>";
+var template = "<div class=\"c-nav__item\">\n  <a href=\"#\">Now Playing</a>\n</div>\n<div class=\"c-nav__item--active\">\n  <a href=\"#shows\">Shows</a>\n</div>\n<div class=\"c-nav__item\">\n  <a href=\"#about\">About</a>\n</div>";
 
 module.exports = Backbone.View.extend({
   render: function render() {
@@ -113,24 +116,38 @@ var Backbone = require('backbone');
 var _ = require("lodash");
 
 var $ = require("jquery");
-var template = "<div class=\"c-player__logo\">LOGO</div>\n<audio id=\"stream-player\" src=\"http://airtime.frequency.asia:8000/airtime_128\"></audio>\n<button id=\"play-stream\" class=\"c-player__button\">\n  <i class=\"fa fa-play js-stream-status\"></i>\n</button>\n<p class=\"js-stream-text\"></p>";
+var template = "<audio id=\"stream-player\" src=\"http://airtime.frequency.asia:8000/airtime_128\"></audio>\n<button id=\"play-stream\" class=\"c-player__button\">\n  <i class=\"fa fa-play js-stream-status\"></i>\n</button>\n<p class=\"js-stream-text\"></p>\n<div class=\"c-player__volume\">\n  <input type=\"range\" value=\"8\" data-steps=\"10\" id=\"volume-slider\" />\n</div>";
+var mixcloudTemplate = "<button id=\"load-stream-btn\">Livestream</button>\n<iframe width=\"100%\" height=\"60\" src=\"https://www.mixcloud.com/widget/iframe/?autoplay=1&amp;embed_type=widget_standard&amp;embed_uuid=99755eaf-a63a-4a7d-af25-efbb86e6480b&amp;feed=<%= url %>;hide_cover=1&amp;hide_tracklist=1&amp;light=1&amp;mini=1&amp;replace=0\" frameborder=\"0\"></iframe>\n";
 
 module.exports = Backbone.View.extend({
   apiUrl: "http://airtime.frequency.asia/api/live-info",
   streamSource: "http://airtime.frequency.asia:8000/airtime_128",
   events: {
     "click #play-stream": "toggleStream",
+    "click #load-stream-btn": "reloadStream",
   },
+  mixcloudURL: null,
 
   render: function render() {
     this.$el.html(_.template(template));
     this.getNowPlaying();
+    this.renderVolume();
+    return this;
+  },
+
+  reloadStream: function reloadStream() {
+    this.render();
+    this.toggleStream();
+  },
+
+  renderMixcloudEmbed: function renderMixcloudEmbed() {
+    this.$el.html(_.template(mixcloudTemplate)({url: this.mixcloudURL}));
     return this;
   },
 
   toggleStream: function toggleStream(event) {
     var stream = document.getElementById('stream-player');
-    if (stream.duration > 0 && !stream.paused) {
+    if (!stream.paused) {
       console.log('pause');
       this.$('.js-stream-status').removeClass("fa-pause").addClass("fa-play");
       stream.pause();
@@ -159,6 +176,66 @@ module.exports = Backbone.View.extend({
       });
   },
 
+  renderVolume: function renderVolume() {
+    var $input = $('#volume-slider');
+    var steps = $input.attr('data-steps');
+    var defValue = $input.attr('value');
+    var $slider = $("<div class='vslider'><div class='vslider_bar'></div><ul class='vslider_sticks'></div>").appendTo($input.parent());
+    $input.hide();
+
+    for (var i = 0; i < steps; i++) {
+      var $stick = $('<li><div class="vslider_stick"a></div></li>').appendTo($slider.find('.vslider_sticks'));
+      $stick.on('mouseenter', function(){
+        $(this).addClass('active');
+      }).on('mouseleave', function(){
+        $(this).removeClass('active');
+    });
+
+    var startDrag = function (event) {
+       renderUI(getPercent(event));
+       $(document.body).on('mousemove', onDrag);
+       $(document.body).on('mouseup', stopDrag);
+     },
+     stopDrag = function (event) {
+       $(document.body).off('mouseup', stopDrag);
+       $(document.body).off('mousemove', onDrag);
+     },
+     onDrag = function (event) {
+       var percent = getPercent(event);
+       renderUI(percent);
+       var stream = document.getElementById("stream-player");
+       stream.volume = percent;
+     };
+    }
+    var renderUI = function(percent) {
+      var index = Math.round(percent * steps);
+      index = index < steps ? index : steps;
+
+      $('.vslider_sticks > li').find('div').css('opacity', 0);
+
+      for(var i = 0; i < index; i++) {
+        $('.vslider_sticks > li:eq(' + i + ')').find('div').css('opacity', 1);
+      }
+    };
+    renderUI(defValue);
+
+    var getPercent = function(event) {
+      var percent = (event.pageX - $slider.offset().left) / $('.vslider_sticks').width();
+      percent = percent >= 0 ? percent : 0;
+      percent = percent <= 1 ? percent : 1;
+      return percent;
+    };
+
+    $slider.on('mousedown', startDrag);
+  },
+
+  setMixcloudURL: function setMixcloudURL(url) {
+    if (url !== this.mixcloudURL) {
+      this.mixcloudURL = url;
+      this.renderMixcloudEmbed();
+    }
+  }
+
 });
 },{"backbone":9,"jquery":11,"lodash":12}],7:[function(require,module,exports){
 'use strict';
@@ -167,17 +244,18 @@ var Backbone = require('backbone');
 var _ = require("lodash");
 var $ = require("jquery");
 
-var template = "<% for (var i = 0; i < data.length; i++) { %>\n  <div><%= data[i].name %></div>\n<% } %>";
+var template = "<% for (var i = 0; i < data.length; i++) { %>\n    <a href=\"#shows/<%= data[i].slug %>\" class='post-module'>\n      <div class='thumbnail'>\n        <img src='/static/files/<%= data[i].imagePath %>'>\n      </div>\n      <div class='post-content'>\n        <h1 class='title'><%= data[i].name %></h1>\n        <h2 class='sub_title'><%= data[i].frequency %></h2>\n        <p class='description'><%= data[i].description %></p>\n        <div class='post-meta'>\n          <span class='timestamp'>\n            <i class='fa fa-clock-o'></i>\n            <%= data[i].num_episodes %> Episodes\n          </span>\n        </div>\n      </div>\n    </a>\n<% } %>";
 
 module.exports = Backbone.View.extend({
 
+  tagName: 'section',
+  className: 'o-content-block',
   shows: [],
 
   initialize: function() {
     var _this = this;
-    $.getJSON("http://127.0.0.1:5000/api/shows/")
+    $.getJSON(window.app.apiURL + "/api/shows/")
       .done(function(data) {
-        console.log('done');
         _this.shows = data.shows;
         _this.render();
       });
@@ -186,6 +264,9 @@ module.exports = Backbone.View.extend({
   render: function render() {
     console.log(this.shows);
     this.$el.html(_.template(template)({"data": this.shows}));
+    this.$('.post-module').hover(function() {
+      $(this).find('.description').stop().animate({height: "toggle", opacity: "toggle"}, 300);
+    });
     return this;
   },
 });
@@ -194,16 +275,35 @@ module.exports = Backbone.View.extend({
 
 var Backbone = require('backbone');
 var _ = require("lodash");
+var $ = require("jquery");
 
-var template = "";
+var template = "<% if(data !== undefined) { %>\n  <% for(var i = 0; i < data.episodes.length; i++) { %>\n    <button class=\"js-play-episode\" data-mixcloud=\"<%= data.episodes[i].mixcloud_link %>\"><%= data.episodes[i].name %></button>\n  <% } %>\n<% } %>";
 
 module.exports = Backbone.View.extend({
+
+  events: {
+    'click .js-play-episode': 'onPlayEpisodeClicked',
+  },
+
+  initialize: function(options) {
+    var _this = this;
+    $.getJSON(window.app.apiURL + "/api/shows/" + options.slug)
+      .done(function(data) {
+        _this.showData = data;
+        _this.render();
+      });
+  },
   render: function render() {
-    this.$el.html(_.template(template));
+    console.log(this.showData);
+    this.$el.html(_.template(template)({"data": this.showData}));
     return this;
-  }
+  },
+  onPlayEpisodeClicked: function onPlayEpisodeClicked(event) {
+    var url = this.$(event.currentTarget).data("mixcloud");
+    window.app.views.playerView.setMixcloudURL(url);
+  },
 });
-},{"backbone":9,"lodash":12}],9:[function(require,module,exports){
+},{"backbone":9,"jquery":11,"lodash":12}],9:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.3
 

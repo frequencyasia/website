@@ -1,0 +1,5 @@
+<% if(data !== undefined) { %>
+  <% for(var i = 0; i < data.episodes.length; i++) { %>
+    <button class="js-play-episode" data-mixcloud="<%= data.episodes[i].mixcloud_link %>"><%= data.episodes[i].name %></button>
+  <% } %>
+<% } %>

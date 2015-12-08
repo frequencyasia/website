@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   </head>
   <body>
-    <header>
-      <aside id="player-container" class="c-player"></aside>
-      <nav id="nav-container" class="c-nav"></nav>
+    <header class="c-header">
+      <img class="c-header__logo" src="/static/testlogo.png" />
+      <div class="c-header__content">
+        <aside id="player-container" class="c-player"></aside>
+        <nav id="nav-container" class="c-nav"></nav>
+      </div>
     </header>
     <div id="main-container" class="c-container"></div>
     <script src="{{ url_for('static', filename='dist/bundle.js') }}"></script>

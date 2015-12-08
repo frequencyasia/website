@@ -1,0 +1,28 @@
+{
+  "name": "frequencyasia",
+  "version": "0.0.1",
+  "description": "Frequency Asia website",
+  "main": "js/app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "backbone": "^1.2.3",
+    "brfs": "^1.4.1",
+    "browserify": "^12.0.1",
+    "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.6.1"
+  },
+  "dependencies": {
+    "jplayer": "^2.9.2",
+    "jquery": "^2.1.4",
+    "lodash": "^3.10.1"
+  }
+}
