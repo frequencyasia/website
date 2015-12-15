@@ -7,6 +7,8 @@ var fs = require("fs");
 var template = fs.readFileSync(__dirname + '/../templates/show.ejs', 'utf8');
 
 module.exports = Backbone.View.extend({
+  className: 'o-content-block',
+  tagName: 'section',
 
   events: {
     'click .js-play-episode': 'onPlayEpisodeClicked',

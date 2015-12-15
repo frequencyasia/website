@@ -337,9 +337,11 @@ var Backbone = require('backbone');
 var _ = require("lodash");
 var $ = require("jquery");
 
-var template = "<section>\n  <div class=\"row\">\n    <div class=\"col\">\n      <% if(data !== undefined) { %>\n        <h2><%= data.name %></h2>\n        <% for(var i = 0; i < data.episodes.length; i++) { %>\n          <span class=\"c-show-title js-play-episode\" data-mixcloud=\"<%= data.episodes[i].mixcloud_link %>\"><%= data.episodes[i].name %></span>\n        <% } %>\n      <% } %>\n    </div>\n  </div>\n</section>\n";
+var template = "<div class=\"row\">\n  <div class=\"col\">\n    <% if(data !== undefined) { %>\n      <h2><%= data.name %></h2>\n      <% for(var i = 0; i < data.episodes.length; i++) { %>\n        <span class=\"c-show-title js-play-episode\" data-mixcloud=\"<%= data.episodes[i].mixcloud_link %>\"><%= data.episodes[i].name %></span>\n      <% } %>\n    <% } %>\n  </div>\n</div>";
 
 module.exports = Backbone.View.extend({
+  className: 'o-content-block',
+  tagName: 'section',
 
   events: {
     'click .js-play-episode': 'onPlayEpisodeClicked',

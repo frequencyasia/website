@@ -250,3 +250,9 @@ body {
   transition: opacity 50ms ease-out;
 }
 
+.c-show-title {
+  cursor: pointer;
+}
+.c-show-title:hover {
+  text-decoration: underline;
+}
