@@ -6,6 +6,7 @@ var NavView = require('./views/navView');
 
 window.app = {
 	apiURL: "http://beta.frequency.asia",
+	airtimeURL: "http://airtime.frequency.asia",
 	init: function () {
 		console.log("init!!");
 		this.views = {
@@ -20,6 +21,9 @@ window.app = {
 		this.views.navView.render();
 		// Create and fire up the router
 		this.router = new Router();
+		this.router.on("route", function(route, params) {
+		  window.app.views.navView.setActivePage();
+		});
 		Backbone.history.start();
 	}
 };

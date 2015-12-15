@@ -5,6 +5,7 @@ var MainView = require('./views/mainView');
 var ShowListView = require('./views/showListView');
 var ShowView = require('./views/showView');
 var AboutView = require('./views/aboutView');
+var ScheduleView = require('./views/scheduleView');
 
 module.exports = Backbone.Router.extend({
 	routes: {
@@ -12,6 +13,7 @@ module.exports = Backbone.Router.extend({
 		"shows": "loadShowListView",
 		"shows/:showSlug": "loadShowView",
 		"about": "loadAboutView",
+		"schedule": 'loadScheduleView'
 	},
 	currentView: null,
 
@@ -35,6 +37,12 @@ module.exports = Backbone.Router.extend({
 	loadAboutView: function () {
 		var view = new AboutView();
 		$("#main-container").html(view.render().el);
+  },
+
+	loadScheduleView: function () {
+		var view = new ScheduleView();
+		$("#main-container").html(view.render().el);
+		view.getSchedule();
   },
 
 });

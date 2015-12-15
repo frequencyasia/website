@@ -5,7 +5,7 @@ body {
 .c-header {
   display: flex;
   flex-direction: row;
-  background-color: #E66000;
+  background-color: #2B2E36;
   -webkit-box-shadow: 0px 7px 16px -8px rgba(0,0,0,0.62);
   -moz-box-shadow: 0px 7px 16px -8px rgba(0,0,0,0.62);
   box-shadow: 0px 7px 16px -8px rgba(0,0,0,0.62);
@@ -26,7 +26,7 @@ body {
   display: flex;
   flex-direction: row;
   height: 10vh;
-  background-color: #E66000;
+  background-color: #2B2E36;
   align-items: center;
   color: white;
 }
@@ -40,7 +40,7 @@ body {
 
 .c-nav {
   height: 5vh;
-  background-color: #E66000;
+  background-color: #2B2E36;
   display: flex;
   align-items: center;
 }
@@ -52,13 +52,13 @@ body {
   padding: 0 1em;
 }
 
-.c-nav__item a, .c-nav__item a:visited, .c-nav__item--active a, .c-nav__item--active a:visited {
-  color: black;
+.c-nav__item a, .c-nav__item a:visited  {
+  color: #E1E7E8;
   text-decoration: none;
 }
 
 .c-nav__item:hover {
-  background-color: #92460F;
+  background-color: #B5B1AE;
 }
 
 .c-nav__item--active {
@@ -66,18 +66,23 @@ body {
   align-items: center;
   height: 5vh;
   padding: 0 1em;
-  background-color: #92460F;
+  background-color: #E1E7E8;
+}
+.c-nav__item:hover a, .c-nav__item--active a, .c-nav__item--active a:visited {
+  color: #2B2E36;
+  text-decoration: none;
 }
 
 .c-container {
   display: flex;
-  height: 85vh;
+  height: 80vh;
   overflow-y: scroll;
 }
 
 .o-content-block {
   display: flex;
-  margin: 1vh 5vw;
+  margin: 1vh auto;
+  width: 75vw;
   flex-wrap: wrap;
   justify-content: space-between;
 }
