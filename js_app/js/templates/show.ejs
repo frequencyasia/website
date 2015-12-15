@@ -1,5 +1,12 @@
-<% if(data !== undefined) { %>
-  <% for(var i = 0; i < data.episodes.length; i++) { %>
-    <button class="js-play-episode" data-mixcloud="<%= data.episodes[i].mixcloud_link %>"><%= data.episodes[i].name %></button>
-  <% } %>
-<% } %>
+<section>
+  <div class="row">
+    <div class="col">
+      <% if(data !== undefined) { %>
+        <h2><%= data.name %></h2>
+        <% for(var i = 0; i < data.episodes.length; i++) { %>
+          <span class="c-show-title js-play-episode" data-mixcloud="<%= data.episodes[i].mixcloud_link %>"><%= data.episodes[i].name %></span>
+        <% } %>
+      <% } %>
+    </div>
+  </div>
+</section>

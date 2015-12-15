@@ -337,7 +337,7 @@ var Backbone = require('backbone');
 var _ = require("lodash");
 var $ = require("jquery");
 
-var template = "<% if(data !== undefined) { %>\n  <% for(var i = 0; i < data.episodes.length; i++) { %>\n    <button class=\"js-play-episode\" data-mixcloud=\"<%= data.episodes[i].mixcloud_link %>\"><%= data.episodes[i].name %></button>\n  <% } %>\n<% } %>";
+var template = "<section>\n  <div class=\"row\">\n    <div class=\"col\">\n      <% if(data !== undefined) { %>\n        <h2><%= data.name %></h2>\n        <% for(var i = 0; i < data.episodes.length; i++) { %>\n          <span class=\"c-show-title js-play-episode\" data-mixcloud=\"<%= data.episodes[i].mixcloud_link %>\"><%= data.episodes[i].name %></span>\n        <% } %>\n      <% } %>\n    </div>\n  </div>\n</section>\n";
 
 module.exports = Backbone.View.extend({
 
@@ -354,7 +354,6 @@ module.exports = Backbone.View.extend({
       });
   },
   render: function render() {
-    console.log(this.showData);
     this.$el.html(_.template(template)({"data": this.showData}));
     return this;
   },

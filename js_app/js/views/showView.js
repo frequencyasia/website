@@ -21,7 +21,6 @@ module.exports = Backbone.View.extend({
       });
   },
   render: function render() {
-    console.log(this.showData);
     this.$el.html(_.template(template)({"data": this.showData}));
     return this;
   },
