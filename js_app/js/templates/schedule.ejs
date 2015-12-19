@@ -1,12 +1,8 @@
 <div class="column">
-<% for(var i = 0; i < schedule.length; i++) { %>
-
-<h2><%= schedule[i].heading %></h2>
-
-<% for(var j = 0; j < schedule[i].shows.length; j++) { %>
-  <h3><%= schedule[i].shows[j].scheduleTime %> - <a href="url"><%= schedule[i].shows[j].name %></a></h3>
-  <p><%= schedule[i].shows[j].description %></p>
-<% } %>
-
-<% } %>
+  <% for(var i = 0; i < schedule.length; i++) { %>
+    <h1><%= schedule[i].heading %></h1>
+      <% for(var j = 0; j < schedule[i].shows.length; j++) { %>
+        <p><%= schedule[i].shows[j].scheduleTime %> / <a href="url"><%= schedule[i].shows[j].name %></a></p>
+      <% } %>
+  <% } %>
 </div>

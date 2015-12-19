@@ -22,7 +22,6 @@ module.exports = Backbone.View.extend({
   },
 
   render: function render() {
-    console.log(this.shows);
     this.$el.html(_.template(template)({"data": this.shows}));
     this.$('.post-module').hover(function() {
       $(this).find('.description').stop().animate({height: "toggle", opacity: "toggle"}, 300);

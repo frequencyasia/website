@@ -6,7 +6,8 @@ var PlayerView = require('./views/playerView');
 var NavView = require('./views/navView');
 
 window.app = {
-	apiURL: "http://beta.frequency.asia",
+	apiURL: "http://127.0.0.1:5000",
+	// apiURL: "http://beta.frequency.asia",
 	airtimeURL: "http://airtime.frequency.asia",
 	init: function () {
 		console.log("init!!");
@@ -85,7 +86,7 @@ module.exports = Backbone.Router.extend({
 var Backbone = require('backbone');
 var _ = require("lodash");
 
-var template = "<section class=\"c-about\">\n  <div class=\"row\">\n    <div class=\"col\">\n      <p>Frequency Asia. Tune In.</p>\n      <p>Frequency Asia is a podcast, label and radio frequency. We’re a platform-community focused on artists sculpting sound in the largest most populous continent in the world.</p>\n      <p>We love to connect musical dots but we thrive on contributions too. We want to get closer to the music in your head – your influences, first loves and lifesavers – we want to help you share the knowledge and passion you have for the music in Asia.</p>\n      <p>Frequency Asia’s main goal is to showcase emerging music across the continent but also provide a context for its evolution. Expect the unexpected with us past, present and future.</p>\n      <p>From Indonesian subtropical punk, to the great walls of Beijing’s future bass clubs, grabbing some Japan blues along the way and stretching over to 70s Iran for some Farsi funk and bospherous beats from Turkey.</p>\n      <p>We are 100% funded by our content creators who are mostly local experts and scene makers themselves meaning you get an honest opinion on what we and they believe is the best music flowing out of Asia today.</p>\n    </div>\n  </div>\n</section>";
+var template = "<section class=\"c-about\">\n  <div class=\"row\">\n    <div class=\"col\">\n      <h1>FREQUENCY ASIA. TUNE IN.</h1>\n      <p>Frequency Asia is a podcast, label and radio frequency. We’re a platform-community focused on artists sculpting sound in the largest most populous continent in the world.</p>\n      <p>We love to connect musical dots but we thrive on contributions too. We want to get closer to the music in your head – your influences, first loves and lifesavers – we want to help you share the knowledge and passion you have for the music in Asia.</p>\n      <p>Frequency Asia’s main goal is to showcase emerging music across the continent but also provide a context for its evolution. Expect the unexpected with us past, present and future.</p>\n      <p>From Indonesian subtropical punk, to the great walls of Beijing’s future bass clubs, grabbing some Japan blues along the way and stretching over to 70s Iran for some Farsi funk and bospherous beats from Turkey.</p>\n      <p>We are 100% funded by our content creators who are mostly local experts and scene makers themselves meaning you get an honest opinion on what we and they believe is the best music flowing out of Asia today.</p>\n    </div>\n  </div>\n</section>";
 
 module.exports = Backbone.View.extend({
   className: 'o-content-block',
@@ -96,15 +97,29 @@ module.exports = Backbone.View.extend({
   }
 });
 },{"backbone":10,"lodash":13}],4:[function(require,module,exports){
-arguments[4][3][0].apply(exports,arguments)
-},{"backbone":10,"dup":3,"lodash":13}],5:[function(require,module,exports){
+'use strict';
+
+var Backbone = require('backbone');
+var _ = require("lodash");
+
+var template = "<section class=\"c-about\">\n  <div class=\"row\">\n    <div class=\"col\">\n      <p>Frequency Asia. Tune In.</p>\n      <p>Frequency Asia is a podcast, label and radio frequency. We’re a platform-community focused on artists sculpting sound in the largest most populous continent in the world.</p>\n      <p>We love to connect musical dots but we thrive on contributions too. We want to get closer to the music in your head – your influences, first loves and lifesavers – we want to help you share the knowledge and passion you have for the music in Asia.</p>\n      <p>Frequency Asia’s main goal is to showcase emerging music across the continent but also provide a context for its evolution. Expect the unexpected with us past, present and future.</p>\n      <p>From Indonesian subtropical punk, to the great walls of Beijing’s future bass clubs, grabbing some Japan blues along the way and stretching over to 70s Iran for some Farsi funk and bospherous beats from Turkey.</p>\n      <p>We are 100% funded by our content creators who are mostly local experts and scene makers themselves meaning you get an honest opinion on what we and they believe is the best music flowing out of Asia today.</p>\n    </div>\n  </div>\n</section>";
+
+module.exports = Backbone.View.extend({
+  className: 'o-content-block',
+  
+  render: function render() {
+    this.$el.html(_.template(template));
+    return this;
+  }
+});
+},{"backbone":10,"lodash":13}],5:[function(require,module,exports){
 'use strict';
 
 var Backbone = require('backbone');
 var _ = require("lodash");
 
 var $ = require("jquery");
-var template = "<div class=\"c-nav__item js-nav-item\">\n  <a href=\"#\">Home</a>\n</div>\n<div class=\"c-nav__item js-nav-item\">\n  <a href=\"#shows\">Shows</a>\n</div>\n<div class=\"c-nav__item js-nav-item\">\n  <a href=\"#schedule\">Schedule</a>\n</div>\n<div class=\"c-nav__item js-nav-item\">\n  <a href=\"#about\">About</a>\n</div>";
+var template = "<div class=\"c-nav__item js-nav-item\">\n  <a href=\"#\">home</a>\n</div>\n<div class=\"c-nav__item js-nav-item\">\n  <a href=\"#shows\">shows</a>\n</div>\n<div class=\"c-nav__item js-nav-item\">\n  <a href=\"#schedule\">schedule</a>\n</div>\n<div class=\"c-nav__item js-nav-item\">\n  <a href=\"#about\">about</a>\n</div>";
 
 module.exports = Backbone.View.extend({
   render: function render() {
@@ -126,7 +141,7 @@ var _ = require("lodash");
 
 var $ = require("jquery");
 var template = "<audio id=\"stream-player\" src=\"http://airtime.frequency.asia:8000/airtime_128\"></audio>\n<button id=\"play-stream\" class=\"c-player__button\">\n  <i class=\"fa fa-play js-stream-status\"></i>\n</button>\n<p class=\"js-stream-text\"></p>\n<div class=\"c-player__volume\">\n  <input type=\"range\" value=\"8\" data-steps=\"10\" id=\"volume-slider\" />\n</div>";
-var mixcloudTemplate = "<button id=\"load-stream-btn\">Livestream</button>\n<iframe width=\"100%\" height=\"60\" src=\"https://www.mixcloud.com/widget/iframe/?autoplay=1&amp;embed_type=widget_standard&amp;embed_uuid=99755eaf-a63a-4a7d-af25-efbb86e6480b&amp;feed=<%= url %>;hide_cover=1&amp;hide_tracklist=1&amp;light=1&amp;mini=1&amp;replace=0\" frameborder=\"0\"></iframe>\n";
+var mixcloudTemplate = "<button id=\"load-stream-btn\" class=\"c-player__button\">\n  <i class=\"fa fa-undo\"></i>\n</button>\n<iframe width=\"100%\" height=\"60\" src=\"https://www.mixcloud.com/widget/iframe/?autoplay=1&amp;embed_type=widget_standard&amp;embed_uuid=99755eaf-a63a-4a7d-af25-efbb86e6480b&amp;feed=<%= url %>;hide_cover=1&amp;hide_tracklist=1&amp;light=1&amp;mini=1&amp;replace=0\" frameborder=\"0\"></iframe>\n";
 
 module.exports = Backbone.View.extend({
   apiUrl: "http://airtime.frequency.asia/api/live-info",
@@ -254,7 +269,7 @@ var _ = require("lodash");
 
 var $ = require("jquery");
 var moment = require("moment");
-var template = "<div class=\"column\">\n<% for(var i = 0; i < schedule.length; i++) { %>\n\n<h2><%= schedule[i].heading %></h2>\n\n<% for(var j = 0; j < schedule[i].shows.length; j++) { %>\n  <h3><%= schedule[i].shows[j].scheduleTime %> - <a href=\"url\"><%= schedule[i].shows[j].name %></a></h3>\n  <p><%= schedule[i].shows[j].description %></p>\n<% } %>\n\n<% } %>\n</div>";
+var template = "<div class=\"column\">\n  <% for(var i = 0; i < schedule.length; i++) { %>\n    <h1><%= schedule[i].heading %></h1>\n      <% for(var j = 0; j < schedule[i].shows.length; j++) { %>\n        <p><%= schedule[i].shows[j].scheduleTime %> / <a href=\"url\"><%= schedule[i].shows[j].name %></a></p>\n      <% } %>\n  <% } %>\n</div>";
 
 module.exports = Backbone.View.extend({
   className: 'o-content-block',
@@ -282,13 +297,13 @@ module.exports = Backbone.View.extend({
     delete this.scheduleData.AIRTIME_API_VERSION
     for (var key of _.keys(this.scheduleData)) {
       var data = {
-        heading: moment(date).format('dddd, MMMM Do'),
+        heading: moment(date).format('dddd / MMMM D').toUpperCase(),
         shows: this.scheduleData[key]
       };
       for (var show of data.shows) {
         var startTime = moment(show.start_timestamp);
         var endTime = moment(show.end_timestamp);
-        show.scheduleTime = startTime.format('HH:mm') + " - " + endTime.format('HH:mm');
+        show.scheduleTime = startTime.format('HHmm') + " - " + endTime.format('HHmm');
       }
       parsedSchedule.push(data);
       date = new Date(date.getTime() + 60 * 60 * 24 * 1000);
@@ -304,7 +319,7 @@ var Backbone = require('backbone');
 var _ = require("lodash");
 var $ = require("jquery");
 
-var template = "<% for (var i = 0; i < data.length; i++) { %>\n    <a href=\"#shows/<%= data[i].slug %>\" class='post-module'>\n      <div class='thumbnail'>\n        <img src='/static/files/<%= data[i].imagePath %>'>\n      </div>\n      <div class='post-content'>\n        <h1 class='title'><%= data[i].name %></h1>\n        <h2 class='sub_title'><%= data[i].frequency %></h2>\n        <p class='description'><%= data[i].description %></p>\n        <div class='post-meta'>\n          <span class='timestamp'>\n            <i class='fa fa-clock-o'></i>\n            <%= data[i].num_episodes %> Episodes\n          </span>\n        </div>\n      </div>\n    </a>\n<% } %>";
+var template = "<% for (var i = 0; i < data.length; i++) { %>\n    <a href=\"#shows/<%= data[i].slug %>\" class='post-module'>\n      <div class='thumbnail'>\n        <img src='/static/files/<%= data[i].imagePath %>'>\n      </div>\n      <div class='post-content'>\n        <h1 class='title'><%= data[i].name %></h1>\n        <h2 class='sub_title'><%= data[i].frequency %></h2>\n        <p class='description'><%= data[i].description %></p>\n        <div class='post-meta'>\n          <span class='timestamp'>\n            <% if (data[i].num_episodes == 1) { %>\n              1 Episode\n            <% } else { %>\n              <%= data[i].num_episodes %> Episodes\n            <% } %>\n          </span>\n        </div>\n      </div>\n    </a>\n<% } %>";
 
 module.exports = Backbone.View.extend({
 
@@ -322,7 +337,6 @@ module.exports = Backbone.View.extend({
   },
 
   render: function render() {
-    console.log(this.shows);
     this.$el.html(_.template(template)({"data": this.shows}));
     this.$('.post-module').hover(function() {
       $(this).find('.description').stop().animate({height: "toggle", opacity: "toggle"}, 300);
@@ -337,7 +351,7 @@ var Backbone = require('backbone');
 var _ = require("lodash");
 var $ = require("jquery");
 
-var template = "<div class=\"row\">\n  <div class=\"col\">\n    <% if(data !== undefined) { %>\n      <h2><%= data.name %></h2>\n      <% for(var i = 0; i < data.episodes.length; i++) { %>\n        <span class=\"c-show-title js-play-episode\" data-mixcloud=\"<%= data.episodes[i].mixcloud_link %>\"><%= data.episodes[i].name %></span>\n      <% } %>\n    <% } %>\n  </div>\n</div>";
+var template = "<div class=\"row\">\n  <div class=\"col\">\n    <% if(data !== undefined) { %>\n      <picture class=\"intrinsic intrinsic--16x9\">\n        <source media=\"(min-width: 500px)\" srcset=\"large.jpg\">\n        <img class=\"intrinsic-item\" srcset=\"small.jpg\" alt=\"\">\n      </picture>\n      <h2><%= data.name %></h2>\n      <% for(var i = 0; i < data.episodes.length; i++) { %>\n        <span class=\"c-show-title js-play-episode\" data-mixcloud=\"<%= data.episodes[i].mixcloud_link %>\"><%= data.episodes[i].name %></span>\n      <% } %>\n    <% } %>\n  </div>\n</div>";
 
 module.exports = Backbone.View.extend({
   className: 'o-content-block',
@@ -355,10 +369,12 @@ module.exports = Backbone.View.extend({
         _this.render();
       });
   },
+
   render: function render() {
     this.$el.html(_.template(template)({"data": this.showData}));
     return this;
   },
+
   onPlayEpisodeClicked: function onPlayEpisodeClicked(event) {
     var url = this.$(event.currentTarget).data("mixcloud");
     window.app.views.playerView.setMixcloudURL(url);

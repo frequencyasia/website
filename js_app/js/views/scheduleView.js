@@ -33,13 +33,13 @@ module.exports = Backbone.View.extend({
     delete this.scheduleData.AIRTIME_API_VERSION
     for (var key of _.keys(this.scheduleData)) {
       var data = {
-        heading: moment(date).format('dddd, MMMM Do'),
+        heading: moment(date).format('dddd / MMMM D').toUpperCase(),
         shows: this.scheduleData[key]
       };
       for (var show of data.shows) {
         var startTime = moment(show.start_timestamp);
         var endTime = moment(show.end_timestamp);
-        show.scheduleTime = startTime.format('HH:mm') + " - " + endTime.format('HH:mm');
+        show.scheduleTime = startTime.format('HHmm') + " - " + endTime.format('HHmm');
       }
       parsedSchedule.push(data);
       date = new Date(date.getTime() + 60 * 60 * 24 * 1000);

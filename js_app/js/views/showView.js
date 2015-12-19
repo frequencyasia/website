@@ -22,10 +22,12 @@ module.exports = Backbone.View.extend({
         _this.render();
       });
   },
+
   render: function render() {
     this.$el.html(_.template(template)({"data": this.showData}));
     return this;
   },
+
   onPlayEpisodeClicked: function onPlayEpisodeClicked(event) {
     var url = this.$(event.currentTarget).data("mixcloud");
     window.app.views.playerView.setMixcloudURL(url);
