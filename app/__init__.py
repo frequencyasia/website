@@ -54,4 +54,4 @@ class EpisodeView(ModelView):
 # ADMIN STUFF
 admin = Admin(app, name='microblog', template_mode='bootstrap3')
 admin.add_view(ShowView(models.Show, db.session))
-admin.add_view(ModelView(models.Episode, db.session))
+admin.add_view(EpisodeView(models.Episode, db.session))
