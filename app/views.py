@@ -16,6 +16,7 @@ def new_episodes():
     for episode in Episode.query.filter_by(showcase=True).all():
         d = episode.to_api_dict()
         d['show'] = episode.getShow()
+        d['image'] = episode.getImage()
         data["items"].append(d)
     return jsonify(data)
 

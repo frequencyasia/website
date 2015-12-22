@@ -42,6 +42,11 @@ class Episode(db.Model):
     def getShow(self):
         return Show.query.get(self.show_id).name
 
+    def getImage(self):
+        if self.image_path:
+            return self.image_path
+        return Show.query.get(self.show_id).imagePath
+
     def to_api_dict(self):
         return {
             "name": self.name,
