@@ -454,12 +454,17 @@ a:hover {
   color: rgb(239, 91, 48);
 }
 
+.c-episode__content__info {
+  padding: 0 20px;
+}
+
 .c-episode__content__title {
   border: none;
   margin: 0;
 }
 
 .c-episode__content__image {
+  max-width: 250px;
   max-height: 150px;
   margin-left: auto;
 }
