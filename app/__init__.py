@@ -36,6 +36,21 @@ class ShowView(ModelView):
         }
     }
 
+class EpisodeView(ModelView):
+    # Override form field to use Flask-Admin FileUploadField
+    form_overrides = {
+        'image_path': form.FileUploadField
+    }
+
+    # Pass additional parameters to 'path' to FileUploadField constructor
+    form_args = {
+        'image_path': {
+            'label': 'Image',
+            'base_path': file_path,
+            'allow_overwrite': False
+        }
+    }
+
 # ADMIN STUFF
 admin = Admin(app, name='microblog', template_mode='bootstrap3')
 admin.add_view(ShowView(models.Show, db.session))
