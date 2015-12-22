@@ -2,6 +2,7 @@
 
 var watchify = require('watchify');
 var browserify = require('browserify');
+var babelify = require('babelify');
 var gulp = require('gulp');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
@@ -14,7 +15,7 @@ var brfs = require('brfs');
 var customOpts = {
   entries: ['./js/app.js'],
   debug: true,
-  transform: [brfs],
+  transform: [brfs, [babelify, {presets: ["es2015"]}]],
 };
 var opts = assign({}, watchify.args, customOpts);
 var b = watchify(browserify(opts));

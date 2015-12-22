@@ -15,6 +15,9 @@ module.exports = Backbone.View.extend({
   setActivePage: function setActivePage() {
     $(".js-nav-item").removeClass("c-nav__item--active").addClass("c-nav__item")
     var url = "#" + window.location.href.split("#")[1];
-    $('.js-nav-item a[href=' + url + ']').parent().removeClass('c-nav__item').addClass('c-nav__item--active');
+    var $navItem = $('.js-nav-item a[href="' + url + '"]');
+    if ($navItem.length) {
+      $navItem.parent().removeClass('c-nav__item').addClass('c-nav__item--active');
+    }
   },
 });

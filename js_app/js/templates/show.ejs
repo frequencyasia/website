@@ -1,14 +1,30 @@
-<div class="row">
-  <div class="col">
-    <% if(data !== undefined) { %>
-      <picture class="intrinsic intrinsic--16x9">
-        <source media="(min-width: 500px)" srcset="large.jpg">
-        <img class="intrinsic-item" srcset="small.jpg" alt="">
-      </picture>
-      <h2><%= data.name %></h2>
-      <% for(var i = 0; i < data.episodes.length; i++) { %>
-        <span class="c-show-title js-play-episode" data-mixcloud="<%= data.episodes[i].mixcloud_link %>"><%= data.episodes[i].name %></span>
-      <% } %>
+<aside class="c-show__sidebar">
+  <% if(data !== undefined) { %>
+    <img class="c-show__sidebar__image" src='/static/files/<%= data.imagePath %>'>
+    <h1 class="c-show__sidebar__title"><%= data.name %></h1>
+    <p><%= data.description %></p>
+  <% } %>
+</aside>
+<section class="c-show__episodes">
+  <% if(data !== undefined) { %>
+    <% for(var i = 0; i < data.episodes.length; i++) { %>
+      <article class="c-episode">
+        <div class="c-episode__content">
+          <div class="c-episode__content__play js-play-episode" data-mixcloud="<%= data.episodes[i].mixcloud_link %>">
+            <i class="fa fa-4x fa-play-circle-o"></i>
+          </div>
+          <div class="c-episode__content__info">
+            <h1 class="c-episode__content__title"><%= data.episodes[i].name %></h1>
+            <p><%= data.episodes[i].tagline %></p>
+            <p class="c-episode__content__date"><%= data.episodes[i].date %></p>
+          </div>
+          <% if(data.episodes[i].episode_image) { %>
+            <img class="c-episode__content__image" src='/static/files/<%= data.episodes[i].episode_image %>'/>
+          <% } %>
+        </div>
+        <div class="c-episode__description-toggle">+ More Info</div>
+        <div class="c-episode__description" style="display: none"><%= data.episodes[i].description %></div>
+      </article>
     <% } %>
-  </div>
-</div>
+  <% } %>
+</section>

@@ -20,6 +20,7 @@ module.exports = Backbone.Router.extend({
   loadMainView: function () {
     var view = new MainView();
 		$("#main-container").html(view.render().el);
+		view.getShowcaseItems();
   },
 
 	loadShowListView: function () {
