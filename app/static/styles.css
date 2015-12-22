@@ -409,6 +409,7 @@ a:hover {
 
 .c-show__episodes {
   flex-grow: 1;
+  flex-basis: 0;
   padding: 2em 3em;
 }
 
