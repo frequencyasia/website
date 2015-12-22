@@ -24,6 +24,8 @@ module.exports = Backbone.View.extend({
   },
 
   reloadStream: function reloadStream() {
+    // Go from Mixcloud player to stream player.
+    this.mixcloudURL = null;
     this.render();
     this.toggleStream();
   },

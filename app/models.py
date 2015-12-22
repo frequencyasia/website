@@ -39,6 +39,9 @@ class Episode(db.Model):
     image_path = db.Column(db.Unicode(255))
     show_id = db.Column(db.Integer, db.ForeignKey('show.id'))
 
+    def getShow(self):
+        return Show.query.get(self.show_id).name
+
     def to_api_dict(self):
         return {
             "name": self.name,

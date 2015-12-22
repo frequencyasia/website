@@ -34,13 +34,14 @@ module.exports = Backbone.View.extend({
     });
     this.$('.c-episode__description-toggle').click((event) => {
       var $el = $(event.currentTarget)
-      if ($el.next().is(":visible")) {
-        $el.next().slideUp();
+      if ($el.next().hasClass("c-episode__description--toggled")) {
+        $el.next().removeClass("c-episode__description--toggled");
         $el.text('+ More Info');
       } else {
-        $el.next().slideDown();
+        $el.next().addClass("c-episode__description--toggled");
         $el.text('- Less Info');
       }
+
     });
     return this;
   },

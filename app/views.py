@@ -14,7 +14,9 @@ def new_episodes():
      "items": []
     }
     for episode in Episode.query.filter_by(showcase=True).all():
-        data["items"].append(episode.to_api_dict())
+        d = episode.to_api_dict()
+        d['show'] = episode.getShow()
+        data["items"].append(d)
     return jsonify(data)
 
 @app.route("/api/shows/")

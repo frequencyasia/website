@@ -8,8 +8,8 @@ var PlayerView = require('./views/playerView');
 var NavView = require('./views/navView');
 
 window.app = {
-	apiURL: "http://127.0.0.1:5000",
-	// apiURL: "http://beta.frequency.asia",
+	// apiURL: "http://127.0.0.1:5000",
+	apiURL: "http://beta.frequency.asia",
 	airtimeURL: "http://airtime.frequency.asia",
 	init: function init() {
 		console.log("init!!");
@@ -111,7 +111,7 @@ var _ = require("lodash");
 var $ = require("jquery");
 
 require('swiper');
-var template = "<div class=\"swiper-container\">\n  <div class=\"swiper-wrapper\">\n    <% for (var i = 0; i < items.length; i++) { %>\n        <div class=\"swiper-slide\" style=\"background: linear-gradient(to right, rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url('/static/files/<%= items[i].show_image %>') no-repeat center center; -webkit-background-size: cover;  -moz-background-size: cover; -o-background-size: cover; background-size: cover;\">\n          <div class=\"c-featured-item\">\n            <div class=\"c-featured-item__background\"></div>\n            <article class=\"c-featured-item__container\">\n              <h1 class=\"c-featured-item__container__title\"><%= items[i].show %></h1>\n              <p class=\"c-featured-item__container__tagline\"><%= items[i].tagline %></p>\n              <p class=\"c-featured-item__container__tagline\"><a href=\"#shows/<%= items[i].show_slug %>\">SEE ALL EPISODES</a></p>\n            </article>\n          </div>\n        </div>\n    <% } %>\n  </div>\n  <div class=\"swiper-pagination\"></div>\n</div>\n";
+var template = "<div class=\"swiper-container\">\n  <div class=\"swiper-wrapper\">\n    <% for (var i = 0; i < items.length; i++) { %>\n        <div class=\"swiper-slide\" style=\"background: linear-gradient(to right, rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url('/static/files/<%= items[i].episode_image %>') no-repeat center center; -webkit-background-size: cover;  -moz-background-size: cover; -o-background-size: cover; background-size: cover;\">\n          <div class=\"c-featured-item\">\n            <div class=\"c-featured-item__background\"></div>\n            <article class=\"c-featured-item__container\">\n              <h1 class=\"c-featured-item__container__title\"><%= items[i].show %></h1>\n              <p class=\"c-featured-item__container__tagline\"><%= items[i].tagline %></p>\n              <p class=\"c-featured-item__container__tagline\"><a href=\"#shows/<%= items[i].show_slug %>\">SEE ALL EPISODES</a></p>\n            </article>\n          </div>\n        </div>\n    <% } %>\n  </div>\n  <div class=\"swiper-pagination\"></div>\n</div>\n";
 
 module.exports = Backbone.View.extend({
   className: 'o-feature-slider',
@@ -201,6 +201,8 @@ module.exports = Backbone.View.extend({
   },
 
   reloadStream: function reloadStream() {
+    // Go from Mixcloud player to stream player.
+    this.mixcloudURL = null;
     this.render();
     this.toggleStream();
   },
@@ -437,7 +439,7 @@ var _ = require("lodash");
 var $ = require("jquery");
 
 var moment = require("moment");
-var template = "<aside class=\"c-show__sidebar\">\n  <% if(data !== undefined) { %>\n    <img class=\"c-show__sidebar__image\" src='/static/files/<%= data.imagePath %>'>\n    <h1 class=\"c-show__sidebar__title\"><%= data.name %></h1>\n    <p><%= data.description %></p>\n  <% } %>\n</aside>\n<section class=\"c-show__episodes\">\n  <% if(data !== undefined) { %>\n    <% for(var i = 0; i < data.episodes.length; i++) { %>\n      <article class=\"c-episode\">\n        <div class=\"c-episode__content\">\n          <div class=\"c-episode__content__play js-play-episode\" data-mixcloud=\"<%= data.episodes[i].mixcloud_link %>\">\n            <i class=\"fa fa-4x fa-play-circle-o\"></i>\n          </div>\n          <div class=\"c-episode__content__info\">\n            <h1 class=\"c-episode__content__title\"><%= data.episodes[i].name %></h1>\n            <p><%= data.episodes[i].tagline %></p>\n            <p class=\"c-episode__content__date\"><%= data.episodes[i].date %></p>\n          </div>\n          <% if(data.episodes[i].episode_image) { %>\n            <img class=\"c-episode__content__image\" src='/static/files/<%= data.episodes[i].episode_image %>'/>\n          <% } %>\n        </div>\n        <div class=\"c-episode__description-toggle\">+ More Info</div>\n        <div class=\"c-episode__description\" style=\"display: none\"><%= data.episodes[i].description %></div>\n      </article>\n    <% } %>\n  <% } %>\n</section>";
+var template = "<aside class=\"c-show__sidebar\">\n  <% if(data !== undefined) { %>\n    <img class=\"c-show__sidebar__image\" src='/static/files/<%= data.imagePath %>'>\n    <h1 class=\"c-show__sidebar__title\"><%= data.name %></h1>\n    <p><%= data.description %></p>\n  <% } %>\n</aside>\n<section class=\"c-show__episodes\">\n  <% if(data !== undefined) { %>\n    <% for(var i = 0; i < data.episodes.length; i++) { %>\n      <article class=\"c-episode\">\n        <div class=\"c-episode__content\">\n          <div class=\"c-episode__content__play js-play-episode\" data-mixcloud=\"<%= data.episodes[i].mixcloud_link %>\">\n            <i class=\"fa fa-4x fa-play-circle-o\"></i>\n          </div>\n          <div class=\"c-episode__content__info\">\n            <h1 class=\"c-episode__content__title\"><%= data.episodes[i].name %></h1>\n            <p><%= data.episodes[i].tagline %></p>\n            <p class=\"c-episode__content__date\"><%= data.episodes[i].date %></p>\n          </div>\n          <% if(data.episodes[i].episode_image) { %>\n            <img class=\"c-episode__content__image\" src='/static/files/<%= data.episodes[i].episode_image %>'/>\n          <% } %>\n        </div>\n        <div class=\"c-episode__description-toggle\">+ More Info</div>\n        <div class=\"c-episode__description\"><%= data.episodes[i].description %></div>\n      </article>\n    <% } %>\n  <% } %>\n</section>";
 
 module.exports = Backbone.View.extend({
   className: 'c-show',
@@ -489,11 +491,11 @@ module.exports = Backbone.View.extend({
     });
     this.$('.c-episode__description-toggle').click(function (event) {
       var $el = $(event.currentTarget);
-      if ($el.next().is(":visible")) {
-        $el.next().slideUp();
+      if ($el.next().hasClass("c-episode__description--toggled")) {
+        $el.next().removeClass("c-episode__description--toggled");
         $el.text('+ More Info');
       } else {
-        $el.next().slideDown();
+        $el.next().addClass("c-episode__description--toggled");
         $el.text('- Less Info');
       }
     });
