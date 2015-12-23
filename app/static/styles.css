@@ -43,7 +43,6 @@
 }
 
 
-
 body {
   margin: 0;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
@@ -283,10 +282,6 @@ a:hover {
 .post-module .post-content .post-meta .timestamp {
   margin: 0 16px 0 0;
 }
-.post-module .post-content .post-meta a {
-  color: #FFFFFF;
-  text-decoration: none;
-}
 .hover .post-content .description {
   display: block !important;
   height: auto !important;
@@ -365,36 +360,6 @@ a:hover {
 
 .c-show-title:hover {
   text-decoration: underline;
-}
-
-.intrinsic {
-
-  /*// Make sure <picture> wrapper is set to block*/
-  /*// Max-width is governed by parentNode*/
-  display: block;
-  /*// Intrinsic Ratio Box*/
-  position: relative;
-  height: 0;
-  width: 100%;
-  padding-top: 100%;
-  /*// Custom Styling*/
-  background: #f0f0f0;
-}
-
-.intrinsic.intrinsic--4x3 {
-  padding-top: 75%;
-}
-
-.intrinsic.intrinsic--16x9 {
-  padding-top: 56.25%;
-}
-
-.intrinsic-item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }
 
 .o-feature-slider {
