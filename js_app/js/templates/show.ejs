@@ -1,6 +1,6 @@
 <aside class="c-show__sidebar">
   <% if(data !== undefined) { %>
-    <img class="c-show__sidebar__image" src='/static/files/<%= data.imagePath %>'>
+    <img class="c-show__sidebar__image" src='/static/files/<%= data.imagePath %>' alt='<%= data.name %>'>
     <h1 class="c-show__sidebar__title"><%= data.name %></h1>
     <p><%= data.description %></p>
   <% } %>
@@ -19,7 +19,7 @@
             <p class="c-episode__content__date"><%= data.episodes[i].date %></p>
           </div>
           <% if(data.episodes[i].episode_image) { %>
-            <img class="c-episode__content__image" src='/static/files/<%= data.episodes[i].episode_image %>'/>
+            <img class="c-episode__content__image" src='/static/files/<%= data.episodes[i].episode_image %>' alt='<%= data.episodes[i].name %>'/>
           <% } %>
         </div>
         <div class="c-episode__description-toggle">+ More Info</div>

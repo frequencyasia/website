@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <title>Frequency Asia</title>
@@ -10,14 +10,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='swiper.min.css') }}">
   </head>
   <body>
-    <header class="c-header">
+    <header class="c-header" role="banner">
       <div class="c-header__content">
-        <img class="c-header__logo" src="/static/logo.png" />
-        <nav id="nav-container" class="c-nav"></nav>
+        <img class="c-header__logo" src="/static/logo.png" alt="Frequency Asia"/>
+        <nav id="nav-container" class="c-nav" role="navigation"></nav>
       </div>
       <aside id="player-container" class="c-player"></aside>
     </header>
-    <div id="main-container" class="c-container"></div>
+    <main id="main-container" class="c-container" role="main"></main>
     <script src="{{ url_for('static', filename='dist/bundle.js') }}"></script>
   </body>
 </html>
