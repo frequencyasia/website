@@ -39,11 +39,11 @@ module.exports = Backbone.View.extend({
     var stream = document.getElementById('stream-player');
     if (!stream.paused) {
       console.log('pause');
-      this.$('.js-stream-status').removeClass("fa-pause").addClass("fa-play");
+      this.$('.js-stream-status').removeClass("icon-pause2").addClass("icon-play3");
       stream.pause();
     } else {
       console.log('play');
-      this.$('.js-stream-status').removeClass("fa-play").addClass("fa-pause");
+      this.$('.js-stream-status').removeClass("icon-play3").addClass("icon-pause2");
       stream.play();
     }
   },

@@ -8,8 +8,8 @@ var PlayerView = require('./views/playerView');
 var NavView = require('./views/navView');
 
 window.app = {
-	// apiURL: "http://127.0.0.1:5000",
-	apiURL: "http://beta.frequency.asia",
+	apiURL: "http://127.0.0.1:5000",
+	// apiURL: "http://beta.frequency.asia",
 	airtimeURL: "http://airtime.frequency.asia",
 	init: function init() {
 		console.log("init!!");
@@ -181,8 +181,8 @@ var Backbone = require('backbone');
 var _ = require("lodash");
 
 var $ = require("jquery");
-var template = "<audio id=\"stream-player\" src=\"http://airtime.frequency.asia:8000/airtime_128\"></audio>\n<button id=\"play-stream\" class=\"c-player__button\">\n  <i class=\"fa fa-play js-stream-status\"></i>\n</button>\n<p class=\"js-stream-text\"></p>\n<div class=\"c-player__volume\">\n  <input type=\"range\" value=\"8\" data-steps=\"10\" id=\"volume-slider\" />\n</div>";
-var mixcloudTemplate = "<button id=\"load-stream-btn\" class=\"c-player__button\">\n  <i class=\"fa fa-undo\"></i>\n</button>\n<iframe width=\"100%\" height=\"60\" src=\"https://www.mixcloud.com/widget/iframe/?autoplay=1&amp;embed_type=widget_standard&amp;embed_uuid=99755eaf-a63a-4a7d-af25-efbb86e6480b&amp;feed=<%= url %>;hide_cover=1&amp;hide_tracklist=1&amp;light=0&amp;mini=1&amp;replace=0\" frameborder=\"0\"></iframe>";
+var template = "<audio id=\"stream-player\" src=\"http://airtime.frequency.asia:8000/airtime_128\"></audio>\n<button id=\"play-stream\" class=\"c-player__button\">\n  <span class=\"icon-play3 js-stream-status\">\n</button>\n<p class=\"js-stream-text\"></p>\n<div class=\"c-player__volume\">\n  <input type=\"range\" value=\"8\" data-steps=\"10\" id=\"volume-slider\" />\n</div>";
+var mixcloudTemplate = "<button id=\"load-stream-btn\" class=\"c-player__button\">\n  <span class=\"icon-arrow-back\"></span>\n</button>\n<iframe width=\"100%\" height=\"60\" src=\"https://www.mixcloud.com/widget/iframe/?autoplay=1&amp;embed_type=widget_standard&amp;embed_uuid=99755eaf-a63a-4a7d-af25-efbb86e6480b&amp;feed=<%= url %>;hide_cover=1&amp;hide_tracklist=1&amp;light=0&amp;mini=1&amp;replace=0\" frameborder=\"0\"></iframe>";
 
 module.exports = Backbone.View.extend({
   apiUrl: "http://airtime.frequency.asia/api/live-info",
@@ -216,11 +216,11 @@ module.exports = Backbone.View.extend({
     var stream = document.getElementById('stream-player');
     if (!stream.paused) {
       console.log('pause');
-      this.$('.js-stream-status').removeClass("fa-pause").addClass("fa-play");
+      this.$('.js-stream-status').removeClass("icon-pause2").addClass("icon-play3");
       stream.pause();
     } else {
       console.log('play');
-      this.$('.js-stream-status').removeClass("fa-play").addClass("fa-pause");
+      this.$('.js-stream-status').removeClass("icon-play3").addClass("icon-pause2");
       stream.play();
     }
   },
@@ -406,7 +406,7 @@ var Backbone = require('backbone');
 var _ = require("lodash");
 var $ = require("jquery");
 
-var template = "<% for (var i = 0; i < data.length; i++) { %>\n    <a href=\"#shows/<%= data[i].slug %>\" class='post-module'>\n      <div class='thumbnail'>\n        <img src='/static/files/<%= data[i].imagePath %>'>\n      </div>\n      <div class='post-content'>\n        <h1 class='title'><%= data[i].name %></h1>\n        <h2 class='sub_title'><%= data[i].frequency %></h2>\n        <p class='description'><%= data[i].description %></p>\n        <div class='post-meta'>\n          <span class='timestamp'>\n            <% if (data[i].num_episodes == 1) { %>\n              1 Episode\n            <% } else { %>\n              <%= data[i].num_episodes %> Episodes\n            <% } %>\n          </span>\n        </div>\n      </div>\n    </a>\n<% } %>";
+var template = "<% for (var i = 0; i < data.length; i++) { %>\n    <a href=\"#shows/<%= data[i].slug %>\" class='post-module'>\n      <div class='thumbnail'>\n        <img src='/static/files/<%= data[i].imagePath %>' alt='<%= data[i].name %>'>\n      </div>\n      <div class='post-content'>\n        <h1 class='title'><%= data[i].name %></h1>\n        <h2 class='sub_title'><%= data[i].frequency %></h2>\n        <p class='description'><%= data[i].description %></p>\n        <div class='post-meta'>\n          <span class='timestamp'>\n            <% if (data[i].num_episodes == 1) { %>\n              1 Episode\n            <% } else { %>\n              <%= data[i].num_episodes %> Episodes\n            <% } %>\n          </span>\n        </div>\n      </div>\n    </a>\n<% } %>";
 
 module.exports = Backbone.View.extend({
 
@@ -439,7 +439,7 @@ var _ = require("lodash");
 var $ = require("jquery");
 
 var moment = require("moment");
-var template = "<aside class=\"c-show__sidebar\">\n  <% if(data !== undefined) { %>\n    <img class=\"c-show__sidebar__image\" src='/static/files/<%= data.imagePath %>'>\n    <h1 class=\"c-show__sidebar__title\"><%= data.name %></h1>\n    <p><%= data.description %></p>\n  <% } %>\n</aside>\n<section class=\"c-show__episodes\">\n  <% if(data !== undefined) { %>\n    <% for(var i = 0; i < data.episodes.length; i++) { %>\n      <article class=\"c-episode\">\n        <div class=\"c-episode__content\">\n          <div class=\"c-episode__content__play js-play-episode\" data-mixcloud=\"<%= data.episodes[i].mixcloud_link %>\">\n            <i class=\"fa fa-4x fa-play-circle-o\"></i>\n          </div>\n          <div class=\"c-episode__content__info\">\n            <h1 class=\"c-episode__content__title\"><%= data.episodes[i].name %></h1>\n            <p><%= data.episodes[i].tagline %></p>\n            <p class=\"c-episode__content__date\"><%= data.episodes[i].date %></p>\n          </div>\n          <% if(data.episodes[i].episode_image) { %>\n            <img class=\"c-episode__content__image\" src='/static/files/<%= data.episodes[i].episode_image %>'/>\n          <% } %>\n        </div>\n        <div class=\"c-episode__description-toggle\">+ More Info</div>\n        <div class=\"c-episode__description\"><%= data.episodes[i].description %></div>\n      </article>\n    <% } %>\n  <% } %>\n</section>";
+var template = "<aside class=\"c-show__sidebar\">\n  <% if(data !== undefined) { %>\n    <img class=\"c-show__sidebar__image\" src='/static/files/<%= data.imagePath %>' alt='<%= data.name %>'>\n    <h1 class=\"c-show__sidebar__title\"><%= data.name %></h1>\n    <p><%= data.description %></p>\n  <% } %>\n</aside>\n<section class=\"c-show__episodes\">\n  <% if(data !== undefined) { %>\n    <% for(var i = 0; i < data.episodes.length; i++) { %>\n      <article class=\"c-episode\">\n        <div class=\"c-episode__content\">\n          <div class=\"c-episode__content__play js-play-episode\" data-mixcloud=\"<%= data.episodes[i].mixcloud_link %>\">\n            <span class=\"icon-play2\"></span>\n          </div>\n          <div class=\"c-episode__content__info\">\n            <h1 class=\"c-episode__content__title\"><%= data.episodes[i].name %></h1>\n            <p><%= data.episodes[i].tagline %></p>\n            <p class=\"c-episode__content__date\"><%= data.episodes[i].date %></p>\n          </div>\n          <% if(data.episodes[i].episode_image) { %>\n            <img class=\"c-episode__content__image\" src='/static/files/<%= data.episodes[i].episode_image %>' alt='<%= data.episodes[i].name %>'/>\n          <% } %>\n        </div>\n        <div class=\"c-episode__description-toggle\">+ More Info</div>\n        <div class=\"c-episode__description\"><%= data.episodes[i].description %></div>\n      </article>\n    <% } %>\n  <% } %>\n</section>";
 
 module.exports = Backbone.View.extend({
   className: 'c-show',
