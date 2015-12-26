@@ -2,8 +2,8 @@
 
 var Backbone = require('backbone');
 var _ = require("lodash");
-var fs = require("fs");
 var $ = require("jquery");
+var fs = require("fs");
 var template = fs.readFileSync(__dirname + '/../templates/player.ejs', 'utf8');
 var mixcloudTemplate = fs.readFileSync(__dirname + '/../templates/mixcloudPlayer.ejs', 'utf8');
 
@@ -20,6 +20,7 @@ module.exports = Backbone.View.extend({
     this.$el.html(_.template(template));
     this.getNowPlaying();
     this.renderVolume();
+    this.toggleStream();
     return this;
   },
 
@@ -38,11 +39,9 @@ module.exports = Backbone.View.extend({
   toggleStream: function toggleStream(event) {
     var stream = document.getElementById('stream-player');
     if (!stream.paused) {
-      console.log('pause');
       this.$('.js-stream-status').removeClass("icon-pause2").addClass("icon-play3");
       stream.pause();
     } else {
-      console.log('play');
       this.$('.js-stream-status').removeClass("icon-play3").addClass("icon-pause2");
       stream.play();
     }

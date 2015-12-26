@@ -2,9 +2,9 @@
 
 var Backbone = require('backbone');
 var _ = require("lodash");
-var fs = require("fs");
 var $ = require("jquery");
-var moment = require("moment");
+var fs = require("fs");
+var fecha = require("fecha");
 var template = fs.readFileSync(__dirname + '/../templates/schedule.ejs', 'utf8');
 
 module.exports = Backbone.View.extend({
@@ -33,18 +33,15 @@ module.exports = Backbone.View.extend({
     delete this.scheduleData.AIRTIME_API_VERSION
     for (var key of _.keys(this.scheduleData)) {
       var data = {
-        heading: moment(date).format('dddd / MMMM D').toUpperCase(),
+        heading: fecha.format(date, 'dddd / MMMM D').toUpperCase(),
         shows: this.scheduleData[key]
       };
       for (var show of data.shows) {
-        var startTime = moment(show.start_timestamp);
-        var endTime = moment(show.end_timestamp);
-        show.scheduleTime = startTime.format('HHmm') + " - " + endTime.format('HHmm');
+        show.scheduleTime = fecha.format(new Date(show.start_timestamp), 'HHmm') + " - " + fecha.format(new Date(show.end_timestamp), 'HHmm');
       }
       parsedSchedule.push(data);
       date = new Date(date.getTime() + 60 * 60 * 24 * 1000);
     }
-    console.log(parsedSchedule);
     return parsedSchedule;
   }
 });

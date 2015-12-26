@@ -9,7 +9,7 @@ var template = fs.readFileSync(__dirname + '/../templates/showlist.ejs', 'utf8')
 module.exports = Backbone.View.extend({
 
   tagName: 'section',
-  className: 'o-content-block',
+  className: 'o-content-block u-full-width-mobile',
   shows: [],
 
   initialize: function() {

@@ -10,6 +10,10 @@ var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
 var assign = require('lodash').assign;
 var brfs = require('brfs');
+var rename = require('gulp-rename');
+var postcss = require('gulp-postcss');
+var notify = require('gulp-notify');
+var uglify = require('gulp-uglify');
 
 // add custom browserify options here
 var customOpts = {
@@ -19,9 +23,6 @@ var customOpts = {
 };
 var opts = assign({}, watchify.args, customOpts);
 var b = watchify(browserify(opts));
-
-// add transformations here
-// i.e. b.transform(coffeeify);
 
 gulp.task('js', bundle); // so you can run `gulp js` to build the file
 b.on('update', bundle); // on any dep update, runs the bundler
@@ -36,11 +37,42 @@ function bundle() {
     .pipe(buffer())
     // optional, remove if you dont want sourcemaps
     .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
+    .pipe(uglify())
        // Add transformation tasks to the pipeline here.
     .pipe(sourcemaps.write('./')) // writes .map file
     .pipe(gulp.dest('./../app/static/dist'));
 }
 
+gulp.task('postcss', () => {
+  // Runs postCSS with all its plugins.
+  const nano = require('gulp-cssnano');
+  const plugins = [
+    require('autoprefixer'),
+  ];
+  // Run PostCSS
+  return gulp.src('./stylesheets/styles.css')
+      .pipe(postcss(plugins))
+      .on('error', (error) => {
+        gutil.log(gutil.colors.magenta.bold('Error while compiling CSS'));
+        gutil.log(gutil.colors.magenta(error.message));
+      })
+      .pipe(gulp.dest('./../app/static/dist'))
+      .pipe(rename({ suffix: '.min' }))
+      .pipe(nano({ discardUnused: false }))
+      .pipe(gulp.dest('./../app/static/dist'))
+      .pipe(function onComplete() {
+        return notify({ message: 'PostCSS has finished compiling.' });
+      }());
+});
+
+gulp.task('watch-styles', function watchStyles() {
+  // Watches the stylesheet folders for changes and runs the 'postcss' task if a change occurs.
+  gulp.watch(['./stylesheets/*.css'], ['postcss']);
+  return;
+});
+
 gulp.task("default", [
+  'postcss',
+  'watch-styles',
   "js",
 ]);

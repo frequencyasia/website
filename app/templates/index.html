@@ -2,14 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    <meta name=viewport content="width=device-width, initial-scale=1">
     <title>Frequency Asia</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='swiper.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/styles.min.css') }}">
   </head>
   <body>
     <header class="c-header" role="banner">
       <div class="c-header__content">
-        <img class="c-header__logo" src="/static/img/logo.png" alt="Frequency Asia"/>
+        <div class="c-header__content__logo"></div>
         <nav id="nav-container" class="c-nav" role="navigation"></nav>
       </div>
       <aside id="player-container" class="c-player"></aside>

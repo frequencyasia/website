@@ -2,8 +2,8 @@
 
 var Backbone = require('backbone');
 var _ = require("lodash");
-var $ = require("jquery");
 var fs = require("fs");
+var $ = require("jquery");
 require('swiper');
 var template = fs.readFileSync(__dirname + '/../templates/main.ejs', 'utf8');
 

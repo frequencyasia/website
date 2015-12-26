@@ -1,5 +1,5 @@
-var $ = require('jquery');
 var Backbone = require('backbone');
+var $ = require("jquery");
 var Router = require('./router');
 var PlayerView = require('./views/playerView');
 var NavView = require('./views/navView');
@@ -9,7 +9,6 @@ window.app = {
 	apiURL: "http://beta.frequency.asia",
 	airtimeURL: "http://airtime.frequency.asia",
 	init: function () {
-		console.log("init!!");
 		this.views = {
 			playerView: new PlayerView({
 				el: $("#player-container"),

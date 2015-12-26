@@ -4,7 +4,7 @@ var Backbone = require('backbone');
 var _ = require("lodash");
 var $ = require("jquery");
 var fs = require("fs");
-var moment = require("moment");
+var fecha = require("fecha");
 var template = fs.readFileSync(__dirname + '/../templates/show.ejs', 'utf8');
 
 module.exports = Backbone.View.extend({
@@ -20,7 +20,7 @@ module.exports = Backbone.View.extend({
     $.getJSON(window.app.apiURL + "/api/shows/" + options.slug)
       .done((data) => {
         for (var item of data.episodes) {
-          item.date = moment(item.start_time).format('dddd / MMMM D YYYY');
+          item.date = fecha.format(new Date(item.start_time), 'dddd / MMMM D YYYY');
         }
         this.showData = data;
         this.render();
