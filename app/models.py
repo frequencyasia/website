@@ -8,6 +8,7 @@ class Show(db.Model):
     imagePath = db.Column(db.Unicode(255))
     description = db.Column(db.UnicodeText())
     frequency = db.Column(db.Unicode(255))
+    published = db.Column(db.Boolean)
     episodes = db.relationship('Episode', backref='show', lazy='dynamic')
 
     def __repr__(self):
@@ -15,6 +16,11 @@ class Show(db.Model):
 
     def get_episodes(self):
         return Episode.query.filter_by(show_id=self.id).all()
+
+    def get_image_path(self):
+        if self.imagePath:
+            return self.imagePath
+        return 'placeholder.png'
 
     def to_api_dict(self):
         return {
@@ -24,7 +30,7 @@ class Show(db.Model):
             "num_episodes": len(self.get_episodes()),
             "frequency": self.frequency,
             "description": self.description,
-            "imagePath": self.imagePath,
+            "imagePath": self.get_image_path(),
         }
 
 class Episode(db.Model):
@@ -36,6 +42,7 @@ class Episode(db.Model):
     start_time = db.Column(db.DateTime)
     end_time = db.Column(db.DateTime)
     showcase = db.Column(db.Boolean)
+    published = db.Column(db.Boolean)
     image_path = db.Column(db.Unicode(255))
     show_id = db.Column(db.Integer, db.ForeignKey('show.id'))
 
@@ -48,7 +55,7 @@ class Episode(db.Model):
     def getImage(self):
         if self.image_path:
             return self.image_path
-        return Show.query.get(self.show_id).imagePath
+        return Show.query.get(self.show_id).get_image_path()
 
     def to_api_dict(self):
         return {

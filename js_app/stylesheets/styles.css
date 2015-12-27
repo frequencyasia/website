@@ -428,8 +428,8 @@ a:hover {
   z-index: 1;
   display: block;
   background: #ffffff;
-  width: 400px;
-  height: 300px;
+  width: 300px;
+  height: 250px;
   margin: 1vw;
   -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
@@ -444,7 +444,7 @@ a:hover {
 @media only screen and (max-width: 780px) {
   .post-module {
     width: 100%;
-    height: 300px;
+    height: 250px;
     margin: 1vw 0;
   }
 }
@@ -463,7 +463,7 @@ a:hover {
 }
 .post-module .thumbnail {
   background: #000000;
-  height: 300px;
+  height: 250px;
   overflow: hidden;
 }
 
