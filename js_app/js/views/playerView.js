@@ -54,7 +54,9 @@ module.exports = Backbone.View.extend({
     $.getJSON("http://airtime.frequency.asia/api/live-info")
       .done(function(data) {
         if (data && data.current) {
-          if (data.current.name.length) {
+          if (data.current.name.length && data.current.url.length) {
+            setNowPlaying('<a href="' + data.current.url + '">' + data.current.name + '</a>');
+          } else if (data.current.name.length) {
             setNowPlaying(data.current.name);
           } else {
             setNowPlaying('Offline', true);
