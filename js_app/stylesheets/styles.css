@@ -707,7 +707,7 @@ a:hover {
 @media only screen and (max-width: 780px) {
   .c-show__sidebar {
     width: auto;
-    min-height: auto;
+    min-height: initial;
     display: flex;
     flex-direction: column;
   }
