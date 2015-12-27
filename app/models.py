@@ -64,7 +64,7 @@ class Episode(db.Model):
             "tagline": self.tagline,
             "description": self.description,
             "start_time": time.mktime(self.start_time.timetuple()) * 1000,
-            "end_time": self.end_time,
+            "end_time": time.mktime(self.end_time.timetuple()) * 1000,
             "mixcloud_link": self.mixcloud_link,
         }
 
