@@ -37,7 +37,6 @@ module.exports = Backbone.View.extend({
         shows: this.scheduleData[key]
       };
       for (var show of data.shows) {
-        console.log(show.start_timestamp)
         // The replace thing is a hack to get dates working in Safari.
         var start = fecha.format(fecha.parse(show.start_timestamp, 'YYYY-MM-DD hh:mm:ss'), 'HHmm');
         var end = fecha.format(fecha.parse(show.end_timestamp, 'YYYY-MM-DD hh:mm:ss'), 'HHmm')

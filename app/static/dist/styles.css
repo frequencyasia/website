@@ -783,10 +783,7 @@ a:hover {
 
 @media only screen and (max-width: 780px) {
   .c-show__sidebar__image {
-    max-height: 200px;
-    width: auto;
-    margin: 0 auto;
-    max-width: 80vw;
+    max-width: 100%;
   }
 }
 
