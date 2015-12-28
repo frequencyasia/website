@@ -17,15 +17,21 @@ module.exports = Backbone.Router.extend({
 	},
 	currentView: null,
 
+	setTitle: function (title) {
+		document.title = title;
+	},
+
   loadMainView: function () {
     var view = new MainView();
 		$("#main-container").html(view.render().el);
 		view.getShowcaseItems();
+		this.setTitle('Frequency Asia');
   },
 
 	loadShowListView: function () {
 		var view = new ShowListView();
 		$("#main-container").html(view.render().el);
+		this.setTitle('Shows | Frequency Asia');
   },
 
 	loadShowView: function (showSlug) {
@@ -38,12 +44,14 @@ module.exports = Backbone.Router.extend({
 	loadAboutView: function () {
 		var view = new AboutView();
 		$("#main-container").html(view.render().el);
+		this.setTitle('About | Frequency Asia');
   },
 
 	loadScheduleView: function () {
 		var view = new ScheduleView();
 		$("#main-container").html(view.render().el);
 		view.getSchedule();
+		this.setTitle('Schedule | Frequency Asia');
   },
 
 });

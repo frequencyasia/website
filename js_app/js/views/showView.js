@@ -24,6 +24,7 @@ module.exports = Backbone.View.extend({
         }
         this.showData = data;
         this.render();
+        document.title = this.showData.name + "| Frequency Asia";
       });
   },
 
@@ -41,7 +42,6 @@ module.exports = Backbone.View.extend({
         $el.next().addClass("c-episode__description--toggled");
         $el.text('- Less Info');
       }
-
     });
     return this;
   },
