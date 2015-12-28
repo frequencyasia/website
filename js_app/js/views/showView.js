@@ -24,7 +24,7 @@ module.exports = Backbone.View.extend({
         }
         this.showData = data;
         this.render();
-        document.title = this.showData.name + "| Frequency Asia";
+        document.title = this.showData.name + " | Frequency Asia";
       });
   },
 
