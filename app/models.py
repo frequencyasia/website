@@ -10,6 +10,7 @@ class Show(db.Model):
     frequency = db.Column(db.Unicode(255))
     published = db.Column(db.Boolean)
     episodes = db.relationship('Episode', backref='show', lazy='dynamic')
+    tagline = db.Column(db.Unicode(255))
 
     def __repr__(self):
         return '<Show %r>' % (self.name)
@@ -31,6 +32,7 @@ class Show(db.Model):
             "frequency": self.frequency,
             "description": self.description,
             "imagePath": self.get_image_path(),
+            "tagline": self.tagline,
         }
 
 class Episode(db.Model):
