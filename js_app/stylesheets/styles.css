@@ -781,6 +781,6 @@ a:hover {
   }
 
   .u-mobile-hidden {
-    width: 100%;
+    display: none;
   }
 }
