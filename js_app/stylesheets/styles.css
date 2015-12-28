@@ -278,19 +278,21 @@ a:hover {
   display: flex;
   flex-direction: row;
   width: 100%;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .c-header__content {
   display: flex;
   flex-direction: row;
   background-color: rgb(26, 26, 26);
-  padding-right: 10vw;
+  flex-basis: 0;
+  flex-grow: 1;
 }
 
 .c-header__content__logo {
   height: 40px;
   width: 100px;
+  min-width: 70px;
   background: url("/static/img/logo.png") center/100px no-repeat;
   background-color: rgb(239, 91, 48);
   padding: 10px 20px;
@@ -317,6 +319,7 @@ a:hover {
   align-items: center;
   color: #FFF;
   flex-grow: 1;
+  flex-basis: 0;
 }
 
 .c-player__button {
@@ -486,9 +489,16 @@ a:hover {
   opacity: 1 !important;
 }
 
+.c-player__text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .c-player__volume {
-  margin-left: auto;
-  margin-right: 10vw;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  min-width: 80px;
 }
 .vslider {
   position: relative;
@@ -714,6 +724,9 @@ a:hover {
   h1 {
     font-size: 20px;
     margin: 20px 0;
+  }
+  .c-header {
+    flex-wrap: wrap;
   }
   .c-header__content {
     width: 100%;
