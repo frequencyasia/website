@@ -352,7 +352,7 @@ a:hover {
   display: flex;
   align-items: center;
   height: 5vh;
-  padding: 0 1em;
+  padding: 0 1vw;
 }
 
 .c-nav__item a, .c-nav__item a:visited {
@@ -366,7 +366,7 @@ a:hover {
   display: flex;
   align-items: center;
   height: 5vh;
-  padding: 0 1em;
+  padding: 0 1vw;
 }
 
 .c-nav__item--active a, .c-nav__item--active a:visited  {
@@ -389,6 +389,7 @@ a:hover {
   width: 75vw;
   flex-wrap: wrap;
   justify-content: space-between;
+  max-width: 1200px;
 }
 
 .post-module {
@@ -720,6 +721,12 @@ a:hover {
   height: auto;
 }
 
+@media only screen and (max-width: 900px) {
+  .c-nav__item, .c-nav__item--active {
+    font-size: 0.8rem;
+  }
+}
+
 @media only screen and (max-width: 790px) {
   h1 {
     font-size: 20px;
@@ -730,15 +737,18 @@ a:hover {
   }
   .c-header__content {
     width: 100%;
+    flex-basis: initial;
   }
   .c-header__content__logo {
     height: 20px;
     width: 20px;
     background: url("/static/img/logo_sm.png") center/30px no-repeat;
-    padding: 10px;
+    padding: 10px 0;
   }
   .c-player {
     background-color: rgba(26, 26, 26, 0.5);
+    width: 100%;
+    flex-basis: initial;
   }
   .c-nav {
     height: 40px;
