@@ -828,6 +828,10 @@ a:hover {
     font-size: 20px;
     margin: 20px 0;
   }
+  .o-feature-slider {
+    height: 90%;
+    height: calc(100vh - 100px);
+  }
   .c-header {
     -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
@@ -937,7 +941,7 @@ a:hover {
 
 @media only screen and (max-width: 600px) {
   .c-nav {
-    height: 40px;
+    height: 80px;
     -webkit-box-flex: 1;
     -webkit-flex-grow: 1;
         -ms-flex-positive: 1;
@@ -948,14 +952,39 @@ a:hover {
   }
   .c-nav__item {
     padding: 0;
+    height: 80px;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
   .c-nav__item--active {
     padding: 0;
+    height: 80px;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
   .c-player {
     -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
         -ms-flex-pack: justify;
             justify-content: space-between;
+  }
+  .c-header__content__logo {
+    margin-top: 20px;
+  }
+  .o-feature-slider {
+    height: 90%;
+    height: calc(100vh - 80px - 60px);
   }
 }

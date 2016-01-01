@@ -748,6 +748,10 @@ a:hover {
     font-size: 20px;
     margin: 20px 0;
   }
+  .o-feature-slider {
+    height: 90%;
+    height: calc(100vh - 100px);
+  }
   .c-header {
     flex-wrap: wrap;
   }
@@ -832,17 +836,30 @@ a:hover {
 
 @media only screen and (max-width: 600px) {
   .c-nav {
-    height: 40px;
+    height: 80px;
     flex-grow: 1;
     justify-content: space-around;
   }
   .c-nav__item {
     padding: 0;
+    height: 80px;
+    flex-grow: 1;
+    justify-content: center;
   }
   .c-nav__item--active {
     padding: 0;
+    height: 80px;
+    flex-grow: 1;
+    justify-content: center;
   }
   .c-player {
     justify-content: space-between;
+  }
+  .c-header__content__logo {
+    margin-top: 20px;
+  }
+  .o-feature-slider {
+    height: 90%;
+    height: calc(100vh - 80px - 60px);
   }
 }
