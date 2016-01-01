@@ -14,6 +14,7 @@ var rename = require('gulp-rename');
 var postcss = require('gulp-postcss');
 var notify = require('gulp-notify');
 var uglify = require('gulp-uglify');
+var doiuse = require('doiuse');
 
 // add custom browserify options here
 var customOpts = {
@@ -48,6 +49,17 @@ gulp.task('postcss', () => {
   const nano = require('gulp-cssnano');
   const plugins = [
     require('autoprefixer'),
+    doiuse({
+      browsers: [
+        'ie >= 8',
+        '> 1%'
+      ],
+      // ignore: ['vh'], // an optional array of features to ignore
+      // ignoreFiles: ['**/normalize.css'], // an optional array of file globs to match against original source file path, to ignore
+      onFeatureUsage: function (usageInfo) {
+        console.log(usageInfo.message)
+      }
+    }),
   ];
   // Run PostCSS
   return gulp.src('./stylesheets/styles.css')

@@ -265,7 +265,7 @@ p {
 
 a, a:visited {
   text-decoration: none;
-  color: white;
+  color: #fff;
   -webkit-transition: color 0.2s ease;
 	transition: color 0.2s ease;
 }
@@ -308,6 +308,7 @@ a:hover {
 }
 
 .c-header__social__icon {
+  margin-right: 20px;
   margin-right: 1vw;
 }
 
@@ -351,7 +352,9 @@ a:hover {
 .c-nav__item {
   display: flex;
   align-items: center;
+  height: 80px;
   height: 5vh;
+  padding: 0 20px;
   padding: 0 1vw;
 }
 
@@ -365,7 +368,9 @@ a:hover {
 .c-nav__item--active {
   display: flex;
   align-items: center;
+  height: 80px;
   height: 5vh;
+  padding: 0 20px;
   padding: 0 1vw;
 }
 
@@ -385,7 +390,9 @@ a:hover {
 
 .o-content-block {
   display: flex;
+  margin: 20px auto;
   margin: 1vh auto;
+  width: 75%;
   width: 75vw;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -400,6 +407,7 @@ a:hover {
   background: #ffffff;
   width: 300px;
   height: 250px;
+  margin: 20px;
   margin: 1vw;
   -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
@@ -497,7 +505,9 @@ a:hover {
 }
 
 .c-player__volume {
+  margin-left: 50px;
   margin-left: 5vw;
+  margin-right: 50px;
   margin-right: 5vw;
   min-width: 80px;
 }
@@ -571,6 +581,7 @@ a:hover {
 }
 
 .o-feature-slider {
+  height: 95%;
   height: calc(100vh - 60px);
   width: 100%;
   position: relative;
@@ -591,10 +602,12 @@ a:hover {
 
 .c-featured-item__container__title {
   border: none;
+  font-size: 3em;
   font-size: 3rem;
 }
 
 .c-featured-item__container__tagline {
+  max-width: 33%;
   max-width: 33vw;
 }
 
@@ -637,9 +650,11 @@ a:hover {
 }
 
 .c-show__sidebar {
+  width: 20%;
   width: 20vw;
   background-color: rgb(26, 26, 26);
   padding: 2em;
+  min-height: 95%;
   min-height: calc(100vh - 60px - 4em);
 }
 
@@ -723,11 +738,12 @@ a:hover {
 
 @media only screen and (max-width: 900px) {
   .c-nav__item, .c-nav__item--active {
+    font-size: 0.8em;
     font-size: 0.8rem;
   }
 }
 
-@media only screen and (max-width: 790px) {
+@media only screen and (max-width: 801px) {
   h1 {
     font-size: 20px;
     margin: 20px 0;
@@ -744,6 +760,8 @@ a:hover {
     width: 20px;
     background: url("/static/img/logo_sm.png") center/30px no-repeat;
     padding: 10px 0;
+    min-width: 40px;
+    margin-left: 10px;
   }
   .c-player {
     background-color: rgba(26, 26, 26, 0.5);
@@ -761,7 +779,9 @@ a:hover {
   }
   .o-content-block {
     display: flex;
+    margin: 20px auto;
     margin: 1vh auto;
+    width: 90%;
     width: 90vw;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -769,6 +789,7 @@ a:hover {
   .post-module {
     width: 100%;
     height: 250px;
+    margin: 20px 0;
     margin: 1vw 0;
   }
   .post-module .post-content {
@@ -780,6 +801,7 @@ a:hover {
     opacity: 1 !important;
   }
   .c-featured-item__container__tagline {
+    max-width: 90%;
     max-width: 90vw;
   }
   .c-show {
@@ -805,5 +827,22 @@ a:hover {
 
   .u-mobile-hidden {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .c-nav {
+    height: 40px;
+    flex-grow: 1;
+    justify-content: space-around;
+  }
+  .c-nav__item {
+    padding: 0;
+  }
+  .c-nav__item--active {
+    padding: 0;
+  }
+  .c-player {
+    justify-content: space-between;
   }
 }
