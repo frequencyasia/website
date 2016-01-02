@@ -244,7 +244,7 @@ h2 {
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 500;
-	line-height: 15.4px;
+	line-height: 18pt;
 }
 h3 {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
@@ -264,6 +264,8 @@ p {
 }
 
 a, a:visited {
+  border-bottom: 1px solid #fff;
+  padding-bottom: 2px;
   text-decoration: none;
   color: #fff;
   -webkit-transition: color 0.2s ease;
@@ -305,6 +307,11 @@ a:hover {
   background-color: rgb(26, 26, 26);
   align-items: center;
   color: #FFF;
+}
+
+.c-header__social a {
+  border: none;
+  padding-bottom: 0;
 }
 
 .c-header__social__icon {
@@ -363,6 +370,7 @@ a:hover {
   text-decoration: none;
   -webkit-transition: color 0.2s ease;
 	transition: color 0.2s ease;
+  border: none;
 }
 
 .c-nav__item--active {
@@ -377,6 +385,7 @@ a:hover {
 .c-nav__item--active a, .c-nav__item--active a:visited  {
   color: rgb(239, 91, 48);
   text-decoration: none;
+  border: none;
 }
 
 .c-nav__item:hover a {
@@ -397,6 +406,11 @@ a:hover {
   flex-wrap: wrap;
   justify-content: space-between;
   max-width: 1200px;
+}
+
+a.post-module {
+  border: none;
+  padding-bottom: 0;
 }
 
 .post-module {
