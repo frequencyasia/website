@@ -13,7 +13,7 @@ class Show(db.Model):
     tagline = db.Column(db.Unicode(255))
 
     def __repr__(self):
-        return '<Show %r>' % (self.name)
+        return self.name
 
     def get_episodes(self):
         return Episode.query.filter_by(show_id=self.id).all()
@@ -71,4 +71,4 @@ class Episode(db.Model):
         }
 
     def __repr__(self):
-        return '<Episode %r>' % (self.name)
+        return self.name

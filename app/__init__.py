@@ -1,11 +1,12 @@
 import os
 import os.path
 
-from flask import Flask
+from werkzeug.exceptions import HTTPException
+from flask import Flask, request, Response
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_admin import Admin, form
 from flask_admin.form import rules
-from flask_admin.contrib.sqla import ModelView
+import flask_admin.contrib.sqla
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -20,6 +21,16 @@ except OSError:
     pass
 
 from app import views, models
+
+class ModelView(flask_admin.contrib.sqla.ModelView):
+    def is_accessible(self):
+        auth = request.authorization or request.environ.get('REMOTE_USER')  # workaround for Apache
+        if not auth or (auth.username, auth.password) != app.config['ADMIN_CREDENTIALS']:
+            raise HTTPException('', Response(
+                "Please log in.", 401,
+                {'WWW-Authenticate': 'Basic realm="Login Required"'}
+            ))
+        return True
 
 class ShowView(ModelView):
     # Override form field to use Flask-Admin FileUploadField
