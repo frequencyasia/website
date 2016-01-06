@@ -716,8 +716,7 @@ a.post-module {
 }
 
 .c-episode__content__image {
-  max-width: 250px;
-  max-height: 150px;
+  max-width: 150px;
   margin-left: auto;
 }
 
@@ -875,5 +874,8 @@ a.post-module {
   .o-feature-slider {
     height: 90%;
     height: calc(100vh - 80px - 60px);
+  }
+  .c-episode__content__image {
+    display: none;
   }
 }
