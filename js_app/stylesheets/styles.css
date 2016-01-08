@@ -268,11 +268,12 @@ a, a:visited {
   padding-bottom: 2px;
   text-decoration: none;
   color: #fff;
-  -webkit-transition: color 0.2s ease;
-	transition: color 0.2s ease;
+  -webkit-transition: color 0.2s ease, border-color 0.2s ease;
+	transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 a:hover {
+  border-color: rgb(239, 91, 48);
   color: rgb(239, 91, 48);
 }
 
@@ -300,21 +301,23 @@ a:hover {
   padding: 10px 20px;
 }
 
-.c-header__social {
+.c-social {
   display: flex;
-  flex-direction: row;
-  height: 60px;
-  background-color: rgb(26, 26, 26);
-  align-items: center;
-  color: #FFF;
+  justify-content: flex-end;
+  position: fixed;
+  top: 95%;
+  color: #fff;
+  width: 95%;
+  width: 95vw;
+  z-index: 9;
 }
 
-.c-header__social a {
+.c-social a {
   border: none;
   padding-bottom: 0;
 }
 
-.c-header__social__icon {
+.c-social__icon {
   margin-right: 20px;
   margin-right: 1vw;
 }
@@ -513,6 +516,7 @@ a.post-module {
 }
 
 .c-player__text {
+  flex-grow: 1;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -521,8 +525,8 @@ a.post-module {
 .c-player__volume {
   margin-left: 50px;
   margin-left: 5vw;
-  margin-right: 50px;
-  margin-right: 5vw;
+  margin-right: 10px;
+  margin-right: 1vw;
   min-width: 80px;
 }
 .vslider {
