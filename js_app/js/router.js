@@ -19,6 +19,19 @@ module.exports = Backbone.Router.extend({
 	},
 	currentView: null,
 
+	track: function() {
+      var url = Backbone.history.getFragment();
+
+      // Add a slash if neccesary
+      if (!/^\//.test(url)) url = '/' + url;
+
+      // Record page view
+      ga('send', {
+          'hitType': 'pageview',
+          'page': url
+      });
+  },
+
 	setTitle: function (title) {
 		document.title = title;
 	},
@@ -28,12 +41,14 @@ module.exports = Backbone.Router.extend({
 		$("#main-container").html(view.render().el);
 		view.getShowcaseItems();
 		this.setTitle('Frequency Asia');
+		this.track();
   },
 
 	loadShowListView: function () {
 		var view = new ShowListView();
 		$("#main-container").html(view.render().el);
 		this.setTitle('Shows | Frequency Asia');
+		this.track();
   },
 
 	loadShowView: function (showSlug) {
@@ -41,18 +56,21 @@ module.exports = Backbone.Router.extend({
 			slug: showSlug,
 		});
 		$("#main-container").html(view.render().el);
+		this.track();
   },
 
 	loadAboutView: function () {
 		var view = new AboutView();
 		$("#main-container").html(view.render().el);
 		this.setTitle('About | Frequency Asia');
+		this.track();
   },
 
 	loadProjectsView: function () {
 		var view = new ProjectsView();
 		$("#main-container").html(view.render().el);
 		this.setTitle('Projects | Frequency Asia');
+		this.track();
   },
 
 	loadScheduleView: function () {
@@ -60,6 +78,6 @@ module.exports = Backbone.Router.extend({
 		$("#main-container").html(view.render().el);
 		view.getSchedule();
 		this.setTitle('Schedule | Frequency Asia');
+		this.track();
   },
-
 });
