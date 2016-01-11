@@ -10,6 +10,7 @@ def index():
 
 @app.route("/api/new-episodes/")
 def new_episodes():
+    # Return all episodes with showcase set to True.
     data = {
      "items": []
     }
@@ -27,7 +28,8 @@ def shows():
      "shows": []
     }
     for show in Show.query.order_by('name').all():
-        shows_dict["shows"].append(show.to_api_dict())
+        if show.published:
+            shows_dict["shows"].append(show.to_api_dict())
     return jsonify(shows_dict)
 
 @app.route("/api/shows/<slug>")
@@ -36,5 +38,6 @@ def episodes(slug):
     show_dict = show.to_api_dict()
     show_dict['episodes'] = []
     for episode in show.get_episodes():
-        show_dict['episodes'].append(episode.to_api_dict())
+        if show.published:
+            show_dict['episodes'].append(episode.to_api_dict())
     return jsonify(show_dict)
