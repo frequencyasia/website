@@ -1,4 +1,5 @@
 import time
+from datetime import datetime
 from app import db
 
 class Show(db.Model):
