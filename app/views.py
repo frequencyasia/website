@@ -38,6 +38,6 @@ def episodes(slug):
     show_dict = show.to_api_dict()
     show_dict['episodes'] = []
     for episode in show.get_episodes():
-        if show.published:
+        if episode.published and episode.has_started():
             show_dict['episodes'].append(episode.to_api_dict())
     return jsonify(show_dict)

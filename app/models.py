@@ -48,6 +48,9 @@ class Episode(db.Model):
     image_path = db.Column(db.Unicode(255))
     show_id = db.Column(db.Integer, db.ForeignKey('show.id'))
 
+    def has_started(self):
+        return self.start_time >= datetime.now()
+
     def getShow(self):
         return Show.query.get(self.show_id).name
 
