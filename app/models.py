@@ -17,7 +17,8 @@ class Show(db.Model):
         return self.name
 
     def get_episodes(self):
-        return Episode.query.filter_by(show_id=self.id).all()
+        # Filter out unpublished and not played yet.
+        return [ep for ep in Episode.query.filter_by(show_id=self.id, published=True).all() if ep.has_started()]
 
     def get_image_path(self):
         if self.imagePath:

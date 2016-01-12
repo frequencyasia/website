@@ -15,7 +15,7 @@ def new_episodes():
      "items": []
     }
     for episode in Episode.query.filter_by(showcase=True).all():
-        if episode.published and episode.has_started:
+        if episode.published and episode.has_started():
             d = episode.to_api_dict()
             d['show'] = episode.getShow()
             d['show_slug'] = episode.getShowSlug()
