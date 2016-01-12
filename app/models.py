@@ -50,9 +50,7 @@ class Episode(db.Model):
     show_id = db.Column(db.Integer, db.ForeignKey('show.id'))
 
     def has_started(self):
-        print(self.start_time)
-        print(datetime.now())
-        return self.start_time >= datetime.now()
+        return self.start_time <= datetime.now()
 
     def getShow(self):
         return Show.query.get(self.show_id).name
