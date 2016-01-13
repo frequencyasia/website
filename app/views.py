@@ -4,7 +4,6 @@ from app import app
 from models import Show, Episode
 
 @app.route('/')
-@app.route('/index')
 def index():
     return render_template('index.html')
 
@@ -42,3 +41,11 @@ def episodes(slug):
         if episode.published and episode.has_started():
             show_dict['episodes'].append(episode.to_api_dict())
     return jsonify(show_dict)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def page_error(e):
+    return render_template('500.html'), 500
