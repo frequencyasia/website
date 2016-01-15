@@ -71,6 +71,9 @@ class EpisodeView(ModelView):
     }
 
 # ADMIN STUFF
-admin = Admin(app, name='microblog', template_mode='bootstrap3')
+admin = Admin(app, name='Frequency Asia', template_mode='bootstrap3')
 admin.add_view(ShowView(models.Show, db.session))
 admin.add_view(EpisodeView(models.Episode, db.session))
+admin.add_view(ModelView(models.ArtistTag, db.session))
+admin.add_view(ModelView(models.CityTag, db.session))
+admin.add_view(ModelView(models.CountryTag, db.session))

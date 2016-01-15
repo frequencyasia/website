@@ -277,6 +277,10 @@ a:hover {
   color: rgb(239, 91, 48);
 }
 
+.u-no-border {
+  border: none;
+}
+
 .c-header {
   display: flex;
   flex-direction: row;
@@ -726,6 +730,10 @@ a.post-module {
 
 .c-episode__content__date {
   color: rgb(239, 91, 48);
+}
+
+.c-episode__content__tags a {
+  border: none;
 }
 
 .c-episode__description-toggle {

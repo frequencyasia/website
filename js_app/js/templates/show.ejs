@@ -17,6 +17,15 @@
             <h1 class="c-episode__content__title"><%= data.episodes[i].name %></h1>
             <p><%= data.episodes[i].tagline %></p>
             <p class="c-episode__content__date"><%= data.episodes[i].date %></p>
+            <p class="c-episode__content__tags">
+              <% var tags = data.episodes[i].tags.countries.concat( data.episodes[i].tags.cities).concat( data.episodes[i].tags.artists); %>
+              <% for (var j = 0; j < tags.length; j++) { %>
+                <a href="#wiki/<%= tags[j].link %>"><%= tags[j].name %></a>
+                <% if(j != tags.length - 1){ %>
+                  &nbsp;/&nbsp;
+                <% } %>
+              <% } %>
+            </p>
           </div>
           <% if(data.episodes[i].episode_image) { %>
             <img class="c-episode__content__image" src='/static/files/<%= data.episodes[i].episode_image %>' alt='<%= data.episodes[i].name %>'/>

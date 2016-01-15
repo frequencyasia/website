@@ -1,0 +1,13 @@
+<section>
+  <div class="row">
+    <div class="col">
+      <h1><a class='u-no-border' href="#wiki">Wiki</a> &rsaquo; <%= typePretty %></h1>
+      <% if (data !== undefined){ %>
+        <ul>
+          <% for(var i = 0; i < data.tags.length; i++) { %>
+            <li><a href='#wiki/<%= data.tags[i].link %>'><%= data.tags[i].name %></a></li>
+          <% } %>
+      <% } %>
+    </div>
+  </div>
+</section>

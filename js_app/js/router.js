@@ -7,6 +7,9 @@ var ShowView = require('./views/showView');
 var AboutView = require('./views/aboutView');
 var ScheduleView = require('./views/scheduleView');
 var ProjectsView = require('./views/projectsView');
+var WikiView = require('./views/wikiView');
+var TagView = require('./views/tagView');
+var TagListView = require('./views/tagListView');
 
 module.exports = Backbone.Router.extend({
 	routes: {
@@ -16,6 +19,13 @@ module.exports = Backbone.Router.extend({
 		"about": "loadAboutView",
 		"schedule": 'loadScheduleView',
 		"projects": 'loadProjectsView',
+		"wiki": "loadWikiView",
+		"wiki/artist": "loadArtistListView",
+		"wiki/city": "loadCityListView",
+		"wiki/country": "loadCountryListView",
+		"wiki/artist/:artistSlug": "loadArtistView",
+		"wiki/city/:citiesSlug": "loadCityView",
+		"wiki/country/:countriesSlug": "loadCountryView",
 	},
 	currentView: null,
 
@@ -80,4 +90,55 @@ module.exports = Backbone.Router.extend({
 		this.setTitle('Schedule | Frequency Asia');
 		this.track();
   },
+
+	loadWikiView: function() {
+		var view = new WikiView();
+		$("#main-container").html(view.render().el);
+		this.setTitle('Wiki | Frequency Asia');
+	},
+
+	loadArtistView: function(slug) {
+		var view = new TagView({
+			type: 'artist',
+			slug: slug,
+		});
+		$("#main-container").html(view.render().el);
+	},
+
+	loadCityView: function(slug) {
+		var view = new TagView({
+			type: 'city',
+			slug: slug,
+		});
+		$("#main-container").html(view.render().el);
+	},
+
+	loadCountryView: function(slug) {
+		var view = new TagView({
+			type: 'country',
+			slug: slug,
+		});
+		$("#main-container").html(view.render().el);
+	},
+
+	loadArtistListView: function() {
+		var view = new TagListView({
+			type: 'artist',
+		});
+		$("#main-container").html(view.render().el);
+	},
+
+	loadCountryListView: function() {
+		var view = new TagListView({
+			type: 'country',
+		});
+		$("#main-container").html(view.render().el);
+	},
+
+	loadCityListView: function() {
+		var view = new TagListView({
+			type: 'city',
+		});
+		$("#main-container").html(view.render().el);
+	},
 });
