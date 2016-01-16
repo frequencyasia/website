@@ -14,10 +14,15 @@ module.exports = Backbone.View.extend({
 
   setActivePage: function setActivePage() {
     $(".js-nav-item").removeClass("c-nav__item--active").addClass("c-nav__item")
-    var url = "#" + window.location.href.split("#")[1];
-    var $navItem = $('.js-nav-item a[href="' + url + '"]');
-    if ($navItem.length) {
-      $navItem.parent().removeClass('c-nav__item').addClass('c-nav__item--active');
+    var subURL = window.location.href.split("#")[1];
+    if (subURL === undefined) {
+        $('.js-nav-item').first().removeClass('c-nav__item').addClass('c-nav__item--active');
+    } else {
+      var url = "#" + subURL;
+      var $navItem = $('.js-nav-item a[href="' + url + '"]');
+      if ($navItem.length) {
+        $navItem.parent().removeClass('c-nav__item').addClass('c-nav__item--active');
+      }
     }
   },
 });
