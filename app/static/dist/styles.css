@@ -439,7 +439,7 @@ a:hover {
   border: none;
 }
 
-.c-nav__item:hover a {
+.c-nav__item a:hover {
   color: rgb(239, 91, 48);
   text-decoration: none;
 }
