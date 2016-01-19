@@ -36,6 +36,7 @@ module.exports = Backbone.View.extend({
 
   renderMixcloudEmbed: function renderMixcloudEmbed() {
     this.$el.html(_.template(mixcloudTemplate)({url: this.mixcloudURL}));
+    window.scrollTo(0,0);
     return this;
   },
 
