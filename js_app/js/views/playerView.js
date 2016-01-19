@@ -20,7 +20,10 @@ module.exports = Backbone.View.extend({
     this.$el.html(_.template(template));
     this.getNowPlaying();
     this.renderVolume();
-    this.toggleStream();
+    if (typeof window.orientation === 'undefined') {
+      // This shoud detect mobile devices. Might not be a catch all (i.e. some non-mobile devices might get caught).
+      this.toggleStream();
+    }
     return this;
   },
 
