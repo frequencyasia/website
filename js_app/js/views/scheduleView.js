@@ -31,7 +31,9 @@ module.exports = Backbone.View.extend({
     var parsedSchedule = [];
     var date = new Date();
     delete this.scheduleData.AIRTIME_API_VERSION
-    for (var key of _.keys(this.scheduleData)) {
+    var keys = _.keys(this.scheduleData);
+    for (var keyIndex; keyIndex < keys.length; keyIndex++) {
+      var key = keys[keyIndex];
       var data = {
         heading: fecha.format(date, 'dddd / MMMM D').toUpperCase(),
         shows: this.scheduleData[key]
