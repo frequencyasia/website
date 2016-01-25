@@ -845,6 +845,10 @@ a.post-module {
   height: auto;
 }
 
+.c-content {
+  width: 100%;
+}
+
 @media only screen and (max-width: 900px) {
   .c-nav__item, .c-nav__item--active {
     font-size: 0.8em;
