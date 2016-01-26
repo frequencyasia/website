@@ -845,6 +845,7 @@ a.post-module {
   }
   .c-header {
     flex-direction: column;
+    height: 100px;
   }
   .c-header__content {
     width: 100%;
@@ -929,6 +930,9 @@ a.post-module {
 }
 
 @media only screen and (max-width: 600px) {
+  .c-header {
+    height: 140px;
+  }
   .c-nav {
     height: 80px;
     flex-grow: 1;
