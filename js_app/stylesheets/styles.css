@@ -831,6 +831,10 @@ a.post-module {
 }
 
 @media only screen and (max-width: 801px) {
+  .c-nav__item, .c-nav__item--active {
+    font-size: 0.9em;
+    font-size: 0.9rem;
+  }
   h1 {
     font-size: 20px;
     margin: 20px 0;
@@ -840,7 +844,7 @@ a.post-module {
     height: calc(100vh - 100px);
   }
   .c-header {
-    flex-wrap: wrap;
+    flex-direction: column;
   }
   .c-header__content {
     width: 100%;
