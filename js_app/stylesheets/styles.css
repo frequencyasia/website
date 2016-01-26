@@ -811,6 +811,10 @@ a.post-module {
   width: 100%;
 }
 
+.c-wiki__list__item {
+  margin-bottom: 5px;
+}
+
 @media only screen and (max-width: 900px) {
   .c-nav__item, .c-nav__item--active {
     font-size: 0.8em;

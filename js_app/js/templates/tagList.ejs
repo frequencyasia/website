@@ -5,7 +5,7 @@
       <% if (data !== undefined){ %>
         <ul>
           <% for(var i = 0; i < data.tags.length; i++) { %>
-            <li><a href='#wiki/<%= data.tags[i].link %>'><%= data.tags[i].name %></a></li>
+            <li class="c-wiki__list__item"><a href='#wiki/<%= data.tags[i].link %>'><%= data.tags[i].name %></a></li>
           <% } %>
       <% } %>
     </div>
