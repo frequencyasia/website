@@ -19,9 +19,9 @@ module.exports = Backbone.View.extend({
         $('.js-nav-item').first().removeClass('c-nav__item').addClass('c-nav__item--active');
     } else {
       var url = "#" + subURL;
-      var $navItem = $('.js-nav-item a[href="' + url + '"]');
+      var $navItem = $('.c-nav a[href="' + url + '"]');
       if ($navItem.length) {
-        $navItem.parent().removeClass('c-nav__item').addClass('c-nav__item--active');
+        $navItem.children().removeClass('c-nav__item').addClass('c-nav__item--active');
       }
     }
   },

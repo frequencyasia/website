@@ -409,6 +409,19 @@ a:hover {
   align-items: center;
 }
 
+.c-nav a, .c-nav a:visited{
+  color: #fff;
+  text-decoration: none;
+  -webkit-transition: color 0.2s ease;
+	transition: color 0.2s ease;
+  border: none;
+}
+
+.c-nav a:hover {
+  color: rgb(239, 91, 48);
+  text-decoration: none;
+}
+
 .c-nav__item {
   display: flex;
   align-items: center;
@@ -416,14 +429,6 @@ a:hover {
   height: 5vh;
   padding: 0 20px;
   padding: 0 1vw;
-}
-
-.c-nav__item a, .c-nav__item a:visited {
-  color: #FFF;
-  text-decoration: none;
-  -webkit-transition: color 0.2s ease;
-	transition: color 0.2s ease;
-  border: none;
 }
 
 .c-nav__item--active {
@@ -435,15 +440,10 @@ a:hover {
   padding: 0 1vw;
 }
 
-.c-nav__item--active a, .c-nav__item--active a:visited  {
+a .c-nav__item--active, a:visited .c-nav__item--active {
   color: rgb(239, 91, 48);
   text-decoration: none;
   border: none;
-}
-
-.c-nav__item a:hover {
-  color: rgb(239, 91, 48);
-  text-decoration: none;
 }
 
 .c-container {
@@ -739,6 +739,7 @@ a.post-module {
   background-color: rgb(26, 26, 26);
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .c-episode__content {
@@ -815,10 +816,17 @@ a.post-module {
   margin-bottom: 5px;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1000px) {
   .c-nav__item, .c-nav__item--active {
     font-size: 0.8em;
     font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 880px) {
+  .c-nav__item, .c-nav__item--active {
+    font-size: 0.7em;
+    font-size: 0.7rem;
   }
 }
 
@@ -902,6 +910,9 @@ a.post-module {
 
   .c-show__sidebar__image {
     max-width: 100%;
+    height: auto;
+    max-height: auto;
+    width: auto;
   }
 
   .u-full-width-mobile {

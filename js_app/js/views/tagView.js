@@ -22,7 +22,7 @@ module.exports = Backbone.View.extend({
     $.getJSON(window.app.apiURL + "/api/tags/" + this.tagType + "/" + options.slug)
       .done((data) => {
         for (var i = 0; i < data.episodes.length; i++) {
-          data.episodes[i].date = fecha.format(new Date(item.start_time), 'dddd / MMMM D YYYY');
+          data.episodes[i].date = fecha.format(new Date(data.episodes[i].start_time), 'dddd / MMMM D YYYY');
         }
         this.tagData = data;
         this.render();
