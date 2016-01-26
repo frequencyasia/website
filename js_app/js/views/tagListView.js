@@ -20,7 +20,6 @@ module.exports = Backbone.View.extend({
     }
     $.getJSON(window.app.apiURL + "/api/tags/" + this.tagType)
       .done((data) => {
-        console.log(data);
         this.tagData = data;
         this.render();
         document.title = this.tagTypePretty + " | Frequency Asia";

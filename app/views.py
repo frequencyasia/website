@@ -44,17 +44,20 @@ def episodes(slug):
 
 @app.route("/api/tags/artist")
 def artist_tags_list():
-    tags = [tag.to_api_dict() for tag in ArtistTag.query.order_by(ArtistTag.name.asc()).all()]
+    tags = [tag.to_api_dict() for tag in ArtistTag.query.all()]
+    tags = sorted(tags, key=lambda k: k['name'].lower())
     return jsonify({'tags': tags})
 
 @app.route("/api/tags/country")
 def country_tags_list():
-    tags = [tag.to_api_dict() for tag in CountryTag.query.order_by(CountryTag.name.asc()).all()]
+    tags = [tag.to_api_dict() for tag in CountryTag.query.all()]
+    tags = sorted(tags, key=lambda k: k['name'].lower())
     return jsonify({'tags': tags})
 
 @app.route("/api/tags/city")
 def city_tags_list():
-    tags = [tag.to_api_dict() for tag in CityTag.query.order_by(CityTag.name.asc()).all()]
+    tags = [tag.to_api_dict() for tag in CityTag.query.all()]
+    tags = sorted(tags, key=lambda k: k['name'].lower())
     return jsonify({'tags': tags})
 
 @app.route("/api/tags/artist/<slug>")
