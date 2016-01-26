@@ -25,6 +25,8 @@ module.exports = Backbone.View.extend({
           pagination: '.swiper-pagination',
           paginationClickable: true,
           preventClicks: false,
+          nextButton: '.swiper-button-next',
+          prevButton: '.swiper-button-prev',
           keyboardControl: true,
           autoplay: 5000,
       });

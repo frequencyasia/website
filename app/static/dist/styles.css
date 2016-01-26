@@ -134,6 +134,38 @@ button.swiper-pagination-bullet {
   opacity: 1;
   background: rgb(239, 91, 48);;
 }
+/* Arrows */
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: 50%;
+  width: 27px;
+  height: 44px;
+  margin-top: -22px;
+  z-index: 10;
+  cursor: pointer;
+  background-size: 27px 44px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+  opacity: 0.35;
+  cursor: auto;
+  pointer-events: none;
+}
+.swiper-button-prev,
+.swiper-container-rtl .swiper-button-next {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23ef5b30'%2F%3E%3C%2Fsvg%3E");
+  left: 10px;
+  right: auto;
+}
+.swiper-button-next,
+.swiper-container-rtl .swiper-button-prev {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23ef5b30'%2F%3E%3C%2Fsvg%3E");
+  right: 10px;
+  left: auto;
+}
 .swiper-container-vertical > .swiper-pagination {
   right: 10px;
   top: 50%;
@@ -248,17 +280,16 @@ p {
 }
 
 a, a:visited {
-  border-bottom: 1px solid #fff;
+  border-bottom: 2px solid transparent;
   padding-bottom: 2px;
   text-decoration: none;
-  color: #fff;
-  -webkit-transition: color 0.2s ease, border-color 0.2s ease;
-	transition: color 0.2s ease, border-color 0.2s ease;
+  color: rgb(239, 91, 48);
+  -webkit-transition: border-color 0.2s ease;
+	transition: border-color 0.2s ease;
 }
 
 a:hover {
   border-color: rgb(239, 91, 48);
-  color: rgb(239, 91, 48);
 }
 
 .u-no-border {
@@ -333,8 +364,15 @@ a:hover {
 }
 
 .c-social a {
+  color: #fff;
   border: none;
   padding-bottom: 0;
+  -webkit-transition: color 0.2s ease;
+	transition: color 0.2s ease;
+}
+
+.c-social a:hover {
+  color: rgb(239, 91, 48);
 }
 
 .c-social__icon {
@@ -378,6 +416,7 @@ a:hover {
   cursor: pointer;
   -webkit-transition: color 0.2s ease;
 	transition: color 0.2s ease;
+  outline: 0;
 }
 
 .c-player__button__icon path {
@@ -786,7 +825,7 @@ a.post-module {
 }
 
 .c-episode__content__play {
-  width: 100px;
+  padding: 0 20px;
   text-align: center;
   cursor: pointer;
   -webkit-transition: color 0.2s ease;
@@ -795,6 +834,10 @@ a.post-module {
 
 .c-episode__content__play:hover {
   color: rgb(239, 91, 48);
+}
+
+.c-episode__content__play__icon {
+  font-size: 3em;
 }
 
 .c-episode__content__info {
@@ -813,10 +856,6 @@ a.post-module {
 
 .c-episode__content__date {
   color: rgb(239, 91, 48);
-}
-
-.c-episode__content__tags a {
-  border: none;
 }
 
 .c-episode__description-toggle {
