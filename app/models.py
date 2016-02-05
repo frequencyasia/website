@@ -81,6 +81,9 @@ class Episode(db.Model):
     def has_started(self):
         return self.start_time <= datetime.now()
 
+    def is_published(self):
+        return self.published
+
     def getShow(self):
         return Show.query.get(self.show_id).name
 
@@ -128,7 +131,7 @@ class ArtistTag(db.Model):
         }
 
     def get_episodes(self):
-        return [episode.to_api_dict() for episode in Episode.query.all() if self in episode.artists]
+        return [episode.to_api_dict() for episode in Episode.query.all() if self in episode.artists and episode.has_started() and episode.is_published()]
 
     def __repr__(self):
         return self.name
@@ -140,7 +143,7 @@ class CountryTag(db.Model):
     slug = db.Column(db.Unicode(255), index=True, unique=True)
 
     def get_episodes(self):
-        return [episode.to_api_dict() for episode in Episode.query.all() if self in episode.countries]
+        return [episode.to_api_dict() for episode in Episode.query.all() if self in episode.countries and episode.has_started() and episode.is_published()]
 
     def to_api_dict(self):
         return {
@@ -158,7 +161,7 @@ class CityTag(db.Model):
     slug = db.Column(db.Unicode(255), index=True, unique=True)
 
     def get_episodes(self):
-        return [episode.to_api_dict() for episode in Episode.query.all() if self in episode.cities]
+        return [episode.to_api_dict() for episode in Episode.query.all() if self in episode.cities and episode.has_started() and episode.is_published()]
 
     def to_api_dict(self):
         return {
