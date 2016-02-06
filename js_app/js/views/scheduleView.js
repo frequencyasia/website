@@ -25,28 +25,27 @@ module.exports = Backbone.View.extend({
   },
 
   parseSchedule: function parseSchedule() {
-    if (!this.scheduleData) {
-      return {}
-    }
     var parsedSchedule = [];
-    var date = new Date();
+    if (!this.scheduleData) {
+      return parsedSchedule;
+    }
     delete this.scheduleData.AIRTIME_API_VERSION
     var keys = _.keys(this.scheduleData);
     for (var keyIndex = 0; keyIndex < keys.length; keyIndex++) {
       var key = keys[keyIndex];
       var data = {
-        heading: fecha.format(date, 'dddd / MMMM D').toUpperCase(),
         shows: this.scheduleData[key]
       };
-      for (var i = 0; i < data.shows.length; i++) {
-        var show = data.shows[i];
-        // The replace thing is a hack to get dates working in Safari.
-        var start = fecha.format(fecha.parse(show.start_timestamp, 'YYYY-MM-DD hh:mm:ss'), 'HHmm');
-        var end = fecha.format(fecha.parse(show.end_timestamp, 'YYYY-MM-DD hh:mm:ss'), 'HHmm')
-        show.scheduleTime = start + " - " + end;
+      if (data.shows.length) {
+        data.heading = fecha.format(fecha.parse(data.shows[0].start_timestamp, 'YYYY-MM-DD hh:mm:ss'), 'dddd / MMMM D').toUpperCase();
+        for (var i = 0; i < data.shows.length; i++) {
+          var show = data.shows[i];
+          var start = fecha.format(fecha.parse(show.start_timestamp, 'YYYY-MM-DD hh:mm:ss'), 'HHmm');
+          var end = fecha.format(fecha.parse(show.end_timestamp, 'YYYY-MM-DD hh:mm:ss'), 'HHmm')
+          show.scheduleTime = start + " - " + end;
+        }
+        parsedSchedule.push(data);
       }
-      parsedSchedule.push(data);
-      date = new Date(date.getTime() + 60 * 60 * 24 * 1000);
     }
     return parsedSchedule;
   }
