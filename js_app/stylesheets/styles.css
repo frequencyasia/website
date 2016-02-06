@@ -349,8 +349,7 @@ a:hover {
   position: fixed;
   top: 95%;
   color: #fff;
-  width: 95%;
-  width: 95vw;
+  left: 90%;
   z-index: 9;
 }
 
