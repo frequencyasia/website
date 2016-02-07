@@ -53,7 +53,7 @@ module.exports = Backbone.View.extend({
 
   getNowPlaying: function getNowPlaying() {
     var setNowPlaying = function(text, hasError) {
-      $('.js-stream-text').text(text);
+      $('.js-stream-text').html(text);
     };
     $.getJSON("http://airtime.frequency.asia/api/live-info")
       .done(function(data) {
