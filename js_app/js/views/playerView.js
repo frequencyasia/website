@@ -57,11 +57,11 @@ module.exports = Backbone.View.extend({
     };
     $.getJSON("http://airtime.frequency.asia/api/live-info")
       .done(function(data) {
-        if (data && data.currentShow) {
-          if (data.currentShow.url && data.currentShow.name && data.currentShow.name.length && data.currentShow.url.length) {
-            setNowPlaying('<a href="' + data.currentShow.url + '">' + data.currentShow.name + '</a>');
-          } else if (data.currentShow.name && data.currentShow.name.length) {
-            setNowPlaying(data.currentShow.name);
+        if (data && data.currentShow.length &&data.currentShow[0]) {
+          if (data.currentShow[0].url && data.currentShow[0].name && data.currentShow[0].name.length && data.currentShow[0].url.length) {
+            setNowPlaying('<a href="' + data.currentShow[0].url + '">' + data.currentShow[0].name + '</a>');
+          } else if (data.currentShow[0].name && data.currentShow[0].name.length) {
+            setNowPlaying(data.currentShow[0].name);
           } else {
             setNowPlaying('Offline', true);
           }
