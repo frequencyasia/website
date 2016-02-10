@@ -335,6 +335,9 @@ a:hover {
 }
 
 .c-header__content__logo {
+  text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
   height: 40px;
   width: 100px;
   min-width: 70px;
