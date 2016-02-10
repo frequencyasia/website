@@ -10,26 +10,26 @@ var template = fs.readFileSync(__dirname + '/../templates/schedule.ejs', 'utf8')
 module.exports = Backbone.View.extend({
   className: 'o-content-block',
 
-  render: function render() {
-    this.$el.html(_.template(template)({schedule: this.parseSchedule()}));
-    return this;
-  },
-
-  getSchedule: function getSchedule () {
+  initialize: function(options) {
     var _this = this;
-    $.getJSON(window.app.airtimeURL + "/api/week-info")
-      .done(function(data) {
-        _this.scheduleData = data;
-        _this.render();
+    $.getJSON(window.app.apiURL + "/api/schedule/")
+      .done((data) => {
+        this.scheduleData = data;
+        this.render();
       });
   },
 
-  parseSchedule: function parseSchedule() {
+  render: function render() {
+    this.$el.html(_.template(template)({schedule: this.getSchedule()}));
+    return this;
+  },
+
+  getSchedule: function getSchedule() {
     var parsedSchedule = [];
     if (!this.scheduleData) {
       return parsedSchedule;
     }
-    delete this.scheduleData.AIRTIME_API_VERSION
+    console.log(this.scheduleData)
     var keys = _.keys(this.scheduleData);
     for (var keyIndex = 0; keyIndex < keys.length; keyIndex++) {
       var key = keys[keyIndex];
@@ -37,11 +37,11 @@ module.exports = Backbone.View.extend({
         shows: this.scheduleData[key]
       };
       if (data.shows.length) {
-        data.heading = fecha.format(fecha.parse(data.shows[0].start_timestamp, 'YYYY-MM-DD hh:mm:ss'), 'dddd / MMMM D').toUpperCase();
+        data.heading = fecha.format(fecha.parse(data.shows[0].start_time, 'YYYY-MM-DD hh:mm:ss'), 'dddd / MMMM D').toUpperCase();
         for (var i = 0; i < data.shows.length; i++) {
           var show = data.shows[i];
-          var start = fecha.format(fecha.parse(show.start_timestamp, 'YYYY-MM-DD hh:mm:ss'), 'HHmm');
-          var end = fecha.format(fecha.parse(show.end_timestamp, 'YYYY-MM-DD hh:mm:ss'), 'HHmm')
+          var start = fecha.format(fecha.parse(show.start_time, 'YYYY-MM-DD hh:mm:ss'), 'HHmm');
+          var end = fecha.format(fecha.parse(show.end_time, 'YYYY-MM-DD hh:mm:ss'), 'HHmm')
           show.scheduleTime = start + " - " + end;
         }
         parsedSchedule.push(data);

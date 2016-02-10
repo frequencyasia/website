@@ -22,6 +22,21 @@ def new_episodes():
             data["items"].append(d)
     return jsonify(data)
 
+@app.route("/api/schedule/")
+def schedule():
+    # Returns Episodes scheduled in next 14 days
+    data = {}
+    for episode in Episode.query.filter_by(published=True).all():
+        if episode.in_next_14_days():
+            d = episode.to_api_dict()
+            d['show'] = episode.getShow()
+            date = episode.start_time.strftime("%d-%m-%y")
+            if date in data:
+                data[date] += d
+            else:
+                data[date] = [d]
+    return jsonify(data)
+
 @app.route("/api/shows/")
 def shows():
     shows_dict = {
