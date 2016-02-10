@@ -29,7 +29,6 @@ module.exports = Backbone.View.extend({
     if (!this.scheduleData) {
       return parsedSchedule;
     }
-    console.log(this.scheduleData)
     var keys = _.keys(this.scheduleData);
     for (var keyIndex = 0; keyIndex < keys.length; keyIndex++) {
       var key = keys[keyIndex];
