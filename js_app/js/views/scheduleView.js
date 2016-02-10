@@ -37,11 +37,11 @@ module.exports = Backbone.View.extend({
         shows: this.scheduleData[key]
       };
       if (data.shows.length) {
-        data.heading = fecha.format(fecha.parse(data.shows[0].start_time, 'YYYY-MM-DD hh:mm:ss'), 'dddd / MMMM D').toUpperCase();
+        data.heading = fecha.format(data.shows[0].start_time, 'dddd / MMMM D').toUpperCase();
         for (var i = 0; i < data.shows.length; i++) {
           var show = data.shows[i];
-          var start = fecha.format(fecha.parse(show.start_time, 'YYYY-MM-DD hh:mm:ss'), 'HHmm');
-          var end = fecha.format(fecha.parse(show.end_time, 'YYYY-MM-DD hh:mm:ss'), 'HHmm')
+          var start = fecha.format(show.start_time, 'HHmm');
+          var end = fecha.format(show.end_time, 'HHmm')
           show.scheduleTime = start + " - " + end;
         }
         parsedSchedule.push(data);
