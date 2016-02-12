@@ -375,6 +375,7 @@ a:hover {
 
 .c-player {
   display: flex;
+  width: 50%;
   flex-direction: row;
   height: 60px;
   background-color: rgb(26, 26, 26);
@@ -571,7 +572,6 @@ a.post-module {
   flex-grow: 1;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .c-player__volume {

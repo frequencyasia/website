@@ -387,6 +387,7 @@ a:hover {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  width: 50%;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
@@ -612,7 +613,6 @@ a.post-module {
           flex-grow: 1;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .c-player__volume {
