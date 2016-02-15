@@ -85,7 +85,7 @@ module.exports = Backbone.View.extend({
             var time = data.next.starts.split('.'); // Get rid of the ms because they're hard to parse.
             var endTime = fecha.parse(time[0], "YYYY-MM-DD HH:mm:ss");
             var endTimestamp = endTime.getTime() + (8 * 60 * 60 * 1000) + 1000; // Add hours to get timezone right, plus 1 second to account for those milliseconds we reomved before.
-            var now = new Date().now();
+            var now = new Date().getTime();
             var diff = endTimestamp - now;
             window.setTimeout(getNowPlaying, diff);
           }
