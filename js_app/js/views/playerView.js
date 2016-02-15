@@ -4,6 +4,8 @@ var Backbone = require('backbone');
 var _ = require("lodash");
 var $ = require("jquery");
 var fs = require("fs");
+var fecha = require("fecha");
+
 var template = fs.readFileSync(__dirname + '/../templates/player.ejs', 'utf8');
 var mixcloudTemplate = fs.readFileSync(__dirname + '/../templates/mixcloudPlayer.ejs', 'utf8');
 
@@ -52,7 +54,15 @@ module.exports = Backbone.View.extend({
   },
 
   getNowPlaying: function getNowPlaying() {
-    var setNowPlaying = function(text, hasError) {
+    var setNowPlaying = function(url, hasError) {
+      $('.js-now-playing-link').attr('href', url);
+      if (url === "#") {
+        $('.js-now-playing-text').text("home");
+      } else {
+        $('.js-now-playing-text').text("now playing");
+      }
+    };
+    var setPlayerMetadata = function(text, hasError) {
       $('.js-stream-text').html(text);
     };
     $.getJSON("http://airtime.frequency.asia/api/live-info")
@@ -65,12 +75,23 @@ module.exports = Backbone.View.extend({
             if (splitStrings.length > 1) {
               url = splitStrings[1].trim();
             }
-            setNowPlaying('<a href="' + url + '">' + name + '</a>');
+            setNowPlaying(url);
+            setPlayerMetadata('<a href="' + url + '">' + name + '</a>');
           } else {
-            setNowPlaying('Offline', true);
+            setNowPlaying('#', true);
+            setPlayerMetadata('Offline', true);
+          }
+          if (data.next.starts) {
+            var time = data.next.starts.split('.'); // Get rid of the ms because they're hard to parse.
+            var endTime = fecha.parse(time[0], "YYYY-MM-DD HH:mm:ss");
+            var endTimestamp = endTime.getTime() + (8 * 60 * 60 * 1000) + 1000; // Add hours to get timezone right, plus 1 second to account for those milliseconds we reomved before.
+            var now = new Date().now();
+            var diff = endTimestamp - now;
+            window.setTimeout(getNowPlaying, diff);
           }
         } else {
-          setNowPlaying('Offline', true);
+          setNowPlaying('#', true);
+          setPlayerMetadata('Offline', true);
         }
       });
   },
