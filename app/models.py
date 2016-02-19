@@ -82,7 +82,7 @@ class Episode(db.Model):
         return self.start_time <= datetime.now()
 
     def in_next_14_days(self):
-        return not self.has_started() and self.start_time <= (datetime.now() + timedelta(days=14))
+        return self.start_time > datetime.now().replace(hour=0,minute=0,second=0,microsecond=0) and self.start_time <= (datetime.now() + timedelta(days=14))
 
     def is_published(self):
         return self.published
