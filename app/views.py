@@ -1,4 +1,6 @@
 from flask import render_template, jsonify
+from urlparse import urljoin
+from werkzeug.contrib.atom import AtomFeed
 
 from app import app
 from models import Show, Episode, ArtistTag, CityTag, CountryTag
@@ -98,6 +100,24 @@ def country_tags(slug):
         'name': tag.name,
         'episodes': tag.get_episodes(),
     })
+
+def make_external(url):
+    return urljoin(request.url_root, url)
+
+@app.route('/shows.atom')
+def shows_feed():
+    feed = AtomFeed('Frequency Asia - New Shows',
+                    feed_url=request.url, url=request.url_root)
+    episodes = Episode.query.order_by(Episode.start_time.desc()).all()
+    for episode in episodes:
+        if episode.has_started() and episode.is_published():
+            feed.add(episode.name, unicode(episode.description),
+                     content_type='html',
+                     author=episode.getShow(),
+                     url=make_external(episode.getShowSlug()),
+                     updated=episode.start_time,
+                     published=episode.start_time)
+    return feed.get_response()
 
 @app.errorhandler(404)
 def page_not_found(e):
