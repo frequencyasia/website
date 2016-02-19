@@ -1,4 +1,4 @@
-from flask import render_template, jsonify
+from flask import render_template, jsonify, request
 from urlparse import urljoin
 from werkzeug.contrib.atom import AtomFeed
 
