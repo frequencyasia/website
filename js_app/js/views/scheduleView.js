@@ -46,6 +46,9 @@ module.exports = Backbone.View.extend({
         parsedSchedule.push(data);
       }
     }
+    parsedSchedule.sort(function(itemA, itemB) {
+      return itemA.start_time - itemB.start_time;
+    })
     return parsedSchedule;
   }
 });
