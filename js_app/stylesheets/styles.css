@@ -667,6 +667,8 @@ a.post-module {
 .c-featured-item__container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .c-featured-item__container__title {
