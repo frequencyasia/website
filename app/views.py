@@ -26,7 +26,7 @@ def new_episodes():
 def schedule():
     # Returns Episodes scheduled in next 14 days
     data = {}
-    for episode in Episode.query.filter_by(published=True).all():
+    for episode in Episode.query.filter_by(published=True).order_by(Episode.start_time.desc()).all():
         if episode.in_next_14_days():
             d = episode.to_api_dict()
             d['show'] = episode.getShow()
