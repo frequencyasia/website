@@ -47,9 +47,7 @@ module.exports = Backbone.View.extend({
       }
     }
     parsedSchedule.sort(function(itemA, itemB) {
-      console.log(itemA);
-      console.log(itemA.shows.start_time - itemB.shows.start_time)
-      return itemA.shows.start_time - itemB.shows.start_time;
+      return itemA.shows[0].start_time - itemB.shows[0].start_time;
     })
     return parsedSchedule;
   }
