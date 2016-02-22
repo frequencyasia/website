@@ -107,8 +107,8 @@ class Episode(db.Model):
 
     def get_feed_content(self):
         content = self.tagline
-        content += '<iframe width="100%" height="60" src="https://www.mixcloud.com/widget/iframe/?autoplay=1&amp;embed_type=widget_standard&amp;embed_uuid=99755eaf-a63a-4a7d-af25-efbb86e6480b&amp;feed=' + self.mixcloud_link + ';hide_cover=1&amp;hide_tracklist=1&amp;light=0&amp;mini=1&amp;replace=0" frameborder="0"></iframe>
-        content += self.description
+        # content += '<iframe width="100%" height="60" src="https://www.mixcloud.com/widget/iframe/?autoplay=1&amp;embed_type=widget_standard&amp;embed_uuid=99755eaf-a63a-4a7d-af25-efbb86e6480b&amp;feed=' + self.mixcloud_link + ';hide_cover=1&amp;hide_tracklist=1&amp;light=0&amp;mini=1&amp;replace=0" frameborder="0"></iframe>
+        # content += self.description
         return content
 
     def to_api_dict(self):
