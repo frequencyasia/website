@@ -111,7 +111,7 @@ def shows_feed():
     episodes = Episode.query.order_by(Episode.start_time.desc()).all()
     for episode in episodes:
         if episode.has_started() and episode.is_published():
-            feed.add(episode.name, unicode(episode.description),
+            feed.add(episode.name, unicode(episode.get_feed_content()),
                      content_type='html',
                      author=episode.getShow(),
                      url=make_external(episode.getShowSlug()),
