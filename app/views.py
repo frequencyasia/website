@@ -114,7 +114,7 @@ def shows_feed():
             feed.add(episode.name, unicode(episode.get_feed_content()),
                      content_type='html',
                      author=episode.getShow(),
-                     url=make_external(episode.getShowSlug()),
+                     url=make_external("/#shows/" + episode.getShowSlug()),
                      updated=episode.start_time,
                      published=episode.start_time)
     return feed.get_response()
