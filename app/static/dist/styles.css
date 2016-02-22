@@ -215,6 +215,9 @@ button.swiper-pagination-bullet {
 .icon-facebook-square:before {
     content: "\e906";
 }
+.icon-rss-square:before {
+    content: "\e907";
+}
 .icon-twitter-square:before {
     content: "\e904";
 }
