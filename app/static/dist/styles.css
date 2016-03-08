@@ -1009,6 +1009,12 @@ a.post-module {
     height: auto !important;
     opacity: 1 !important;
   }
+  .c-featured-item__container__title {
+    font-size: 2em;
+    font-size: 2rem;
+    max-width: 66%;
+    max-width: 66vw;
+  }
   .c-featured-item__container__tagline {
     margin: 20px auto;
     max-width: 66%;
