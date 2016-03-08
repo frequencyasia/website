@@ -143,7 +143,7 @@ class ArtistTag(db.Model):
 
     def get_episodes(self):
         episodes = [episode.to_api_dict() for episode in Episode.query.all() if self in episode.artists and episode.has_started() and episode.is_published()]
-        return sorted(episodes, key=lambda k: k['start_time'])
+        return sorted(episodes, key=lambda k: k['start_time'], reverse=True)
 
     def __repr__(self):
         return self.name
@@ -156,7 +156,7 @@ class CountryTag(db.Model):
 
     def get_episodes(self):
         episodes = [episode.to_api_dict() for episode in Episode.query.all() if self in episode.countries and episode.has_started() and episode.is_published()]
-        return sorted(episodes, key=lambda k: k['start_time'])
+        return sorted(episodes, key=lambda k: k['start_time'], reverse=True)
 
     def to_api_dict(self):
         return {
@@ -175,7 +175,7 @@ class CityTag(db.Model):
 
     def get_episodes(self):
         episodes = [episode.to_api_dict() for episode in Episode.query.all() if self in episode.cities and episode.has_started() and episode.is_published()]
-        return sorted(episodes, key=lambda k: k['start_time'])
+        return sorted(episodes, key=lambda k: k['start_time'], reverse=True)
 
     def to_api_dict(self):
         return {
