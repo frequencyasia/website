@@ -62,8 +62,8 @@ class ShowView(ModelView):
 class EpisodeView(ModelView):
     page_size = 50
     can_view_details = True
-    column_default_sort = 'start_time'
-    column_exclude_list = ['description', 'end_time' ,'image_path', 'cities', 'countries', 'artists' ]
+    column_default_sort = ('start_time', True)
+    column_exclude_list = ['description', 'end_time' ,'image_path', 'cities', 'countries', 'artists', 'mixcloud_link', 'show' ]
     # Override form field to use Flask-Admin FileUploadField
     form_overrides = {
         'image_path': form.FileUploadField
