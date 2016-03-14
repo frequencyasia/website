@@ -41,6 +41,10 @@ class ModelView(flask_admin.contrib.sqla.ModelView):
         return True
 
 class ShowView(ModelView):
+    page_size = 50
+    can_view_details = True
+    column_default_sort = 'name'
+    column_exclude_list = ['slug', 'imagePath', 'description', 'episodes' ]
     # Override form field to use Flask-Admin FileUploadField
     form_overrides = {
         'imagePath': form.FileUploadField
@@ -56,6 +60,10 @@ class ShowView(ModelView):
     }
 
 class EpisodeView(ModelView):
+    page_size = 50
+    can_view_details = True
+    column_default_sort = 'start_time'
+    column_exclude_list = ['description', 'end_time' ,'image_path', 'cities', 'countries', 'artists' ]
     # Override form field to use Flask-Admin FileUploadField
     form_overrides = {
         'image_path': form.FileUploadField
