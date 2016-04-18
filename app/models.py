@@ -134,6 +134,11 @@ class ArtistTag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     slug = db.Column(db.Unicode(255), index=True, unique=True)
+    description = db.Column(db.UnicodeText())
+    link = db.Column(db.UnicodeText())
+    country_id = db.Column(db.Integer, db.ForeignKey('country_tag.id'))
+    city_id = db.Column(db.Integer, db.ForeignKey('city_tag.id'))
+    image_path = db.Column(db.Unicode(255))
 
     def to_api_dict(self):
         return {
@@ -153,6 +158,8 @@ class CountryTag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     slug = db.Column(db.Unicode(255), index=True, unique=True)
+    cities = db.relationship('City', backref='country_tag', lazy='dynamic')
+    artists = db.relationship('Artist', backref='artist_tag', lazy='dynamic')
 
     def get_episodes(self):
         episodes = [episode.to_api_dict() for episode in Episode.query.all() if self in episode.countries and episode.has_started() and episode.is_published()]
@@ -172,6 +179,8 @@ class CityTag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     slug = db.Column(db.Unicode(255), index=True, unique=True)
+    country_id = db.Column(db.Integer, db.ForeignKey('country_tag.id'))
+    artists = db.relationship('Artist', backref='artist_tag', lazy='dynamic')
 
     def get_episodes(self):
         episodes = [episode.to_api_dict() for episode in Episode.query.all() if self in episode.cities and episode.has_started() and episode.is_published()]
