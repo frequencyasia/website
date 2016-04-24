@@ -904,6 +904,9 @@ a.post-module {
     margin: 20px 0;
     margin: 1vw 0;
   }
+  .post-module .thumbnail {
+    height: 250px;
+  }
   .post-module .post-content {
     height: 100%;
   }
