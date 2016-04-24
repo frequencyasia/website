@@ -16,6 +16,7 @@ module.exports = Backbone.Router.extend({
     "": "loadMainView",
 		"shows": "loadShowListView",
 		"shows/:showSlug": "loadShowView",
+		"shows/:showSlug/:episodeSlug": "loadShowView", // Currently just go to show page, until we have episode pages.
 		"about": "loadAboutView",
 		"schedule": 'loadScheduleView',
 		"projects": 'loadProjectsView',

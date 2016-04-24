@@ -78,6 +78,13 @@ class Episode(db.Model):
         backref='episode')
     show_id = db.Column(db.Integer, db.ForeignKey('show.id'))
 
+    def get_slug(self):
+        # Returns a slug for this episode (generated from the start_time in the form of 01-04-1999)
+        # if no start_time is available (though it always should be), self.id is returned as the slug.
+        if (not self.start_time):
+            return self.id
+        return self.start_time.strftime("%d-%m-%Y")
+
     def has_started(self):
         return self.start_time <= datetime.now()
 
