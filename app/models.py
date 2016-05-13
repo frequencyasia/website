@@ -154,10 +154,10 @@ class ArtistTag(db.Model):
         return CityTag.query.get(self.city_id).slug
 
     def get_country(self):
-        return CountryTag.query.get(self.city_id).name
+        return CountryTag.query.get(self.country_id).name
 
     def get_country_slug(self):
-        return CountryTag.query.get(self.city_id).slug
+        return CountryTag.query.get(self.country_id).slug
 
     def to_api_dict(self):
         return {
