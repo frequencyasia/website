@@ -148,16 +148,24 @@ class ArtistTag(db.Model):
     image_path = db.Column(db.Unicode(255))
 
     def get_city(self):
-        return CityTag.query.get(self.city_id).name
+        if self.city_id:
+            return CityTag.query.get(self.city_id).name
+        return ''
 
     def get_city_slug(self):
-        return CityTag.query.get(self.city_id).slug
+        if self.city_id:
+            return CityTag.query.get(self.city_id).slug
+        return ''
 
     def get_country(self):
-        return CountryTag.query.get(self.country_id).name
+        if self.country_id:
+            return CountryTag.query.get(self.country_id).name
+        return ''
 
     def get_country_slug(self):
-        return CountryTag.query.get(self.country_id).slug
+        if self.country_id:
+            return CountryTag.query.get(self.country_id).slug
+        return ''
 
     def to_api_dict(self):
         return {
