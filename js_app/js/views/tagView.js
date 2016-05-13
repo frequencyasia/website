@@ -6,6 +6,7 @@ var fs = require("fs");
 var $ = require("jquery");
 var fecha = require("fecha");
 var template = fs.readFileSync(__dirname + '/../templates/tag.ejs', 'utf8');
+var artistTemplate = fs.readFileSync(__dirname + '/../templates/artistTag.ejs', 'utf8');
 
 module.exports = Backbone.View.extend({
   className: 'o-content-block',
@@ -35,11 +36,20 @@ module.exports = Backbone.View.extend({
   },
 
   render: function render() {
-    this.$el.html(_.template(template)({
-      'type': this.tagType,
-      'typePretty': this.tagTypePretty,
-      'data': this.tagData,
-    }));
+    if (this.tagType === 'artist') {
+      this.$el.html(_.template(this.template)({
+        'type': this.tagType,
+        'typePretty': this.tagTypePretty,
+        'data': this.tagData,
+        locationData: this.parseArtistLocationData(),
+      }));
+    } else {
+      this.$el.html(_.template(this.template)({
+        'type': this.tagType,
+        'typePretty': this.tagTypePretty,
+        'data': this.tagData,
+      }));
+    }
     this.$('.c-episode__description-toggle').click((event) => {
       var $el = $(event.currentTarget)
       if ($el.next().hasClass("c-episode__description--toggled")) {
@@ -51,6 +61,25 @@ module.exports = Backbone.View.extend({
       }
     });
     return this;
+  },
+
+  parseArtistLocationData: function parseArtistLocationData() {
+    // Returns a string with location data for the artist (including links) if available.
+    let str = '';
+    if (this.tagData.country && this.tagData.country_slug && this.tagData.country.length && this.tagData.country_slug.length) {
+      str = `<a href="#wiki/country/${this.tagData.country_slug}">${this.tagData.country}</a>`;
+    } else if (this.tagData.country && this.tagData.country.length) {
+      str = this.tagData.country;
+    }
+    if (this.tagData.country && this.tagData.country.length && this.tagData.city && this.tagData.city.length) {
+      str = ', ' + str;
+    }
+    if (this.tagData.city && this.tagData.city_slug && this.tagData.city.length && this.tagData.city_slug.length) {
+      str = `<a href="#wiki/city/${this.tagData.city_slug}">${this.tagData.city}</a>` + str;
+    } else if (this.tagData.city && this.tagData.city.length) {
+      str = this.tagData.city + str;
+    }
+    return str;
   },
 
   onPlayEpisodeClicked: function onPlayEpisodeClicked(event) {

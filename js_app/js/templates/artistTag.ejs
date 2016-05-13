@@ -1,0 +1,40 @@
+<section class="c-content">
+  <div class="row">
+    <div class="col">
+      <% if (data !== undefined){ %>
+        <h1><a class='u-no-border' href="#wiki">Wiki</a> &rsaquo; <a class='u-no-border' href="#wiki/<%= type %>"><%= typePretty %></a> &rsaquo; <%= data.name %></h1>
+        <h2><%- locationData %></h2>
+        <% for(var i = 0; i < data.episodes.length; i++) { %>
+          <article class="c-episode">
+            <div class="c-episode__content">
+              <% if (data.episodes[i].mixcloud_link && data.episodes[i].mixcloud_link.length) { %>
+                <div class="c-episode__content__play js-play-episode" data-mixcloud="<%= data.episodes[i].mixcloud_link %>">
+                  <span class="icon-play2"></span>
+                </div>
+              <% } %>
+              <div class="c-episode__content__info">
+                <h1 class="c-episode__content__title"><a href="#shows/<%= data.episodes[i].show_slug %>"><%= data.episodes[i].name %></a></h1>
+                <p><%= data.episodes[i].tagline %></p>
+                <p class="c-episode__content__date"><%= data.episodes[i].date %></p>
+                <p class="c-episode__content__tags">
+                  <% var tags = data.episodes[i].tags.countries.concat( data.episodes[i].tags.cities).concat( data.episodes[i].tags.artists); %>
+                  <% for (var j = 0; j < tags.length; j++) { %>
+                    <a href="#wiki/<%= tags[j].link %>"><%= tags[j].name %></a>
+                    <% if(j != tags.length - 1){ %>
+                      &nbsp;/&nbsp;
+                    <% } %>
+                  <% } %>
+                </p>
+              </div>
+              <% if(data.episodes[i].episode_image) { %>
+                <img class="c-episode__content__image" src='/static/files/<%= data.episodes[i].episode_image %>' alt='<%= data.episodes[i].name %>'/>
+              <% } %>
+            </div>
+            <div class="c-episode__description-toggle">+ More Info</div>
+            <div class="c-episode__description"><%= data.episodes[i].description %></div>
+          </article>
+        <% } %>
+      <% } %>
+    </div>
+  </div>
+</section>

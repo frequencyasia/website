@@ -147,10 +147,29 @@ class ArtistTag(db.Model):
     city_id = db.Column(db.Integer, db.ForeignKey('city_tag.id'))
     image_path = db.Column(db.Unicode(255))
 
+    def get_city(self):
+        return CityTag.query.get(self.city_id).name
+
+    def get_city_slug(self):
+        return CityTag.query.get(self.city_id).slug
+
+    def get_country(self):
+        return CountryTag.query.get(self.city_id).name
+
+    def get_country_slug(self):
+        return CountryTag.query.get(self.city_id).slug
+
     def to_api_dict(self):
         return {
-            'link': 'artist/' + self.slug,
-            'name': self.name
+            'link': self.slug,
+            'name': self.name,
+            'description': self.description,
+            'external_link': self.link,
+            'description': self.description,
+            'city': self.get_city(),
+            'country': self.get_country(),
+            'city_slug': self.get_city_slug(),
+            'country_slug': self.get_country_slug()
         }
 
     def get_episodes(self):
