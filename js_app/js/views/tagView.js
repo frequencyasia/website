@@ -10,6 +10,10 @@ var template = fs.readFileSync(__dirname + '/../templates/tag.ejs', 'utf8');
 module.exports = Backbone.View.extend({
   className: 'o-content-block',
 
+  events: {
+    'click .js-play-episode': 'onPlayEpisodeClicked',
+  },
+
   initialize: function(options) {
     this.tagType = options.type;
     if (this.tagType === 'artist') {
@@ -47,5 +51,10 @@ module.exports = Backbone.View.extend({
       }
     });
     return this;
-  }
+  },
+
+  onPlayEpisodeClicked: function onPlayEpisodeClicked(event) {
+    var url = this.$(event.currentTarget).data("mixcloud");
+    window.app.views.playerView.setMixcloudURL(url);
+  },
 });

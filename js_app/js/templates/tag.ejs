@@ -6,9 +6,11 @@
         <% for(var i = 0; i < data.episodes.length; i++) { %>
           <article class="c-episode">
             <div class="c-episode__content">
-              <div class="c-episode__content__play js-play-episode" data-mixcloud="<%= data.episodes[i].mixcloud_link %>">
-                <span class="icon-play2"></span>
-              </div>
+              <% if (data.episodes[i].mixcloud_link && data.episodes[i].mixcloud_link.length) { %>
+                <div class="c-episode__content__play js-play-episode" data-mixcloud="<%= data.episodes[i].mixcloud_link %>">
+                  <span class="icon-play2"></span>
+                </div>
+              <% } %>
               <div class="c-episode__content__info">
                 <h1 class="c-episode__content__title"><a href="#shows/<%= data.episodes[i].show_slug %>"><%= data.episodes[i].name %></a></h1>
                 <p><%= data.episodes[i].tagline %></p>
