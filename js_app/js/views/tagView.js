@@ -17,8 +17,10 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options) {
     this.tagType = options.type;
+    this.template = template;
     if (this.tagType === 'artist') {
       this.tagTypePretty = "Artists";
+      this.template = artistTemplate;
     } else if (this.tagType === 'city') {
       this.tagTypePretty = "Cities";
     } else {

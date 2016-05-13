@@ -169,7 +169,7 @@ class ArtistTag(db.Model):
 
     def to_api_dict(self):
         return {
-            'link': self.slug,
+            'link': 'artist/' + self.slug,
             'name': self.name,
             'description': self.description,
             'external_link': self.link,
