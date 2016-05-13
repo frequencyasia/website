@@ -68,18 +68,20 @@ module.exports = Backbone.View.extend({
   parseArtistLocationData: function parseArtistLocationData() {
     // Returns a string with location data for the artist (including links) if available.
     let str = '';
-    if (this.tagData.country && this.tagData.country_slug && this.tagData.country.length && this.tagData.country_slug.length) {
-      str = `<a href="#wiki/country/${this.tagData.country_slug}">${this.tagData.country}</a>`;
-    } else if (this.tagData.country && this.tagData.country.length) {
-      str = this.tagData.country;
-    }
-    if (this.tagData.country && this.tagData.country.length && this.tagData.city && this.tagData.city.length) {
-      str = ', ' + str;
-    }
-    if (this.tagData.city && this.tagData.city_slug && this.tagData.city.length && this.tagData.city_slug.length) {
-      str = `<a href="#wiki/city/${this.tagData.city_slug}">${this.tagData.city}</a>` + str;
-    } else if (this.tagData.city && this.tagData.city.length) {
-      str = this.tagData.city + str;
+    if (this.tagData) {
+      if (this.tagData.country && this.tagData.country_slug && this.tagData.country.length && this.tagData.country_slug.length) {
+        str = `<a href="#wiki/country/${this.tagData.country_slug}">${this.tagData.country}</a>`;
+      } else if (this.tagData.country && this.tagData.country.length) {
+        str = this.tagData.country;
+      }
+      if (this.tagData.country && this.tagData.country.length && this.tagData.city && this.tagData.city.length) {
+        str = ', ' + str;
+      }
+      if (this.tagData.city && this.tagData.city_slug && this.tagData.city.length && this.tagData.city_slug.length) {
+        str = `<a href="#wiki/city/${this.tagData.city_slug}">${this.tagData.city}</a>` + str;
+      } else if (this.tagData.city && this.tagData.city.length) {
+        str = this.tagData.city + str;
+      }
     }
     return str;
   },
