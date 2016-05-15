@@ -1,6 +1,1 @@
 node_modules
-db_repository
-*.pyc
-app.db
-app/static/files
-config.py
