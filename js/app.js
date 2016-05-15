@@ -5,8 +5,6 @@ var PlayerView = require('./views/playerView');
 var NavView = require('./views/navView');
 
 window.app = {
-	// apiURL: "http://127.0.0.1:5000",
-	apiURL: "http://www.frequency.asia",
 	airtimeURL: "http://airtime.frequency.asia",
 	init: function () {
 		this.views = {
