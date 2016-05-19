@@ -46,8 +46,8 @@ function bundle() {
 
 gulp.task('postcss', function() {
   // Runs postCSS with all its plugins.
-  const nano = require('gulp-cssnano');
-  const plugins = [
+  var nano = require('gulp-cssnano');
+  var plugins = [
     require('autoprefixer'),
     doiuse({
       browsers: [
