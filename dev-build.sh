@@ -2,6 +2,7 @@
 exec &> githook.log
 
 npm install
+
 gulp build
 
 cp -rf ./dist/bundle.js /var/www/api-canary/app/static/dist/bundle.js
