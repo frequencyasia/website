@@ -41,7 +41,7 @@ function bundle() {
     .pipe(uglify())
        // Add transformation tasks to the pipeline here.
     .pipe(sourcemaps.write('./')) // writes .map file
-    .pipe(gulp.dest('./../app/static/dist'));
+    .pipe(gulp.dest('./dist'));
 }
 
 gulp.task('postcss', () => {
@@ -68,10 +68,10 @@ gulp.task('postcss', () => {
         gutil.log(gutil.colors.magenta.bold('Error while compiling CSS'));
         gutil.log(gutil.colors.magenta(error.message));
       })
-      .pipe(gulp.dest('./../app/static/dist'))
+      .pipe(gulp.dest('./dist'))
       .pipe(rename({ suffix: '.min' }))
       .pipe(nano({ discardUnused: false }))
-      .pipe(gulp.dest('./../app/static/dist'))
+      .pipe(gulp.dest('./dist'))
       .pipe(function onComplete() {
         return notify({ message: 'PostCSS has finished compiling.' });
       }());
@@ -86,5 +86,10 @@ gulp.task('watch-styles', function watchStyles() {
 gulp.task("default", [
   'postcss',
   'watch-styles',
+  "js",
+]);
+
+gulp.task("build", [
+  'postcss',
   "js",
 ]);

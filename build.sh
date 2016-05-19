@@ -2,4 +2,4 @@
 exec &> githook.log
 
 npm install
-gulp
+gulp build
