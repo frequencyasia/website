@@ -44,7 +44,7 @@ function bundle() {
     .pipe(gulp.dest('./dist'));
 }
 
-gulp.task('postcss', () => {
+gulp.task('postcss', function() {
   // Runs postCSS with all its plugins.
   const nano = require('gulp-cssnano');
   const plugins = [
@@ -64,7 +64,7 @@ gulp.task('postcss', () => {
   // Run PostCSS
   return gulp.src('./stylesheets/styles.css')
       .pipe(postcss(plugins))
-      .on('error', (error) => {
+      .on('error', function(error) {
         gutil.log(gutil.colors.magenta.bold('Error while compiling CSS'));
         gutil.log(gutil.colors.magenta(error.message));
       })
