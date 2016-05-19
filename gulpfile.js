@@ -1,6 +1,5 @@
 'use strict';
 
-var watchify = require('watchify');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var gulp = require('gulp');
@@ -22,16 +21,17 @@ var customOpts = {
   debug: true,
   transform: [brfs, [babelify, {presets: ["es2015"]}]],
 };
-var opts = assign({}, watchify.args, customOpts);
-var w = watchify(browserify(opts));
 var b = browserify(customOpts);
 
 gulp.task('watch-js', bundleAndWatch);
 gulp.task('js', bundle);
-w.on('update', bundle); // on any dep update, runs the bundler
-w.on('log', gutil.log); // output build logs to terminal
 
 function bundleAndWatch() {
+  var watchify = require('watchify');
+  var opts = assign({}, watchify.args, customOpts);
+  var w = watchify(browserify(opts));
+  w.on('update', bundle); // on any dep update, runs the bundler
+  w.on('log', gutil.log); // output build logs to terminal
   return w.bundle()
     // log errors if they happen
     .on('error', gutil.log.bind(gutil, 'Browserify Error'))
