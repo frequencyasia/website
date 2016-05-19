@@ -23,11 +23,28 @@ var customOpts = {
   transform: [brfs, [babelify, {presets: ["es2015"]}]],
 };
 var opts = assign({}, watchify.args, customOpts);
-var b = watchify(browserify(opts));
+var w = watchify(browserify(opts));
+var b = browserify(customOpts);
 
-gulp.task('js', bundle); // so you can run `gulp js` to build the file
-b.on('update', bundle); // on any dep update, runs the bundler
-b.on('log', gutil.log); // output build logs to terminal
+gulp.task('watch-js', bundleAndWatch);
+gulp.task('js', bundle);
+w.on('update', bundle); // on any dep update, runs the bundler
+w.on('log', gutil.log); // output build logs to terminal
+
+function bundleAndWatch() {
+  return w.bundle()
+    // log errors if they happen
+    .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+    .pipe(source('bundle.js'))
+    // optional, remove if you don't need to buffer file contents
+    .pipe(buffer())
+    // optional, remove if you dont want sourcemaps
+    .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
+    .pipe(uglify())
+       // Add transformation tasks to the pipeline here.
+    .pipe(sourcemaps.write('./')) // writes .map file
+    .pipe(gulp.dest('./dist'));
+}
 
 function bundle() {
   return b.bundle()
@@ -86,7 +103,7 @@ gulp.task('watch-styles', function watchStyles() {
 gulp.task("default", [
   'postcss',
   'watch-styles',
-  "js",
+  "watch-js",
 ]);
 
 gulp.task("build", [
