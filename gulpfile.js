@@ -1,67 +1,21 @@
-'use strict';
+const browserify = require('browserify');
+const babelify = require('babelify');
+const gulp = require('gulp');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
+const gutil = require('gulp-util');
+const sourcemaps = require('gulp-sourcemaps');
+const rename = require('gulp-rename');
+const postcss = require('gulp-postcss');
+const uglify = require('gulp-uglify');
 
-var browserify = require('browserify');
-var babelify = require('babelify');
-var gulp = require('gulp');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-var gutil = require('gulp-util');
-var sourcemaps = require('gulp-sourcemaps');
-var assign = require('lodash').assign;
-var brfs = require('brfs');
-var rename = require('gulp-rename');
-var postcss = require('gulp-postcss');
-var uglify = require('gulp-uglify');
-//
-// // add custom browserify options here
-// var customOpts = {
-//   entries: ['./js/app.js'],
-//   debug: true,
-//   transform: [brfs, [babelify, {presets: ["es2015"]}]],
-// };
-// var b = browserify(customOpts);
-//
-// gulp.task('watch-js', bundleAndWatch);
-// gulp.task('js', bundle);
-//
-// function bundleAndWatch() {
-//   var watchify = require('watchify');
-//   var opts = assign({}, watchify.args, customOpts);
-//   var w = watchify(browserify(opts));
-//   w.on('update', bundle); // on any dep update, runs the bundler
-//   w.on('log', gutil.log); // output build logs to terminal
-//   return w.bundle()
-//     // log errors if they happen
-//     .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-//     .pipe(source('bundle.js'))
-//     // optional, remove if you don't need to buffer file contents
-//     .pipe(buffer())
-//     // optional, remove if you dont want sourcemaps
-//     .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
-//     .pipe(uglify())
-//        // Add transformation tasks to the pipeline here.
-//     .pipe(sourcemaps.write('./')) // writes .map file
-//     .pipe(gulp.dest('./dist'));
-// }
-//
-// function bundle() {
-//   return b.bundle()
-//     // log errors if they happen
-//     .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-//     .pipe(source('bundle.js'))
-//     // optional, remove if you don't need to buffer file contents
-//     .pipe(buffer())
-//     // optional, remove if you dont want sourcemaps
-//     .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
-//     .pipe(uglify())
-//        // Add transformation tasks to the pipeline here.
-//     .pipe(sourcemaps.write('./')) // writes .map file
-//     .pipe(gulp.dest('./dist'));
-// }
+let isProduction = false;
 
-var isProduction = false;
+gulp.task('is-production', () => {
+  isProduction = true;
+});
 
-gulp.task('build-js', function() {
+gulp.task('build-js', () => {
   return browserify({
     entries: ['./js/app.js'],
     debug: isProduction,
@@ -76,16 +30,16 @@ gulp.task('build-js', function() {
     .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('postcss', function() {
+gulp.task('postcss', () => {
   // Runs postCSS with all its plugins.
-  var nano = require('gulp-cssnano');
-  var plugins = [
+  const nano = require('gulp-cssnano');
+  const plugins = [
     require('autoprefixer'),
   ];
   // Run PostCSS
   return gulp.src('./stylesheets/styles.css')
       .pipe(postcss(plugins))
-      .on('error', function(error) {
+      .on('error', (error) => {
         gutil.log(gutil.colors.magenta.bold('Error while compiling CSS'));
         gutil.log(gutil.colors.magenta(error.message));
       })
@@ -95,19 +49,13 @@ gulp.task('postcss', function() {
       .pipe(gulp.dest('./dist'));
 });
 
-// gulp.task('watch-styles', function watchStyles() {
-//   // Watches the stylesheet folders for changes and runs the 'postcss' task if a change occurs.
-//   gulp.watch(['./stylesheets/*.css'], ['postcss']);
-//   return;
-// });
-//
-// gulp.task("default", [
-//   'postcss',
-//   'watch-styles',
-//   "watch-js",
-// ]);
-
 gulp.task('build', [
+  'postcss',
+  'build-js',
+]);
+
+gulp.task('build-production', [
+  'is-production',
   'postcss',
   'build-js',
 ]);
