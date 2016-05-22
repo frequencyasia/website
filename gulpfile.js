@@ -60,6 +60,8 @@ var uglify = require('gulp-uglify');
 //     .pipe(gulp.dest('./dist'));
 // }
 
+var isProduciton = false;
+
 gulp.task('build-js', function() {
   return browserify({
     entries: ['./js/app.js'],
