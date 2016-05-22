@@ -70,6 +70,7 @@ gulp.task('build-js', function() {
     .bundle()
     .pipe(source('bundle.js')) // gives streaming vinyl file object
     .pipe(buffer()) // <----- convert from streaming to buffered vinyl file object
+    .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
     .pipe(uglify()) // now gulp-uglify works
     .pipe(gulp.dest('./dist'));
 });
