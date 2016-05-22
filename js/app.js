@@ -27,3 +27,4 @@ window.app = {
 };
 
 window.app.init();
+console.log("Frequency Asia v1.1")
