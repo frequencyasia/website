@@ -14,7 +14,7 @@ module.exports = Backbone.View.extend({
 
   initialize: function() {
     var _this = this;
-    $.getJSON("/api/v1.0/shows/")
+    $.getJSON("/api/v1.0/shows")
       .done(function(data) {
         _this.shows = data.shows;
         _this.render();
