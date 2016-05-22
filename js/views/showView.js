@@ -17,7 +17,7 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options) {
     var _this = this;
-    $.getJSON("/api/shows/" + options.slug)
+    $.getJSON("/api/v1.0/shows/" + options.slug)
       .done((data) => {
         for (var i = 0; i < data.episodes.length; i++) {
           var item = data.episodes[i];

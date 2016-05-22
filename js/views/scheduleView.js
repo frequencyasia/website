@@ -12,7 +12,7 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options) {
     var _this = this;
-    $.getJSON("/api/schedule/")
+    $.getJSON("/api/v1.0/schedule/")
       .done((data) => {
         this.scheduleData = data;
         this.render();

@@ -19,7 +19,7 @@ module.exports = Backbone.View.extend({
     } else {
       this.tagTypePretty = "Countries";
     }
-    $.getJSON("/api/tags/" + this.tagType + "/" + options.slug)
+    $.getJSON("/api/v1.0/tags/" + this.tagType + "/" + options.slug)
       .done((data) => {
         for (var i = 0; i < data.episodes.length; i++) {
           data.episodes[i].date = fecha.format(new Date(data.episodes[i].start_time), 'dddd / MMMM D YYYY');

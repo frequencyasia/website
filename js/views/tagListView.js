@@ -18,7 +18,7 @@ module.exports = Backbone.View.extend({
     } else {
       this.tagTypePretty = "Countries";
     }
-    $.getJSON("/api/tags/" + this.tagType)
+    $.getJSON("/api/v1.0/tags/" + this.tagType)
       .done((data) => {
         this.tagData = data;
         this.render();
