@@ -11,7 +11,6 @@ var assign = require('lodash').assign;
 var brfs = require('brfs');
 var rename = require('gulp-rename');
 var postcss = require('gulp-postcss');
-var notify = require('gulp-notify');
 var uglify = require('gulp-uglify');
 //
 // // add custom browserify options here
@@ -60,7 +59,7 @@ var uglify = require('gulp-uglify');
 //     .pipe(gulp.dest('./dist'));
 // }
 
-var isProduciton = false;
+var isProduction = false;
 
 gulp.task('build-js', function() {
   return browserify({
@@ -91,10 +90,7 @@ gulp.task('postcss', function() {
       .pipe(gulp.dest('./dist'))
       .pipe(rename({ suffix: '.min' }))
       .pipe(nano({ discardUnused: false }))
-      .pipe(gulp.dest('./dist'))
-      .pipe(function onComplete() {
-        return notify({ message: 'PostCSS has finished compiling.' });
-      }());
+      .pipe(gulp.dest('./dist'));
 });
 
 // gulp.task('watch-styles', function watchStyles() {
