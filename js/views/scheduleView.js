@@ -39,7 +39,7 @@ module.exports = Backbone.View.extend({
         days[day] = { shows: [episode] };
       }
     });
-    days.keys().map((key) => {
+    _.keys(days).map((key) => {
       days[key].heading = fecha.format(days[key].shows[0].start_time, 'dddd / MMMM D').toUpperCase();
       parsedSchedule.push(days[key]);
     });
