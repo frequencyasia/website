@@ -100,7 +100,7 @@ module.exports = Backbone.Router.extend({
 
 	loadArtistView: function(slug) {
 		var view = new TagView({
-			type: 'artist',
+			type: 'artists',
 			slug: slug,
 		});
 		$("#main-container").html(view.render().el);
@@ -108,7 +108,7 @@ module.exports = Backbone.Router.extend({
 
 	loadCityView: function(slug) {
 		var view = new TagView({
-			type: 'city',
+			type: 'cities',
 			slug: slug,
 		});
 		$("#main-container").html(view.render().el);
@@ -116,7 +116,7 @@ module.exports = Backbone.Router.extend({
 
 	loadCountryView: function(slug) {
 		var view = new TagView({
-			type: 'country',
+			type: 'countries',
 			slug: slug,
 		});
 		$("#main-container").html(view.render().el);
@@ -124,21 +124,21 @@ module.exports = Backbone.Router.extend({
 
 	loadArtistListView: function() {
 		var view = new TagListView({
-			type: 'artist',
+			type: 'artists',
 		});
 		$("#main-container").html(view.render().el);
 	},
 
 	loadCountryListView: function() {
 		var view = new TagListView({
-			type: 'country',
+			type: 'countries',
 		});
 		$("#main-container").html(view.render().el);
 	},
 
 	loadCityListView: function() {
 		var view = new TagListView({
-			type: 'city',
+			type: 'cities',
 		});
 		$("#main-container").html(view.render().el);
 	},

@@ -11,14 +11,14 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options) {
     this.tagType = options.type;
-    if (this.tagType === 'artist') {
+    if (this.tagType === 'artists') {
       this.tagTypePretty = "Artists";
-    } else if (this.tagType === 'city') {
+    } else if (this.tagType === 'cities') {
       this.tagTypePretty = "Cities";
     } else {
       this.tagTypePretty = "Countries";
     }
-    $.getJSON("/api/v1.0/tags/" + this.tagType)
+    $.getJSON("/api/v1.0/" + this.tagType)
       .done((data) => {
         this.tagData = data;
         this.render();
@@ -33,5 +33,5 @@ module.exports = Backbone.View.extend({
       'data': this.tagData,
     }));
     return this;
-  }
+  },
 });

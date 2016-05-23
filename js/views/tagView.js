@@ -12,14 +12,14 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options) {
     this.tagType = options.type;
-    if (this.tagType === 'artist') {
+    if (this.tagType === 'artists') {
       this.tagTypePretty = "Artists";
-    } else if (this.tagType === 'city') {
+    } else if (this.tagType === 'cities') {
       this.tagTypePretty = "Cities";
     } else {
       this.tagTypePretty = "Countries";
     }
-    $.getJSON("/api/v1.0/tags/" + this.tagType + "/" + options.slug)
+    $.getJSON("/api/v1.0/" + this.tagType + "/" + options.slug)
       .done((data) => {
         for (var i = 0; i < data.episodes.length; i++) {
           data.episodes[i].date = fecha.format(new Date(data.episodes[i].start_time), 'dddd / MMMM D YYYY');
