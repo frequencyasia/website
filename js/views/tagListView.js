@@ -20,7 +20,7 @@ module.exports = Backbone.View.extend({
     }
     $.getJSON("/api/v1.0/" + this.tagType)
       .done((data) => {
-        this.tagData = data;
+        this.tagData = data.items;
         this.render();
         document.title = this.tagTypePretty + " | Frequency Asia";
       });
