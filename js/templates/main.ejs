@@ -5,9 +5,9 @@
           <div class="c-featured-item">
             <div class="c-featured-item__background"></div>
             <article class="c-featured-item__container">
-              <h1 class="c-featured-item__container__title"><%= items[i].show %></h1>
+              <h1 class="c-featured-item__container__title"><%= items[i].show.name %></h1>
               <p class="c-featured-item__container__tagline"><%= items[i].tagline %></p>
-              <p class="c-featured-item__container__tagline"><a href="#shows/<%= items[i].show_slug %>">SEE ALL EPISODES</a></p>
+              <p class="c-featured-item__container__tagline"><a href="#shows/<%= items[i].show.slug %>">SEE ALL EPISODES</a></p>
             </article>
           </div>
         </div>
