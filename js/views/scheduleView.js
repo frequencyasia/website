@@ -12,7 +12,7 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options) {
     var _this = this;
-    $.getJSON("/api/v1.0/schedule")
+    $.getJSON("/api/v1.0/episodes/scheduled")
       .done((data) => {
         this.scheduleData = data;
         this.render();
@@ -20,7 +20,7 @@ module.exports = Backbone.View.extend({
   },
 
   render: function render() {
-    this.$el.html(_.template(template)({schedule: this.getSchedule()}));
+    this.$el.html(_.template(template)({ schedule: this.getSchedule() }));
     return this;
   },
 
@@ -29,6 +29,7 @@ module.exports = Backbone.View.extend({
     if (!this.scheduleData) {
       return parsedSchedule;
     }
+    console.log(this.scheduleData)
     var keys = _.keys(this.scheduleData);
     for (var keyIndex = 0; keyIndex < keys.length; keyIndex++) {
       var key = keys[keyIndex];
