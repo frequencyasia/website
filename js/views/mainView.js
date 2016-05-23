@@ -35,11 +35,12 @@ module.exports = Backbone.View.extend({
 
   getShowcaseItems: function getShowcaseItems() {
     // Return maximum of 5 episodes to showcase on the main page.
-    $.getJSON("/api/v1.0/new-episodes")
+    $.getJSON('/api/v1.0/episodes/released')
       .done((data) => {
+        console.log(data)
         this.showcaseItems = data.items;
         this.render();
         this.initSwiper();
       });
-  }
+  },
 });
