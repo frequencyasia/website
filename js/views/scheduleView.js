@@ -36,7 +36,7 @@ module.exports = Backbone.View.extend({
       if (days.hasOwnProperty(day)) {
         days[day].shows.push(episode);
       } else {
-        days[day].shows = [episode];
+        days[day] = { shows: [episode] };
       }
     });
     days.keys().map((key) => {
