@@ -38,7 +38,7 @@ module.exports = Backbone.View.extend({
   },
 
   render: function render() {
-    if (this.tagType === 'artist') {
+    if (this.tagType === 'artists') {
       this.$el.html(_.template(this.template)({
         'type': this.tagType,
         'typePretty': this.tagTypePretty,
