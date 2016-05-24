@@ -18,15 +18,15 @@ module.exports = Backbone.View.extend({
   initialize: function(options) {
     this.tagType = options.type;
     this.template = template;
-    if (this.tagType === 'artist') {
+    if (this.tagType === 'artists') {
       this.tagTypePretty = "Artists";
       this.template = artistTemplate;
-    } else if (this.tagType === 'city') {
+    } else if (this.tagType === 'cities') {
       this.tagTypePretty = "Cities";
     } else {
       this.tagTypePretty = "Countries";
     }
-    $.getJSON("/api/tags/" + this.tagType + "/" + options.slug)
+    $.getJSON("/api/v1.0/" + this.tagType + "/" + options.slug)
       .done((data) => {
         for (var i = 0; i < data.episodes.length; i++) {
           data.episodes[i].date = fecha.format(new Date(data.episodes[i].start_time), 'dddd / MMMM D YYYY');

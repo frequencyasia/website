@@ -12,43 +12,40 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options) {
     var _this = this;
-    $.getJSON("/api/schedule/")
+    $.getJSON("/api/v1.0/episodes/scheduled")
       .done((data) => {
-        this.scheduleData = data;
+        this.scheduleData = data.episodes;
         this.render();
       });
   },
 
   render: function render() {
-    this.$el.html(_.template(template)({schedule: this.getSchedule()}));
+    this.$el.html(_.template(template)({ schedule: this.getSchedule() }));
     return this;
   },
 
   getSchedule: function getSchedule() {
-    var parsedSchedule = [];
+    const parsedSchedule = [];
     if (!this.scheduleData) {
       return parsedSchedule;
     }
-    var keys = _.keys(this.scheduleData);
-    for (var keyIndex = 0; keyIndex < keys.length; keyIndex++) {
-      var key = keys[keyIndex];
-      var data = {
-        shows: this.scheduleData[key]
-      };
-      if (data.shows.length) {
-        data.heading = fecha.format(data.shows[0].start_time, 'dddd / MMMM D').toUpperCase();
-        for (var i = 0; i < data.shows.length; i++) {
-          var show = data.shows[i];
-          var start = fecha.format(show.start_time, 'HHmm');
-          var end = fecha.format(show.end_time, 'HHmm')
-          show.scheduleTime = start + " - " + end;
-        }
-        parsedSchedule.push(data);
+    const days = {};
+    this.scheduleData.map((episode) => {
+      episode.scheduleTime = fecha.format(episode.start_time, 'HHmm') + ' - ' + fecha.format(episode.end_time, 'HHmm');
+      const day = episode.start_time - episode.start_time % 86400000;
+      if (days.hasOwnProperty(day)) {
+        days[day].shows.push(episode);
+      } else {
+        days[day] = { shows: [episode] };
       }
-    }
-    parsedSchedule.sort(function(itemA, itemB) {
+    });
+    _.keys(days).map((key) => {
+      days[key].heading = fecha.format(days[key].shows[0].start_time, 'dddd / MMMM D').toUpperCase();
+      parsedSchedule.push(days[key]);
+    });
+    parsedSchedule.sort((itemA, itemB) => {
       return itemA.shows[0].start_time - itemB.shows[0].start_time;
-    })
+    });
     return parsedSchedule;
-  }
+  },
 });

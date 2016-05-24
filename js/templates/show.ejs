@@ -1,6 +1,6 @@
 <aside class="c-show__sidebar">
   <% if(data !== undefined) { %>
-    <div class="c-show__sidebar__image" style="background-image: url(/static/files/<%= data.imagePath %>);"></div>
+    <div class="c-show__sidebar__image" style="background-image: url(/static/files/<%= data.image_path %>);"></div>
     <h1 class="c-show__sidebar__title"><%= data.name %></h1>
     <p><%= data.description %></p>
   <% } %>
@@ -20,7 +20,7 @@
             <p><%= data.episodes[i].tagline %></p>
             <p class="c-episode__content__date"><%= data.episodes[i].date %></p>
             <p class="c-episode__content__tags">
-              <% var tags = data.episodes[i].tags.countries.concat( data.episodes[i].tags.cities).concat( data.episodes[i].tags.artists); %>
+              <% var tags = data.episodes[i].countries.concat( data.episodes[i].cities).concat( data.episodes[i].artists); %>
               <% for (var j = 0; j < tags.length; j++) { %>
                 <a href="#wiki/<%= tags[j].link %>"><%= tags[j].name %></a>
                 <% if(j != tags.length - 1){ %>
