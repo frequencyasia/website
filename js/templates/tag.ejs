@@ -16,10 +16,15 @@
                 <p><%= data.episodes[i].tagline %></p>
                 <p class="c-episode__content__date"><%= data.episodes[i].date %></p>
                 <p class="c-episode__content__tags">
-                  <% var tags = data.episodes[i].tags.countries.concat( data.episodes[i].tags.cities).concat( data.episodes[i].tags.artists); %>
-                  <% for (var j = 0; j < tags.length; j++) { %>
-                    <a href="#wiki/<%= tags[j].link %>"><%= tags[j].name %></a>
-                    <% if(j != tags.length - 1){ %>
+                  <% for (var j = 0; j < data.episodes[i].countries.length; j++) { %>
+                    <a href="#wiki/countries/<%= data.episodes[i].countries[j].slug %>"><%= data.episodes[i].countries[j].name %></a>&nbsp;/&nbsp;
+                  <% } %>
+                  <% for (var j = 0; j < data.episodes[i].cities.length; j++) { %>
+                    <a href="#wiki/cities/<%= data.episodes[i].cities[j].slug %>"><%= data.episodes[i].cities[j].name %></a>&nbsp;/&nbsp;
+                  <% } %>
+                  <% for (var j = 0; j < data.episodes[i].artists.length; j++) { %>
+                    <a href="#wiki/artists/<%= data.episodes[i].artists[j].slug %>"><%= data.episodes[i].artists[j].name %></a>
+                    <% if(j !=  data.episodes[i].artists.length - 1){ %>
                       &nbsp;/&nbsp;
                     <% } %>
                   <% } %>
