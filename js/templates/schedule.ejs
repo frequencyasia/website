@@ -2,7 +2,7 @@
   <% for(var i = 0; i < schedule.length; i++) { %>
     <h1><%= schedule[i].heading %></h1>
       <% for(var j = 0; j < schedule[i].shows.length; j++) { %>
-        <p><a href="/#shows/<%= schedule[i].shows[j].slug %>"><%= schedule[i].shows[j].scheduleTime %> / <%= schedule[i].shows[j].name %></a></p>
+        <p><a href="/#shows/<%= schedule[i].shows[j].show.slug %>"><%= schedule[i].shows[j].scheduleTime %> / <%= schedule[i].shows[j].name %></a></p>
       <% } %>
   <% } %>
 </div>
