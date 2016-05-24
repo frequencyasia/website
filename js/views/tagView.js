@@ -68,6 +68,7 @@ module.exports = Backbone.View.extend({
   parseArtistLocationData: function parseArtistLocationData() {
     // Returns a string with location data for the artist (including links) if available.
     let str = '';
+    console.log(this.tagData)
     if (this.tagData) {
       if (this.tagData.country && this.tagData.country_slug && this.tagData.country.length && this.tagData.country_slug.length) {
         str = `<a href="#wiki/countries/${this.tagData.country_slug}">${this.tagData.country}</a>`;
