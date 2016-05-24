@@ -70,7 +70,7 @@ module.exports = Backbone.View.extend({
     let str = '';
     if (this.tagData) {
       if (this.tagData.country && this.tagData.country_slug && this.tagData.country.length && this.tagData.country_slug.length) {
-        str = `<a href="#wiki/country/${this.tagData.country_slug}">${this.tagData.country}</a>`;
+        str = `<a href="#wiki/countries/${this.tagData.country_slug}">${this.tagData.country}</a>`;
       } else if (this.tagData.country && this.tagData.country.length) {
         str = this.tagData.country;
       }
@@ -78,7 +78,7 @@ module.exports = Backbone.View.extend({
         str = ', ' + str;
       }
       if (this.tagData.city && this.tagData.city_slug && this.tagData.city.length && this.tagData.city_slug.length) {
-        str = `<a href="#wiki/city/${this.tagData.city_slug}">${this.tagData.city}</a>` + str;
+        str = `<a href="#wiki/cities/${this.tagData.city_slug}">${this.tagData.city}</a>` + str;
       } else if (this.tagData.city && this.tagData.city.length) {
         str = this.tagData.city + str;
       }
