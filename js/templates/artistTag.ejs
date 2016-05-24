@@ -3,7 +3,7 @@
     <div class="col">
       <% if (data !== undefined){ %>
         <h1><a class='u-no-border' href="#wiki">Wiki</a> &rsaquo; <a class='u-no-border' href="#wiki/<%= type %>"><%= typePretty %></a> &rsaquo; <%= data.name %></h1>
-        <h2><%- locationData %></h2>
+        <h2 id="location-data"></h2>
         <% for(var i = 0; i < data.episodes.length; i++) { %>
           <article class="c-episode">
             <div class="c-episode__content">

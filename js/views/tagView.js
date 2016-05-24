@@ -43,8 +43,8 @@ module.exports = Backbone.View.extend({
         'type': this.tagType,
         'typePretty': this.tagTypePretty,
         'data': this.tagData,
-        locationData: this.parseArtistLocationData(),
       }));
+      this.$('#location-data').html(this.parseArtistLocationData());
     } else {
       this.$el.html(_.template(this.template)({
         'type': this.tagType,
