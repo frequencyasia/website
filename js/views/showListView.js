@@ -1,13 +1,12 @@
 'use strict';
 
 var Backbone = require('backbone');
-var _ = require("lodash");
+import template from 'lodash/template';
 var $ = require("jquery");
 var fs = require("fs");
-var template = fs.readFileSync(__dirname + '/../templates/showlist.ejs', 'utf8');
 
 module.exports = Backbone.View.extend({
-
+  template: fs.readFileSync(__dirname + '/../templates/showList.ejs', 'utf8'),
   tagName: 'section',
   className: 'o-content-block u-full-width-mobile',
   shows: [],
@@ -22,7 +21,7 @@ module.exports = Backbone.View.extend({
   },
 
   render: function render() {
-    this.$el.html(_.template(template)({"data": this.shows}));
+    this.$el.html(template(this.template)({"data": this.shows}));
     this.$('.post-module').hover(function() {
       $(this).find('.description').stop().animate({height: "toggle", opacity: "toggle"}, 300);
     });

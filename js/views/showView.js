@@ -1,13 +1,13 @@
 'use strict';
 
 var Backbone = require('backbone');
-var _ = require("lodash");
+import template from 'lodash/template';
 var $ = require("jquery");
 var fs = require("fs");
 var fecha = require("fecha");
-var template = fs.readFileSync(__dirname + '/../templates/show.ejs', 'utf8');
 
 module.exports = Backbone.View.extend({
+  template: fs.readFileSync(__dirname + '/../templates/show.ejs', 'utf8'),
   className: 'c-show',
   tagName: 'section',
 
@@ -30,7 +30,7 @@ module.exports = Backbone.View.extend({
   },
 
   render: function render() {
-    this.$el.html(_.template(template)({"data": this.showData}));
+    this.$el.html(template(this.template)({"data": this.showData}));
     this.$('.c-episode__description-toggle').click((event) => {
       var $el = $(event.currentTarget)
       if ($el.next().hasClass("c-episode__description--toggled")) {

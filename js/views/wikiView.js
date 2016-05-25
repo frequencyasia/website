@@ -1,16 +1,16 @@
 'use strict';
 
 var Backbone = require('backbone');
-var _ = require("lodash");
+import template from 'lodash/template';
 var fs = require("fs");
 var $ = require("jquery");
-var template = fs.readFileSync(__dirname + '/../templates/wiki.ejs', 'utf8');
 
 module.exports = Backbone.View.extend({
+  template: fs.readFileSync(__dirname + '/../templates/wiki.ejs', 'utf8'),
   className: 'o-content-block',
 
   render: function render() {
-    this.$el.html(_.template(template));
+    this.$el.html(template(this.template));
     return this;
-  }
+  },
 });

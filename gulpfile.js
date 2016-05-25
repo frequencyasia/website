@@ -9,7 +9,7 @@ const rename = require('gulp-rename');
 const postcss = require('gulp-postcss');
 const uglify = require('gulp-uglify');
 
-let isProduction = false;
+var isProduction = false;
 
 gulp.task('is-production', () => {
   isProduction = true;

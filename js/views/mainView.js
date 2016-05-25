@@ -1,18 +1,18 @@
 'use strict';
 
 var Backbone = require('backbone');
-var _ = require("lodash");
+import template from 'lodash/template';
 var fs = require("fs");
 var $ = require("jquery");
 require('swiper');
-var template = fs.readFileSync(__dirname + '/../templates/main.ejs', 'utf8');
 
 module.exports = Backbone.View.extend({
+  template: fs.readFileSync(__dirname + '/../templates/main.ejs', 'utf8'),
   className: 'o-feature-slider',
   episodes: [],
 
   render: function render() {
-    this.$el.html(_.template(template)({
+    this.$el.html(template(this.template)({
       items: this.episodes,
     }));
     return this;

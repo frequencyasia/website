@@ -1,14 +1,14 @@
 'use strict';
 
 var Backbone = require('backbone');
-var _ = require("lodash");
+import template from 'lodash/template';
 var fs = require("fs");
 var $ = require("jquery");
 var fecha = require("fecha");
-var template = fs.readFileSync(__dirname + '/../templates/tag.ejs', 'utf8');
-var artistTemplate = fs.readFileSync(__dirname + '/../templates/artistTag.ejs', 'utf8');
 
 module.exports = Backbone.View.extend({
+  template: fs.readFileSync(__dirname + '/../templates/tag.ejs', 'utf8'),
+  artistTemplate: fs.readFileSync(__dirname + '/../templates/artistTag.ejs', 'utf8'),
   className: 'o-content-block',
 
   events: {
@@ -17,10 +17,9 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options) {
     this.tagType = options.type;
-    this.template = template;
     if (this.tagType === 'artists') {
       this.tagTypePretty = "Artists";
-      this.template = artistTemplate;
+      this.template = this.artistTemplate;
     } else if (this.tagType === 'cities') {
       this.tagTypePretty = "Cities";
     } else {
@@ -39,14 +38,14 @@ module.exports = Backbone.View.extend({
 
   render: function render() {
     if (this.tagType === 'artists') {
-      this.$el.html(_.template(this.template)({
+      this.$el.html(template(this.template)({
         'type': this.tagType,
         'typePretty': this.tagTypePretty,
         'data': this.tagData,
       }));
       this.$('#location-data').html(this.parseArtistLocationData());
     } else {
-      this.$el.html(_.template(this.template)({
+      this.$el.html(template(this.template)({
         'type': this.tagType,
         'typePretty': this.tagTypePretty,
         'data': this.tagData,

@@ -1,14 +1,15 @@
 'use strict';
 
 var Backbone = require('backbone');
-var _ = require("lodash");
+import template from 'lodash/template';
+import keys from 'lodash/keys';
 var $ = require("jquery");
 var fs = require("fs");
 var fecha = require("fecha");
-var template = fs.readFileSync(__dirname + '/../templates/schedule.ejs', 'utf8');
 
 module.exports = Backbone.View.extend({
   className: 'o-content-block',
+  template: fs.readFileSync(__dirname + '/../templates/schedule.ejs', 'utf8'),
 
   initialize: function(options) {
     var _this = this;
@@ -20,7 +21,7 @@ module.exports = Backbone.View.extend({
   },
 
   render: function render() {
-    this.$el.html(_.template(template)({ schedule: this.getSchedule() }));
+    this.$el.html(template(this.template)({ schedule: this.getSchedule() }));
     return this;
   },
 
@@ -39,7 +40,7 @@ module.exports = Backbone.View.extend({
         days[day] = { shows: [episode] };
       }
     });
-    _.keys(days).map((key) => {
+    keys(days).map((key) => {
       days[key].heading = fecha.format(days[key].shows[0].start_time, 'dddd / MMMM D').toUpperCase();
       parsedSchedule.push(days[key]);
     });

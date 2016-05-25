@@ -1,15 +1,14 @@
 'use strict';
 
 var Backbone = require('backbone');
-var _ = require("lodash");
+import template from 'lodash/template';
 var $ = require("jquery");
 var fs = require("fs");
 var fecha = require("fecha");
 
-var template = fs.readFileSync(__dirname + '/../templates/player.ejs', 'utf8');
-var mixcloudTemplate = fs.readFileSync(__dirname + '/../templates/mixcloudPlayer.ejs', 'utf8');
-
 module.exports = Backbone.View.extend({
+  template: fs.readFileSync(__dirname + '/../templates/player.ejs', 'utf8'),
+  mixcloudTemplate: fs.readFileSync(__dirname + '/../templates/mixcloudPlayer.ejs', 'utf8'),
   apiUrl: "http://airtime.frequency.asia/api/live-info",
   streamSource: "http://airtime.frequency.asia:8000/airtime_128",
   events: {
@@ -19,7 +18,7 @@ module.exports = Backbone.View.extend({
   mixcloudURL: null,
 
   render: function render() {
-    this.$el.html(_.template(template));
+    this.$el.html(template(this.template));
     this.getNowPlaying();
     this.renderVolume();
     if (typeof window.orientation === 'undefined') {
@@ -37,7 +36,7 @@ module.exports = Backbone.View.extend({
   },
 
   renderMixcloudEmbed: function renderMixcloudEmbed() {
-    this.$el.html(_.template(mixcloudTemplate)({ url: this.mixcloudURL }));
+    this.$el.html(template(this.mixcloudTemplate)({ url: this.mixcloudURL }));
     window.scrollTo(0, 0);
     return this;
   },
