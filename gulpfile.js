@@ -4,15 +4,21 @@ const gulp = require('gulp');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const gutil = require('gulp-util');
+const gulpif = require('gulp-if');
 const sourcemaps = require('gulp-sourcemaps');
 const rename = require('gulp-rename');
 const postcss = require('gulp-postcss');
 const uglify = require('gulp-uglify');
 
 var isProduction = false;
+var isLocalDev = false;
 
 gulp.task('is-production', () => {
   isProduction = true;
+});
+
+gulp.task('is-local-dev', () => {
+  isLocalDev = true;
 });
 
 gulp.task('build-js', () => {
@@ -27,7 +33,8 @@ gulp.task('build-js', () => {
     .pipe(sourcemaps.init({ loadMaps: true })) // loads map from browserify file
     .pipe(uglify()) // now gulp-uglify works
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./dist'))
+    .pipe(gulpif(isLocalDev, gulp.dest('./../api/app/static/dist')));
 });
 
 gulp.task('postcss', () => {
@@ -46,8 +53,30 @@ gulp.task('postcss', () => {
       .pipe(gulp.dest('./dist'))
       .pipe(rename({ suffix: '.min' }))
       .pipe(nano({ discardUnused: false }))
-      .pipe(gulp.dest('./dist'));
+      .pipe(gulp.dest('./dist'))
+      .pipe(gulpif(isLocalDev, gulp.dest('./../api/app/static/dist')));
 });
+
+gulp.task('watch-styles', function watchStyles() {
+  // Watches the stylesheet folders for changes and runs the 'postcss' task if a change occurs.
+  gulp.watch(['./stylesheets/**/*.css'], ['postcss']);
+  return;
+});
+
+gulp.task('watch-js', function watchStyles() {
+  // Watches the stylesheet folders for changes and runs the 'postcss' task if a change occurs.
+  gulp.watch(['./js/**/*.js'], ['build-js']);
+  return;
+});
+
+gulp.task('default', [
+  'is-local-dev',
+  'postcss',
+  'build-js',
+  'watch-styles',
+  'watch-js',
+]);
+
 
 gulp.task('build', [
   'postcss',

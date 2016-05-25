@@ -38,6 +38,7 @@ import Projects from './components/projects';
 import Schedule from './components/schedule';
 import Show from './components/show';
 import ShowList from './components/showList';
+import Wiki from './components/wiki';
 
 console.log("Frequency Asia v1.1")
 
@@ -56,6 +57,7 @@ ReactDOM.render((
 				</Route>
 			</Route>
 			<Route path="wiki">
+				<IndexRoute component={Wiki} />
 			</Route>
     </Route>
   </Router>
