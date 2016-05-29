@@ -40,7 +40,7 @@ module.exports = React.createClass({
     parsedData.sort((itemA, itemB) => {
       return itemA.shows[0].start_time - itemB.shows[0].start_time;
     });
-    this.state.schedule = parsedData;
+    this.setState({ schedule: parsedData });
   },
 
   renderScheduledEpisode: function renderScheduledEpisode(episode) {

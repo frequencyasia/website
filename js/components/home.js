@@ -17,7 +17,7 @@ module.exports = React.createClass({
   componentWillMount: function componentWillMount() {
     $.getJSON(`${Constants.API_URL}episodes/released?length=${this.numShowcaseItems}&showcase=true`)
       .done((data) => {
-        this.state.episodes = data.episodes;
+        this.setState({ episodes: data.episodes });
       });
   },
 
