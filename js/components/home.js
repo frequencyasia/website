@@ -45,13 +45,15 @@ module.exports = React.createClass({
 
   render: function render() {
     return (
-      <div className="swiper-container">
-        <div className="swiper-wrapper">
-          { this.state.episodes.map((episode) => { return this.renderSlide(episode); }) }
+      <div className="o-feature-slider">
+        <div className="swiper-container">
+          <div className="swiper-wrapper">
+            { this.state.episodes.map((episode) => { return this.renderSlide(episode); }) }
+          </div>
+          <div className="swiper-pagination"></div>
+          <div className="swiper-button-next"></div>
+          <div className="swiper-button-prev"></div>
         </div>
-        <div className="swiper-pagination"></div>
-        <div className="swiper-button-next"></div>
-        <div className="swiper-button-prev"></div>
       </div>
     );
   },
