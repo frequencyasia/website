@@ -3,12 +3,14 @@ import $ from 'jquery';
 import { Link } from 'react-router-component';
 
 module.exports = React.createClass({
+
   render: function render() {
-    const link = 'shows/' + this.props.show.slug;
+    const show = this.props.show;
+    const link = 'shows/' + show.slug;
     const thumbnailStyle = { backgroundImage: `url('/static/files/${show.image_path}` };
     let episodes = '1 Episode';
-    if (this.props.show.num_episodes !== 1) {
-      episodes = this.props.show.num_episodes + ' Episodes';
+    if (show.num_episodes !== 1) {
+      episodes = show.num_episodes + ' Episodes';
     }
     return (
       <Link href={ link } class="post-module">
@@ -16,9 +18,9 @@ module.exports = React.createClass({
           <div className="thumbnail__img" style={ thumbnailStyle }></div>
         </div>
         <div className="post-content">
-          <h1 className="title">{ this.props.show.name }</h1>
-          <h2 className="sub_title">{ this.props.show.frequency }</h2>
-          <p className="description">{ this.props.show.tagline }</p>
+          <h1 className="title">{ show.name }</h1>
+          <h2 className="sub_title">{ show.frequency }</h2>
+          <p className="description">{ show.tagline }</p>
           <div className="post-meta">
             <span className="timestamp">{ episodes }</span>
           </div>
