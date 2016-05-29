@@ -1,8 +1,21 @@
 import React from 'react';
-import $ from 'jquery';
 import { Link } from 'react-router-component';
 
 module.exports = React.createClass({
+
+  getInitialState: function getInitialState() {
+    return {
+      hover: false,
+    };
+  },
+
+  onMouseOver: function onMouseOver() {
+    this.setState({ hover: true });
+  },
+
+  onMouseOut: function onMouseOut() {
+    this.setState({ hover: false });
+  },
 
   render: function render() {
     const show = this.props.show;
@@ -13,7 +26,7 @@ module.exports = React.createClass({
       episodes = show.num_episodes + ' Episodes';
     }
     return (
-      <Link href={ link } class="post-module">
+      <Link href={ link } className="post-module" onMouseOver={ this.onMouseOver } onMouseOut={ this.onMouseOut }>
         <div className="thumbnail">
           <div className="thumbnail__img" style={ thumbnailStyle }></div>
         </div>
