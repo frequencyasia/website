@@ -7,7 +7,7 @@ module.exports = React.createClass({
     name: React.PropTypes.string.isRequired,
     frequency: React.PropTypes.string.isRequired,
     tagline: React.PropTypes.string.isRequired,
-    num_episodes: React.PropTypes.string.isRequired,
+    num_episodes: React.PropTypes.number.isRequired,
     image_path: React.PropTypes.string.isRequired,
   },
 
