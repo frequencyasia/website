@@ -22,7 +22,7 @@ module.exports = React.createClass({
   render: function render() {
     return (
       <section className="o-content-block u-full-width-mobile">
-        { this.state.shows.map((show) => { return <ShowThumbnail show={ show } />; }) }
+        { this.state.shows.map((show) => { return <ShowThumbnail { ...show } />; }) }
       </section>
     );
   },

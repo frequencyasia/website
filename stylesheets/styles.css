@@ -572,15 +572,15 @@ a.post-module {
   font-weight: 400;
 }
 .post-module .post-content .description {
-  display: none;
+  overflow: hidden;
   color: #FFF;
   font-size: 14px;
   line-height: 1.8em;
-  -webkit-transition: all 0.3s linear 0s;
-  -moz-transition: all 0.3s linear 0s;
-  -ms-transition: all 0.3s linear 0s;
-  -o-transition: all 0.3s linear 0s;
-  transition: all 0.3s linear 0s;
+  -webkit-transition: all 3s linear 0s;
+  -moz-transition: all 3s linear 0s;
+  -ms-transition: all 3s linear 0s;
+  -o-transition: all 3s linear 0s;
+  transition: all 3s linear 0s;
   max-height: 0;
 }
 
