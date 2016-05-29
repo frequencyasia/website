@@ -24,10 +24,10 @@ module.exports = React.createClass({
   renderSlide: function renderSlide(episode) {
     const style = {
       'background': 'linear-gradient(to right, rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/static/files/' + episode.image_path + '") no-repeat center center',
-      '-webkit-background-size': 'cover',
-      '-moz-background-size': 'cover',
-      '-o-background-size': 'cover',
-      'background-size': 'cover',
+      'WebkitBackgroundSize': 'cover',
+      'MozBackgroundSize': 'cover',
+      'OBackgroundSize': 'cover',
+      'backgroundSize': 'cover',
     };
     return (
       <div className="swiper-slide" style={ style }>
@@ -62,7 +62,7 @@ module.exports = React.createClass({
 
   initSwiper: function initSwiper() {
     // Needs to be triggered after Virtual DOM is attached.
-    if (this.$('.swiper-container').length) {
+    if ($('.swiper-container').length) {
       this.swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         paginationClickable: true,
