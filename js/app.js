@@ -30,35 +30,48 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { browserHistory, Route, Router, IndexRoute } from 'react-router';
+import { Location, Locations, NotFound } from 'react-router-component';
 
 import Home from './components/home';
 import About from './components/about';
+import Nav from './components/nav';
+import Player from './components/player';
 import Projects from './components/projects';
 import Schedule from './components/schedule';
 import Show from './components/show';
 import ShowList from './components/showList';
 import Wiki from './components/wiki';
 
-console.log("Frequency Asia v1.1")
+const NotFoundPage = React.createClass({
+  render: function render() {
+    return '404';
+  },
+});
+
+const App = React.createClass({
+  render: function render() {
+    return (
+    <Locations component={null}>
+      <Location path="/" handler={Home} />
+      <Location path="/about" handler={About} />
+      <Location path="/projects" handler={Projects} />
+      <Location path="/schedule" handler={Schedule} />
+      <Location path="/shows" handler={ShowList} />
+      <Location path="/shows/:slug" handler={Show} />
+      <Location path="/wiki" handler={Wiki} />
+      <NotFound handler={NotFoundPage} />
+    </Locations>);
+  },
+});
 
 ReactDOM.render((
-  <Router history={browserHistory}>
-    <Route path="/">
-      <IndexRoute component={Home} />
-			<Route path="about" component={About} />
-			<Route path="projects" component={Projects} />
-			<Route path="schedule" component={Schedule} />
-      <Route path="shows">
-				<IndexRoute component={ShowList} />
-				<Route path=":showSlug">
-					<IndexRoute component={Show} />
-					<Route path=":episodeSlug" />
-				</Route>
-			</Route>
-			<Route path="wiki">
-				<IndexRoute component={Wiki} />
-			</Route>
-    </Route>
-  </Router>
+  <Nav />
+), document.getElementById('nav-container'));
+
+ReactDOM.render((
+  <Player />
+), document.getElementById('player-container'));
+
+ReactDOM.render((
+  <App history />
 ), document.getElementById('main-container'));

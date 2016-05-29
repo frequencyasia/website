@@ -16,6 +16,7 @@
     "backbone": "^1.2.3",
     "brfs": "^1.4.1",
     "browserify": "^12.0.1",
+    "envify": "^3.4.0",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^2.0.0",
     "eslint-plugin-react": "^3.11.3",
@@ -37,7 +38,7 @@
     "jquery": "^2.1.4",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
-    "react-router": "^2.4.1",
+    "react-router-component": "^0.32.2",
     "swiper": "^3.2.7"
   }
 }
