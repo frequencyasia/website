@@ -58,7 +58,16 @@ const App = React.createClass({
       <Location path="/schedule" handler={Schedule} />
       <Location path="/shows" handler={ShowList} />
       <Location path="/shows/:slug" handler={Show} />
+      <Location path="/shows/:slug/:episodeSlug" handler={Show} />
       <Location path="/wiki" handler={Wiki} />
+      <Location path="/wiki/artists" handler={Wiki} />
+      <Location path="/wiki/artists/:slug" handler={Wiki} />
+      <Location path="/wiki/cities" handler={Wiki} />
+      <Location path="/wiki/cities/:slug" handler={Wiki} />
+      <Location path="/wiki/countries" handler={Wiki} />
+      <Location path="/wiki/countries/:slug" handler={Wiki} />
+      <Location path="/wiki/labels" handler={Wiki} />
+      <Location path="/wiki/labels/:slug" handler={Wiki} />
       <NotFound handler={NotFoundPage} />
     </Locations>);
   },
