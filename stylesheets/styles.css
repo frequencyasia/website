@@ -509,10 +509,8 @@ a.post-module {
   transform: scale(1.1);
   opacity: .6;
 }
-.post-module:hover .description {
-  display: block !important;
-  height: auto !important;
-  opacity: 1 !important;
+.post-module:hover .post-content .description {
+  max-height: 500px;
 }
 
 .post-module .thumbnail {
@@ -583,6 +581,7 @@ a.post-module {
   -ms-transition: all 0.3s linear 0s;
   -o-transition: all 0.3s linear 0s;
   transition: all 0.3s linear 0s;
+  max-height: 0;
 }
 
 .post-module .post-content .post-meta {
