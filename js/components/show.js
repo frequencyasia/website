@@ -6,10 +6,14 @@ import Constants from './../constants';
 
 module.exports = React.createClass({
 
+  propTypes: {
+    slug: React.PropTypes.string.isRequired,
+  },
+
   getInitialState: function getInitialState() {
     return {
       name: '',
-      image_path: '',
+      image_path: 'placeholder.png',
       description: '',
     };
   },

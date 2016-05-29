@@ -12,7 +12,7 @@ module.exports = React.createClass({
   },
 
   render: function render() {
-    const link = 'shows/' + this.props.slug;
+    const link = '/shows/' + this.props.slug;
     const thumbnailStyle = { backgroundImage: `url('/static/files/${this.props.image_path}` };
     let episodes = '1 Episode';
     if (this.props.num_episodes !== 1) {
