@@ -53,7 +53,7 @@ module.exports = React.createClass({
     return (
       <div>
         <h1>{ day.heading }</h1>
-        { day.shows.map(this.renderScheduledEpisode) }
+        { day.shows.map((episode) => { return this.renderScheduledEpisode(episode); }) }
       </div>
     );
   },
@@ -62,7 +62,7 @@ module.exports = React.createClass({
     return (
       <div className="o-content-block">
         <div className="column">
-          { this.state.schedule.map(this.renderDay) }
+          { this.state.schedule.map((day) => { return this.renderDay(day); }) }
         </div>
       </div>
     );

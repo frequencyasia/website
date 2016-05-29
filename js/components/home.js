@@ -40,7 +40,7 @@ module.exports = React.createClass({
     return (
       <div className="swiper-container">
         <div className="swiper-wrapper">
-          { this.state.episodes.map(this.renderSlide) }
+          { this.state.episodes.map((episode) => { return this.renderSlide(episode); }) }
         </div>
         <div className="swiper-pagination"></div>
         <div className="swiper-button-next"></div>
