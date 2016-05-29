@@ -22,8 +22,15 @@ module.exports = React.createClass({
   },
 
   renderSlide: function renderSlide(episode) {
+    const style = {
+      'background': 'linear-gradient(to right, rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/static/files/' + episode.image_path + '") no-repeat center center',
+      '-webkit-background-size': 'cover',
+      '-moz-background-size': 'cover',
+      '-o-background-size': 'cover',
+      'background-size': 'cover',
+    };
     return (
-      <div className="swiper-slide" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url('/static/files/<%= items[i].image_path %>') no-repeat center center; -webkit-background-size: cover;  -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+      <div className="swiper-slide" style={ style }>
         <div className="c-featured-item">
           <div className="c-featured-item__background"></div>
           <article className="c-featured-item__container">
