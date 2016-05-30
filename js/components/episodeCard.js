@@ -57,7 +57,7 @@ module.exports = React.createClass({
   },
 
   onMoreInfoClicked: function onMoreInfoClicked() {
-    this.setState({ expanded: true });
+    this.setState({ expanded: !this.state.expanded });
   },
 
   render: function render() {
