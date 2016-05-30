@@ -29,6 +29,7 @@ module.exports = React.createClass({
       'OBackgroundSize': 'cover',
       'backgroundSize': 'cover',
     };
+    const link = '/shows/' + episode.show.slug;
     return (
       <div className="swiper-slide" style={ style }>
         <div className="c-featured-item">
@@ -36,7 +37,7 @@ module.exports = React.createClass({
           <article className="c-featured-item__container">
             <h1 className="c-featured-item__container__title">{ episode.show.name }</h1>
             <p className="c-featured-item__container__tagline">{ episode.tagline }</p>
-            <p className="c-featured-item__container__tagline"><Link href="shows/{ episode.show.slug }">SEE ALL EPISODES</Link></p>
+            <p className="c-featured-item__container__tagline"><Link href={ link }>SEE ALL EPISODES</Link></p>
           </article>
         </div>
       </div>

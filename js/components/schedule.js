@@ -44,8 +44,8 @@ module.exports = React.createClass({
   },
 
   renderScheduledEpisode: function renderScheduledEpisode(episode) {
-    const link = '/shows/' + episode.slug;
-    const text = `${episode.scheduleTime} / ${episode.name}`;
+    const link = '/shows/' + episode.show.slug;
+    const text = `${episode.scheduleTime} / ${episode.show.name}`;
     return (<p><Link href={ link }>{ text }</Link></p>);
   },
 

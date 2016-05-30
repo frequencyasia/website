@@ -35,7 +35,7 @@ module.exports = React.createClass({
       <aside className="c-show__sidebar">
         <div className="c-show__sidebar__image" style={ style }></div>
         <h1 className="c-show__sidebar__title">{ this.state.name }</h1>
-        <p>{ this.state.description }</p>
+        <div dangerouslySetInnerHTML={ this.state.description } />
       </aside>
     );
   },
