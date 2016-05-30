@@ -27,7 +27,7 @@ module.exports = React.createClass({
             <div className="col">
               <h1><a className="u-no-border" href="/wiki">Wiki</a> &rsaquo; Artists</h1>
               <ul>
-                { this.state.shows.map((artist) => {
+                { this.state.artists.map((artist) => {
                   const link = '/wiki/artists/' + artist.slug;
                   return <li className="c-wiki__list__item"><Link href={ link }>{ artist.name }</Link></li>;
                 }) }
