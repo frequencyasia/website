@@ -33,16 +33,20 @@ module.exports = React.createClass({
     this.props.countries.forEach((tag) => {
       const link = '/wiki/countries/' + tag.slug;
       tags.push(<Link href={ link }>{ tag.name }</Link>);
+      tags.push(<span> / </span>);
     });
     this.props.cities.forEach((tag) => {
       const link = '/wiki/cities/' + tag.slug;
       tags.push(<Link href={ link }>{ tag.name }</Link>);
+      tags.push(<span> / </span>);
     });
     this.props.artists.forEach((tag) => {
       const link = '/wiki/artists/' + tag.slug;
       tags.push(<Link href={ link }>{ tag.name }</Link>);
+      tags.push(<span> / </span>);
     });
-    return tags.join(' / ');
+    tags.pop();
+    return tags;
   },
 
   renderThumbnail: function renderThumbnail() {
@@ -78,7 +82,7 @@ module.exports = React.createClass({
           { this.renderThumbnail() }
         </div>
         <div className="c-episode__description-toggle" onClick={ this.onMoreInfoClicked } >{ descriptionToggleText }</div>
-        <div className={ descriptionStyle }>{ this.props.description }</div>
+        <div className={ descriptionStyle } dangerouslySetInnerHTML={ { __html: this.props.description } }/>
       </article>
     );
   },
