@@ -33,6 +33,8 @@ import ReactDOM from 'react-dom';
 import { Location, Locations, NotFound } from 'react-router-component';
 
 import Home from './components/home';
+import ArtistList from './components/artistList';
+import Artist from './components/artist';
 import About from './components/about';
 import Nav from './components/nav';
 import Player from './components/player';
@@ -60,8 +62,8 @@ const App = React.createClass({
       <Location path="/shows/:slug" handler={Show} />
       <Location path="/shows/:slug/:episodeSlug" handler={Show} />
       <Location path="/wiki" handler={Wiki} />
-      <Location path="/wiki/artists" handler={Wiki} />
-      <Location path="/wiki/artists/:slug" handler={Wiki} />
+      <Location path="/wiki/artists" handler={ArtistList} />
+      <Location path="/wiki/artists/:slug" handler={Artist} />
       <Location path="/wiki/cities" handler={Wiki} />
       <Location path="/wiki/cities/:slug" handler={Wiki} />
       <Location path="/wiki/countries" handler={Wiki} />
