@@ -8,6 +8,10 @@ module.exports = React.createClass({
     };
   },
 
+  onPlayClicked: function onPlayClicked() {
+    this.setState({ isPlayingStream: !this.state.isPlayingStream });
+  },
+
   setPlayerState: function setPlayerState() {
     const stream = document.getElementById('stream-player');
     if (!this.state.isPlayingStream) {
@@ -26,11 +30,11 @@ module.exports = React.createClass({
   },
 
   render: function render() {
-    const audioButtonClass = this.state.isPlayingStream ? 'icon-play3' : 'icon-pause2';
+    const audioButtonClass = this.state.isPlayingStream ? 'icon-pause2' : 'icon-play3';
     return (
       <div className="c-player">
         <audio id="stream-player" src="http://airtime.frequency.asia:8000/airtime_128"></audio>
-        <button id="play-stream" className="c-player__button">
+        <button id="play-stream" className="c-player__button" onClick={ this.onPlayClicked }>
           <span className={ audioButtonClass }></span>
         </button>
         <p className="c-player__text">{ this.state.nowPlayingLabel }</p>
