@@ -510,7 +510,7 @@ a.post-module {
   opacity: .6;
 }
 .post-module:hover .post-content .description {
-  max-height: 500px;
+  max-height: 100px;
 }
 
 .post-module .thumbnail {
@@ -576,11 +576,11 @@ a.post-module {
   color: #FFF;
   font-size: 14px;
   line-height: 1.8em;
-  -webkit-transition: all 3s linear 0s;
-  -moz-transition: all 3s linear 0s;
-  -ms-transition: all 3s linear 0s;
-  -o-transition: all 3s linear 0s;
-  transition: all 3s linear 0s;
+  -webkit-transition: all 0.3s linear 0s;
+  -moz-transition: all 0.3s linear 0s;
+  -ms-transition: all 0.3s linear 0s;
+  -o-transition: all 0.3s linear 0s;
+  transition: all 0.3s linear 0s;
   max-height: 0;
 }
 

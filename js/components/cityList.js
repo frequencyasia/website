@@ -15,7 +15,7 @@ module.exports = React.createClass({
   componentWillMount: function componentWillMount() {
     $.getJSON(Constants.API_URL + 'cities')
       .done((data) => {
-        this.setState({ countries: data.items });
+        this.setState({ cities: data.items });
       });
   },
 
@@ -28,7 +28,7 @@ module.exports = React.createClass({
               <h1><a className="u-no-border" href="/wiki">Wiki</a> &rsaquo; Cities</h1>
               <ul>
                 { this.state.cities.map((city) => {
-                  const link = '/wiki/countries/' + city.slug;
+                  const link = '/wiki/cities/' + city.slug;
                   return <li className="c-wiki__list__item"><Link href={ link }>{ city.name }</Link></li>;
                 }) }
               </ul>
