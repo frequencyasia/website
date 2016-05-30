@@ -64,7 +64,7 @@ module.exports = React.createClass({
     let descriptionToggleText = '+ More Info';
     let descriptionStyle = 'c-episode__description';
     if (this.state.expanded) {
-      descriptionStyle += 'c-episode__description--toggled';
+      descriptionStyle += ' c-episode__description--toggled';
       descriptionToggleText = '- Less Info';
     }
     return (
