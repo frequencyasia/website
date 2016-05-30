@@ -31,7 +31,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Location, Locations, NotFound } from 'react-router-component';
-import PubSub from 'pubsub-js';
 
 import Home from './components/home';
 import ArtistList from './components/artistList';
@@ -56,22 +55,6 @@ const NotFoundPage = React.createClass({
 });
 
 const App = React.createClass({
-
-  setMixcloudURL: function setMixcloudURL(url) {
-    this.setState({ selectedMixcloudLink: url });
-  },
-
-  componentDidMount: function componentDidMount() {
-    this.mixcloudPubSubToken = PubSub.subscribe('MIXCLOUD_URL', this.setMixcloudURL);
-  },
-
-  componentWillUnmount: function componentWillUnmount() {
-    PubSub.unsubscribe(this.mixcloudPubSubToken);
-  },
-
-  getInitialState: function getInitialState() {
-    return { selectedMixcloudLink: null };
-  },
 
   render: function render() {
     return (
@@ -102,7 +85,7 @@ ReactDOM.render((
 ), document.getElementById('nav-container'));
 
 ReactDOM.render((
-  <Player selectedMixcloudLink={ this.state.selectedMixcloudLink } />
+  <Player />
 ), document.getElementById('player-container'));
 
 ReactDOM.render((

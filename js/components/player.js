@@ -1,15 +1,35 @@
 import React from 'react';
+import PubSub from 'pubsub-js';
 
 module.exports = React.createClass({
+
   getInitialState: function getInitialState() {
     return {
       isPlayingStream: typeof window.orientation === 'undefined', // Should return true if not mobile
       nowPlayingLabel: 'Offline',
+      selectedMixcloudLink: '', // Empty string to denote no Mixcloud show selected.
     };
+  },
+
+  componentWillUnmount: function componentWillUnmount() {
+    PubSub.unsubscribe(this.mixcloudPubSubToken);
+  },
+
+  componentDidMount: function componentDidMount() {
+    this.mixcloudPubSubToken = PubSub.subscribe('MIXCLOUD_URL', this.setMixcloudURL);
+    this.setPlayerState();
+  },
+
+  componentDidUpdate: function componentDidUpdate() {
+    this.setPlayerState();
   },
 
   onPlayClicked: function onPlayClicked() {
     this.setState({ isPlayingStream: !this.state.isPlayingStream });
+  },
+
+  setMixcloudURL: function setMixcloudURL(url) {
+    this.setState({ selectedMixcloudLink: url });
   },
 
   setPlayerState: function setPlayerState() {
@@ -19,14 +39,6 @@ module.exports = React.createClass({
     } else {
       stream.play();
     }
-  },
-
-  componentDidMount: function componentDidMount() {
-    this.setPlayerState();
-  },
-
-  componentDidUpdate: function componentDidUpdate() {
-    this.setPlayerState();
   },
 
   clearMixcloud: function clearMixcloud() {
@@ -62,7 +74,7 @@ module.exports = React.createClass({
   },
 
   render: function render() {
-    if (this.props.selectedMixcloudLink) {
+    if (this.props.selectedMixcloudLink && this.props.selectedMixcloudLink.length) {
       return this.renderMixcloud();
     }
     return this.renderStream();
