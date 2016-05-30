@@ -12,7 +12,7 @@ module.exports = React.createClass({
     };
   },
 
-  componentWillMount: function componentWillMount() {
+  componentDidMount: function componentDidMount() {
     $.getJSON(Constants.API_URL + 'countries')
       .done((data) => {
         this.setState({ countries: data.items });
@@ -29,7 +29,7 @@ module.exports = React.createClass({
               <ul>
                 { this.state.countries.map((country) => {
                   const link = '/wiki/countries/' + country.slug;
-                  return <li className="c-wiki__list__item"><Link href={ link }>{ country.name }</Link></li>;
+                  return <li className="c-wiki__list__item" key={ country.slug }><Link href={ link }>{ country.name }</Link></li>;
                 }) }
               </ul>
             </div>

@@ -12,7 +12,7 @@ module.exports = React.createClass({
     };
   },
 
-  componentWillMount: function componentWillMount() {
+  componentDidMount: function componentDidMount() {
     $.getJSON(Constants.API_URL + 'shows')
       .done((data) => {
         this.setState({ shows: data.shows });

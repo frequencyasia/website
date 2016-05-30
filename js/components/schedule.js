@@ -14,7 +14,7 @@ module.exports = React.createClass({
     };
   },
 
-  componentWillMount: function componentWillMount() {
+  componentDidMount: function componentDidMount() {
     $.getJSON(Constants.API_URL + 'episodes/scheduled')
       .done((data) => {
         this.parseScheduleData(data.episodes);

@@ -20,7 +20,7 @@ module.exports = React.createClass({
     };
   },
 
-  componentWillMount: function componentWillMount() {
+  componentDidMount: function componentDidMount() {
     $.getJSON(Constants.API_URL + 'shows/' + this.props.slug)
       .done((data) => {
         for (let i = 0; i < data.episodes.length; i++) {

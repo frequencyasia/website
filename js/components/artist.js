@@ -19,7 +19,7 @@ module.exports = React.createClass({
     };
   },
 
-  componentWillMount: function componentWillMount() {
+  componentDidMount: function componentDidMount() {
     $.getJSON(Constants.API_URL + 'artists/' + this.props.slug)
       .done((data) => {
         data.episodes.forEach((episode) => {
