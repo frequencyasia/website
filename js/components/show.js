@@ -3,6 +3,7 @@ import $ from 'jquery';
 import fecha from 'fecha';
 
 import Constants from './../constants';
+import EpisodeCard from './episodeCard';
 
 module.exports = React.createClass({
 
@@ -15,6 +16,7 @@ module.exports = React.createClass({
       name: '',
       image_path: 'placeholder.png',
       description: '',
+      episodes: [],
     };
   },
 
@@ -35,16 +37,22 @@ module.exports = React.createClass({
       <aside className="c-show__sidebar">
         <div className="c-show__sidebar__image" style={ style }></div>
         <h1 className="c-show__sidebar__title">{ this.state.name }</h1>
-        <div dangerouslySetInnerHTML={ this.state.description } />
+        <div dangerouslySetInnerHTML={ { __html: this.state.description } } />
       </aside>
     );
+  },
+
+  renderEpisodeCards: function renderEpisodeCards() {
+    return this.state.episodes.map((episode) => {
+      return <EpisodeCard key={ episode.slug } { ...episode } />;
+    });
   },
 
   render: function render() {
     return (
       <section className="c-show">
         { this.renderSidebar() }
-        <section className="c-show__episodes"></section>
+        <section className="c-show__episodes">{ this.renderEpisodeCards() }</section>
       </section>
     );
   },
