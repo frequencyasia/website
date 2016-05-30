@@ -36,6 +36,7 @@
   "dependencies": {
     "fecha": "^1.1.1",
     "jquery": "^2.1.4",
+    "pubsub-js": "^1.5.3",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router-component": "^0.32.2",

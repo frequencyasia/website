@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-component';
+import PubSub from 'pubsub-js';
 
 module.exports = React.createClass({
   propTypes: {
@@ -18,10 +19,14 @@ module.exports = React.createClass({
     return { expanded: false };
   },
 
+  onPlayClicked: function onPlayClicked() {
+    PubSub.publish('MIXCLOUD_URL', this.props.mixcloud_link);
+  },
+
   renderPlayButton: function renderPlayButton() {
     if (this.props.mixcloud_link && this.props.mixcloud_link.length) {
       return (
-        <div className="c-episode__content__play js-play-episode" data-mixcloud={ this.props.mixcloud_link }>
+        <div className="c-episode__content__play" onClick={ this.onPlayClicked }>
           <span className="icon-play2 c-episode__content__play__icon"></span>
         </div>
       );
