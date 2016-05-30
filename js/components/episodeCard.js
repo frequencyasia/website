@@ -2,14 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-component';
 
 module.exports = React.createClass({
-  // propTypes: {
-  //   slug: React.PropTypes.string.isRequired,
-  //   name: React.PropTypes.string.isRequired,
-  //   frequency: React.PropTypes.string.isRequired,
-  //   tagline: React.PropTypes.string.isRequired,
-  //   num_episodes: React.PropTypes.number.isRequired,
-  //   image_path: React.PropTypes.string.isRequired,
-  // },
+  propTypes: {
+    mixcloud_link: React.PropTypes.string,
+    countries: React.PropTypes.array.isRequired,
+    cities: React.PropTypes.array.isRequired,
+    artists: React.PropTypes.array.isRequired,
+    episode_image: React.PropTypes.string,
+    name: React.PropTypes.string.isRequired,
+    tagline: React.PropTypes.string.isRequired,
+    description: React.PropTypes.string.isRequired,
+    date: React.PropTypes.string.isRequired,
+  },
+
+  getInitialState: function getInitialState() {
+    return { expanded: false };
+  },
 
   renderPlayButton: function renderPlayButton() {
     if (this.props.mixcloud_link && this.props.mixcloud_link.length) {
@@ -22,7 +29,7 @@ module.exports = React.createClass({
   },
 
   renderTags: function renderTags() {
-    const tags = []
+    const tags = [];
     this.props.countries.forEach((tag) => {
       const link = '/wiki/countries/' + tag.slug;
       tags.push(<Link href={ link }>{ tag.name }</Link>);
@@ -35,7 +42,7 @@ module.exports = React.createClass({
       const link = '/wiki/artists/' + tag.slug;
       tags.push(<Link href={ link }>{ tag.name }</Link>);
     });
-    return tags;
+    return tags.join(' / ');
   },
 
   renderThumbnail: function renderThumbnail() {
@@ -45,7 +52,17 @@ module.exports = React.createClass({
     }
   },
 
+  onMoreInfoClicked: function onMoreInfoClicked() {
+    this.setState({ expanded: true });
+  },
+
   render: function render() {
+    let descriptionToggleText = '+ More Info';
+    let descriptionStyle = 'c-episode__description';
+    if (this.state.expanded) {
+      descriptionStyle += 'c-episode__description--toggled';
+      descriptionToggleText = '- Less Info';
+    }
     return (
       <article className="c-episode">
         <div className="c-episode__content">
@@ -60,8 +77,8 @@ module.exports = React.createClass({
           </div>
           { this.renderThumbnail() }
         </div>
-        <div className="c-episode__description-toggle">+ More Info</div>
-        <div className="c-episode__description">{ this.props.description }</div>
+        <div className="c-episode__description-toggle" onClick={ this.onMoreInfoClicked } >{ descriptionToggleText }</div>
+        <div className={ descriptionStyle }>{ this.props.description }</div>
       </article>
     );
   },
