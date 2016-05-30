@@ -64,7 +64,7 @@ module.exports = React.createClass({
   },
 
   renderMixcloud: function renderMixcloud() {
-    const url = 'https://www.mixcloud.com/widget/iframe/?autoplay=1&amp;embed_type=widget_standard&amp;embed_uuid=99755eaf-a63a-4a7d-af25-efbb86e6480b&amp;feed=' + this.props.selectedMixcloudLink + ';hide_cover=1&amp;hide_tracklist=1&amp;light=0&amp;mini=1&amp;replace=0';
+    const url = 'https://www.mixcloud.com/widget/iframe/?autoplay=1&amp;embed_type=widget_standard&amp;embed_uuid=99755eaf-a63a-4a7d-af25-efbb86e6480b&amp;feed=' + this.state.selectedMixcloudLink + ';hide_cover=1&amp;hide_tracklist=1&amp;light=0&amp;mini=1&amp;replace=0';
     return (
       <div className="c-player">
         <button className="c-player__button" onClick={ this.clearMixcloud }>
@@ -76,7 +76,7 @@ module.exports = React.createClass({
   },
 
   render: function render() {
-    if (this.props.selectedMixcloudLink && this.props.selectedMixcloudLink.length) {
+    if (this.state.selectedMixcloudLink && this.state.selectedMixcloudLink.length) {
       return this.renderMixcloud();
     }
     return this.renderStream();
