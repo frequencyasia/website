@@ -28,8 +28,10 @@ module.exports = React.createClass({
     this.setState({ isPlayingStream: !this.state.isPlayingStream });
   },
 
-  setMixcloudURL: function setMixcloudURL(url) {
-    this.setState({ selectedMixcloudLink: url });
+  setMixcloudURL: function setMixcloudURL(pubSubLabel, url) {
+    if (pubSubLabel === 'MIXCLOUD_URL') {
+      this.setState({ selectedMixcloudLink: url });
+    }
   },
 
   setPlayerState: function setPlayerState() {
@@ -42,7 +44,7 @@ module.exports = React.createClass({
   },
 
   clearMixcloud: function clearMixcloud() {
-
+    this.setState({ selectedMixcloudLink: '' });
   },
 
   renderStream: function renderStream() {
