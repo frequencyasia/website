@@ -42,6 +42,10 @@ import Projects from './components/projects';
 import Schedule from './components/schedule';
 import Show from './components/show';
 import ShowList from './components/showList';
+import Country from './components/country';
+import CountryList from './components/countryList';
+import City from './components/city';
+import CityList from './components/cityList';
 import Wiki from './components/wiki';
 
 const NotFoundPage = React.createClass({
@@ -64,10 +68,10 @@ const App = React.createClass({
       <Location path="/wiki" handler={Wiki} />
       <Location path="/wiki/artists" handler={ArtistList} />
       <Location path="/wiki/artists/:slug" handler={Artist} />
-      <Location path="/wiki/cities" handler={Wiki} />
-      <Location path="/wiki/cities/:slug" handler={Wiki} />
-      <Location path="/wiki/countries" handler={Wiki} />
-      <Location path="/wiki/countries/:slug" handler={Wiki} />
+      <Location path="/wiki/cities" handler={CityList} />
+      <Location path="/wiki/cities/:slug" handler={City} />
+      <Location path="/wiki/countries" handler={CountryList} />
+      <Location path="/wiki/countries/:slug" handler={Country} />
       <Location path="/wiki/labels" handler={Wiki} />
       <Location path="/wiki/labels/:slug" handler={Wiki} />
       <NotFound handler={NotFoundPage} />

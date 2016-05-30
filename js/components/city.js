@@ -20,7 +20,7 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function componentWillMount() {
-    $.getJSON(Constants.API_URL + 'artists/' + this.props.slug)
+    $.getJSON(Constants.API_URL + 'cities/' + this.props.slug)
       .done((data) => {
         data.episodes.forEach((episode) => {
           episode.date = fecha.format(new Date(episode.start_time), 'dddd / MMMM D YYYY');
@@ -44,7 +44,7 @@ module.exports = React.createClass({
       <section className="c-content">
         <div className="row">
           <div className="col">
-            <h1><Link className="u-no-border" href="/wiki">Wiki</Link> &rsaquo; <Link className="u-no-border" href="/wiki/artists">Artists</Link> &rsaquo; { this.state.name }</h1>
+            <h1><Link className="u-no-border" href="/wiki">Wiki</Link> &rsaquo; <Link className="u-no-border" href="/wiki/cities">Cities</Link> &rsaquo; { this.state.name }</h1>
             <h2 id="location-data"></h2>
             { this.renderEpisodeCards() }
           </div>
