@@ -1,6 +1,13 @@
 import React from 'react';
 import $ from 'jquery';
 
+var ReactTabs = require('react-tabs');
+var Tab = ReactTabs.Tab;
+var Tabs = ReactTabs.Tabs;
+var TabList = ReactTabs.TabList;
+var TabPanel = ReactTabs.TabPanel;
+
+
 import Constants from './../constants';
 import { Link } from 'react-router-component';
 
@@ -8,15 +15,53 @@ module.exports = React.createClass({
 
   getInitialState: function getInitialState() {
     return {
-      artists: [],
+      artists: {},
     };
   },
 
   componentDidMount: function componentDidMount() {
     $.getJSON(Constants.API_URL + 'artists')
       .done((data) => {
-        this.setState({ artists: data.items });
+        this.setState({ artists: this.alphabetiseArtists(data.items) });
       });
+  },
+
+  isLetter: function isLetter(char) {
+    return char.match(/[a-z]/i);
+  },
+
+  alphabetiseArtists: function alphabetiseArtists(artists) {
+    const alphabetisedArtists = Object.assign({}, Constants.TABS_TEMPLATE);
+    for (const artist of artists) {
+      const initial = artist.slug[0];
+      if (this.isLetter(initial)) {
+        alphabetisedArtists[initial.toLowerCase()].push(artist);
+      } else {
+        alphabetisedArtists['#'].push(artist);
+      }
+    }
+    return alphabetisedArtists;
+  },
+
+  renderTabs: function renderTabs() {
+    return Object.keys(this.state.artists).map((key) => {
+      return <Tab>{ key }</Tab>;
+    });
+  },
+
+  renderPanels: function renderPanels() {
+    return Object.keys(this.state.artists).map((key) => {
+      return (
+        <TabPanel>
+          <ul>
+            { this.state.artists[key].map((artist) => {
+              const link = '/wiki/artists/' + artist.slug;
+              return <li className="c-wiki__list__item" key={ artist.slug }><Link href={ link }>{ artist.name }</Link></li>;
+            }) }
+          </ul>
+        </TabPanel>
+      );
+    });
   },
 
   render: function render() {
@@ -25,13 +70,13 @@ module.exports = React.createClass({
         <section className="c-content">
           <div className="row">
             <div className="col">
-              <h1><a className="u-no-border" href="/wiki">Wiki</a> &rsaquo; Artists</h1>
-              <ul>
-                { this.state.artists.map((artist) => {
-                  const link = '/wiki/artists/' + artist.slug;
-                  return <li className="c-wiki__list__item" key={ artist.slug }><Link href={ link }>{ artist.name }</Link></li>;
-                }) }
-              </ul>
+              <h1><Link className="u-no-border" href="/wiki">Wiki</Link> &rsaquo; Artists</h1>
+              <Tabs>
+                <TabList>
+                  { this.renderTabs() }
+                </TabList>
+                { this.renderPanels() }
+              </Tabs>
             </div>
           </div>
         </section>

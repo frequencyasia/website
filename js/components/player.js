@@ -2,6 +2,7 @@ import React from 'react';
 import PubSub from 'pubsub-js';
 import $ from 'jquery';
 import { Link } from 'react-router-component';
+import fecha from 'fecha';
 
 import Constants from './../constants';
 
@@ -72,12 +73,12 @@ module.exports = React.createClass({
           });
         }
         if (data && data.next && data.next.starts) {
-          // var time = data.next.starts.split('.'); // Get rid of the ms because they're hard to parse.
-          // var endTime = fecha.parse(time[0], "YYYY-MM-DD HH:mm:ss");
-          // var endTimestamp = endTime.getTime() + (8 * 60 * 60 * 1000) + 1000; // Add hours to get timezone right, plus 1 second to account for those milliseconds we reomved before.
-          // var now = new Date().getTime();
-          // var diff = endTimestamp - now;
-          // window.setTimeout(getNowPlaying, diff);
+          const time = data.next.starts.split('.'); // Get rid of the ms because they're hard to parse.
+          const endTime = fecha.parse(time[0], 'YYYY-MM-DD HH:mm:ss');
+          const endTimestamp = endTime.getTime() + (8 * 60 * 60 * 1000) + 1000; // Add hours to get timezone right, plus 1 second to account for those milliseconds we reomved before.
+          const now = new Date().getTime();
+          const diff = endTimestamp - now;
+          window.setTimeout(this.getNowPlaying, diff);
         }
       });
   },

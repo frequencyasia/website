@@ -25,7 +25,7 @@ module.exports = React.createClass({
         <section className="c-content">
           <div className="row">
             <div className="col">
-              <h1><a className="u-no-border" href="/wiki">Wiki</a> &rsaquo; Countries</h1>
+              <h1><Link className="u-no-border" href="/wiki">Wiki</Link> &rsaquo; Countries</h1>
               <ul>
                 { this.state.countries.map((country) => {
                   const link = '/wiki/countries/' + country.slug;
