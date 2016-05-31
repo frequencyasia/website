@@ -57,8 +57,9 @@ module.exports = React.createClass({
     $.getJSON(Constants.LIVE_INFO_URL)
       .done((data) => {
         if (data && data.current && data.current.name) {
-          const [name, url] = data.current.name.split('|');
+          let [name, url] = data.current.name.split('|');
           const [_creatorName, showName] = name.split('-'); // Remove leading show name from Airtime.
+          url = url.replace('#', '/'); // NOTE: Temp. fix for fact that url schema is different in react and airtime expects old schema.
           this.setState({
             nowPlayingLabel: showName.trim(),
             nowPlayingLink: url === undefined ? '' : url.trim(), // Return '' if no url.
