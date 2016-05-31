@@ -1,10 +1,11 @@
 import React from 'react';
 import $ from 'jquery';
 import fecha from 'fecha';
+import { Link } from 'react-router-component';
 
 import Constants from './../constants';
 import EpisodeCard from './episodeCard';
-import { Link } from 'react-router-component';
+
 
 module.exports = React.createClass({
 

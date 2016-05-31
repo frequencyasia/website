@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-component';
 import PubSub from 'pubsub-js';
 
+import Constants from './../constants';
+
 module.exports = React.createClass({
   propTypes: {
     mixcloud_link: React.PropTypes.string,
@@ -20,7 +22,7 @@ module.exports = React.createClass({
   },
 
   onPlayClicked: function onPlayClicked() {
-    PubSub.publish('MIXCLOUD_URL', this.props.mixcloud_link);
+    PubSub.publish(Constants.PUB_SUB_LABEL.MIXCLOUD_URL, this.props.mixcloud_link);
   },
 
   renderPlayButton: function renderPlayButton() {

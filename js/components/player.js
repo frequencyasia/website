@@ -1,6 +1,7 @@
 import React from 'react';
 import PubSub from 'pubsub-js';
 import $ from 'jquery';
+import { Link } from 'react-router-component';
 
 import Constants from './../constants';
 
@@ -20,7 +21,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function componentDidMount() {
-    this.mixcloudPubSubToken = PubSub.subscribe('MIXCLOUD_URL', this.setMixcloudURL);
+    this.mixcloudPubSubToken = PubSub.subscribe(Constants.PUB_SUB_LABEL.MIXCLOUD_URL, this.setMixcloudURL);
     this.setPlayerState();
     this.getNowPlaying();
   },
@@ -34,7 +35,7 @@ module.exports = React.createClass({
   },
 
   setMixcloudURL: function setMixcloudURL(pubSubLabel, url) {
-    if (pubSubLabel === 'MIXCLOUD_URL') {
+    if (pubSubLabel === Constants.PUB_SUB_LABEL.MIXCLOUD_URL) {
       this.setState({ selectedMixcloudLink: url });
     }
   },
@@ -57,10 +58,12 @@ module.exports = React.createClass({
       .done((data) => {
         if (data && data.current && data.current.name) {
           const [name, url] = data.current.name.split('|');
+          const [_creatorName, showName] = name.split('-'); // Remove leading show name from Airtime.
           this.setState({
-            nowPlayingLabel: name.trim(),
+            nowPlayingLabel: showName.trim(),
             nowPlayingLink: url === undefined ? '' : url.trim(), // Return '' if no url.
           });
+          PubSub.publish(Constants.PUB_SUB_LABEL.NOW_PLAYING_URL, this.state.nowPlayingLink); // Push url to Nav
         } else {
           this.setState({
             nowPlayingLabel: 'Offline',
@@ -78,6 +81,14 @@ module.exports = React.createClass({
       });
   },
 
+  renderMetadata: function renderMetadata() {
+    return (
+      <p className="c-player__text">
+        <Link href={ this.state.nowPlayingLink }>{ this.state.nowPlayingLabel }</ Link>
+      </p>
+    );
+  },
+
   renderStream: function renderStream() {
     const audioButtonClass = this.state.isPlayingStream ? 'icon-pause2' : 'icon-play3';
     return (
@@ -86,7 +97,7 @@ module.exports = React.createClass({
         <button id="play-stream" className="c-player__button" onClick={ this.onPlayClicked }>
           <span className={ audioButtonClass }></span>
         </button>
-        <p className="c-player__text">{ this.state.nowPlayingLabel }</p>
+        { this.renderMetadata() }
         <div className="c-player__volume">
           <input type="range" value="8" data-steps="10" id="volume-slider" />
         </div>
