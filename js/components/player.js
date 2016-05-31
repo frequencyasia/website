@@ -1,5 +1,8 @@
 import React from 'react';
 import PubSub from 'pubsub-js';
+import $ from 'jquery';
+
+import Constants from './../constants';
 
 module.exports = React.createClass({
 
@@ -7,6 +10,7 @@ module.exports = React.createClass({
     return {
       isPlayingStream: typeof window.orientation === 'undefined', // Should return true if not mobile
       nowPlayingLabel: 'Offline',
+      nowPlayingLink: '',
       selectedMixcloudLink: '', // Empty string to denote no Mixcloud show selected.
     };
   },
@@ -18,6 +22,7 @@ module.exports = React.createClass({
   componentDidMount: function componentDidMount() {
     this.mixcloudPubSubToken = PubSub.subscribe('MIXCLOUD_URL', this.setMixcloudURL);
     this.setPlayerState();
+    this.getNowPlaying();
   },
 
   componentDidUpdate: function componentDidUpdate() {
@@ -45,6 +50,32 @@ module.exports = React.createClass({
 
   clearMixcloud: function clearMixcloud() {
     this.setState({ selectedMixcloudLink: '' });
+  },
+
+  getNowPlaying: function getNowPlaying() {
+    $.getJSON(Constants.LIVE_INFO_URL)
+      .done((data) => {
+        if (data && data.current && data.current.name) {
+          const [name, url] = data.current.name.split('|');
+          this.setState({
+            nowPlayingLabel: name.trim(),
+            nowPlayingLink: url === undefined ? '' : url.trim(), // Return '' if no url.
+          });
+        } else {
+          this.setState({
+            nowPlayingLabel: 'Offline',
+            nowPlayingLink: '',
+          });
+        }
+        if (data && data.next && data.next.starts) {
+          // var time = data.next.starts.split('.'); // Get rid of the ms because they're hard to parse.
+          // var endTime = fecha.parse(time[0], "YYYY-MM-DD HH:mm:ss");
+          // var endTimestamp = endTime.getTime() + (8 * 60 * 60 * 1000) + 1000; // Add hours to get timezone right, plus 1 second to account for those milliseconds we reomved before.
+          // var now = new Date().getTime();
+          // var diff = endTimestamp - now;
+          // window.setTimeout(getNowPlaying, diff);
+        }
+      });
   },
 
   renderStream: function renderStream() {
