@@ -4,15 +4,16 @@ import $ from 'jquery';
 import { Link } from 'react-router-component';
 import fecha from 'fecha';
 
-import Constants from './../constants';
-import VolumeControl from './player/volumeControl';
+import Constants from './../../constants';
+import MixcloudEmbed from './mixcloudEmbed'
+import VolumeControl from './volumeControl';
 
 module.exports = React.createClass({
 
   getInitialState: function getInitialState() {
     return {
       isPlayingStream: typeof window.orientation === 'undefined', // Should return true if not mobile
-      nowPlayingLabel: 'Offline',
+      nowPlayingLabel: Constants.LABELS.OFFLINE,
       nowPlayingLink: '',
       selectedMixcloudLink: '', // Empty string to denote no Mixcloud show selected.
       volume: 8, // Max 10
@@ -114,21 +115,9 @@ module.exports = React.createClass({
     );
   },
 
-  renderMixcloud: function renderMixcloud() {
-    const url = 'https://www.mixcloud.com/widget/iframe/?autoplay=1&amp;embed_type=widget_standard&amp;embed_uuid=99755eaf-a63a-4a7d-af25-efbb86e6480b&amp;feed=' + this.state.selectedMixcloudLink + ';hide_cover=1&amp;hide_tracklist=1&amp;light=0&amp;mini=1&amp;replace=0';
-    return (
-      <div className="c-player">
-        <button className="c-player__button" onClick={ this.clearMixcloud }>
-          <span className="icon-arrow-back"></span>
-        </button>
-        <iframe width="100%" height="60" src={ url } frameBorder="0"></iframe>
-      </div>
-    );
-  },
-
   render: function render() {
     if (this.state.selectedMixcloudLink && this.state.selectedMixcloudLink.length) {
-      return this.renderMixcloud();
+      return <MixcloudEmbed onBackClicked={ this.clearMixcloud } link={ this.state.selectedMixcloudLink }/>
     }
     return this.renderStream();
   },

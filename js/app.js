@@ -37,7 +37,7 @@ import ArtistList from './components/artistList';
 import Artist from './components/artist';
 import About from './components/about';
 import Nav from './components/nav';
-import Player from './components/player';
+import Player from './components/player/player';
 import Projects from './components/projects';
 import Schedule from './components/schedule';
 import Show from './components/show';
