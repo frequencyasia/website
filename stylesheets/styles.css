@@ -645,7 +645,7 @@ a.post-module {
 .vslider_sticks > li:last-child {
   margin-right: 0;
 }
-.vslider_sticks > li.active {
+.vslider_sticks > li:hover {
   height: 100%;
   top: 0;
 }

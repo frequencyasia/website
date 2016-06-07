@@ -2,20 +2,6 @@ import React from 'react';
 
 module.exports = React.createClass({
 
-  // var $input = $('#volume-slider');
-  // var steps = $input.attr('data-steps');
-  // var defValue = $input.attr('value');
-  // var $slider = $("<div class='vslider'><div class='vslider_bar'></div><ul class='vslider_sticks'></div>").appendTo($input.parent());
-  // $input.hide();
-  //
-  // for (var i = 0; i < steps; i++) {
-  //   var $stick = $('<li><div class="vslider_stick"a></div></li>').appendTo($slider.find('.vslider_sticks'));
-  //   $stick.on('mouseenter', function(){
-  //     $(this).addClass('active');
-  //   }).on('mouseleave', function(){
-  //     $(this).removeClass('active');
-  // });
-  //
   // var startDrag = function (event) {
   //    renderUI(getPercent(event));
   //    $(document.body).on('mousemove', onDrag);
@@ -53,19 +39,12 @@ module.exports = React.createClass({
   //
   // $slider.on('mousedown', startDrag);
 
-  onMouseEnterTick: function onMouseEnterTick(event) {
-    console.log(event)
-  },
-
-  onMouseLeaveTick: function onMouseEnterTick(event) {
-    console.log(event)
-  },
-
   renderSliderTicks: function renderSliderTicks() {
-    return [1,2,3,4,5,6,7,8,9,10].map(() => {
+    return [1,2,3,4,5,6,7,8,9,10].map((i) => {
+      const style = { opacity: i <= this.props.volume ? 1 : 0 }
       return (
         <li>
-          <div className="vslider_stick" onMouseEnter={ this.onMouseEnterTick } onMouseLeave={ this.onMouseLeaveTick }></div>
+          <div className="vslider_stick" style={ style }></div>
         </li>
       );
     });
