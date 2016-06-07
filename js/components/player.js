@@ -43,6 +43,10 @@ module.exports = React.createClass({
     }
   },
 
+  setVolume: function setVolume(volume) {
+    this.setState({ volume });
+  },
+
   setPlayerState: function setPlayerState() {
     const stream = document.getElementById('stream-player');
     if (!this.state.isPlayingStream) {
@@ -102,7 +106,7 @@ module.exports = React.createClass({
           <span className={ audioButtonClass }></span>
         </button>
         { this.renderMetadata() }
-        <VolumeControl volume={ this.state.volume } />
+        <VolumeControl volume={ this.state.volume } setVolume={ this.setVolume } />
       </div>
     );
   },
