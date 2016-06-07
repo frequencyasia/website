@@ -1,6 +1,13 @@
 import React from 'react';
 
 module.exports = React.createClass({
+
+  propTypes: {
+    value: React.PropTypes.number.isRequired,
+    volume: React.PropTypes.number.isRequired,
+    setVolume: React.PropTypes.func.isRequired,
+  },
+
   onMouseEnter: function onMouseEnter(event) {
     // Set volume to this value if mouse is down on enter.
     if (event.nativeEvent.which === 1) {
@@ -10,14 +17,13 @@ module.exports = React.createClass({
 
   onMouseLeave: function onMouseLeave(event) {
     // Set volume to 0 if this is the first tick and mouse is leaving to left.
-    if (this.props.value === 1 && event.nativeEvent.which === 1) {
-      console.log(event.nativeEvent)
-      // this.props.setVolume(0);
+    if (this.props.value === 1 && event.nativeEvent.which === 1 && event.nativeEvent.offsetX < 0) {
+      this.props.setVolume(0);
     }
   },
 
   render: function render() {
-    const style = { opacity: this.props.value <= this.props.volume ? 1 : 0 }
+    const style = { opacity: this.props.value <= this.props.volume ? 1 : 0 };
     return (
       <li onMouseEnter={ this.onMouseEnter } onMouseLeave={ this.onMouseLeave }>
         <div className="vslider_stick" style={style}></div>

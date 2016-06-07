@@ -4,15 +4,20 @@ import VolumeTick from './volumeTick';
 
 module.exports = React.createClass({
 
+  propTypes: {
+    volume: React.PropTypes.number.isRequired,
+    setVolume: React.PropTypes.func.isRequired,
+  },
+
+  onARIASliderChange: function onARIASliderChange(event) {
+    this.props.setVolume(event.target.value);
+  },
+
   renderSliderTicks: function renderSliderTicks() {
     // Render 10 ticks for the volume slider.
     return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => {
       return (<VolumeTick value={ i } volume={ this.props.volume } setVolume={ this.props.setVolume } />);
     });
-  },
-
-  onARIASliderChange: function onARIASliderChange(event) {
-    this.props.setVolume(event.target.value);
   },
 
   renderARIASlider: function renderARIASlider() {

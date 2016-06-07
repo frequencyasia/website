@@ -45,8 +45,9 @@ module.exports = React.createClass({
 
   setVolume: function setVolume(volume) {
     this.setState({ volume });
-    // var stream = document.getElementById("stream-player");
-    // stream.volume = percent;
+    // Need to explicitly set volume because react cant handle the Audio well.
+    const stream = document.getElementById('stream-player');
+    stream.volume = volume / 10;
   },
 
   setPlayerState: function setPlayerState() {
