@@ -1,15 +1,9 @@
 import React from 'react';
 import $ from 'jquery';
-
-var ReactTabs = require('react-tabs');
-var Tab = ReactTabs.Tab;
-var Tabs = ReactTabs.Tabs;
-var TabList = ReactTabs.TabList;
-var TabPanel = ReactTabs.TabPanel;
-
+import { Link } from 'react-router-component';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import Constants from './../constants';
-import { Link } from 'react-router-component';
 
 module.exports = React.createClass({
 

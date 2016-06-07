@@ -1,8 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
+import { Link } from 'react-router-component';
 
 import Constants from './../constants';
-import { Link } from 'react-router-component';
 
 module.exports = React.createClass({
 
