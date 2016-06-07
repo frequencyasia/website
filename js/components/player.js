@@ -15,6 +15,7 @@ module.exports = React.createClass({
       nowPlayingLabel: 'Offline',
       nowPlayingLink: '',
       selectedMixcloudLink: '', // Empty string to denote no Mixcloud show selected.
+      volume: 8, // Max 10
     };
   },
 
@@ -101,7 +102,7 @@ module.exports = React.createClass({
           <span className={ audioButtonClass }></span>
         </button>
         { this.renderMetadata() }
-        <VolumeControl className="c-player__volume" />
+        <VolumeControl volume={ this.state.volume } />
       </div>
     );
   },

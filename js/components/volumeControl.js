@@ -53,20 +53,35 @@ module.exports = React.createClass({
   //
   // $slider.on('mousedown', startDrag);
 
+  onMouseEnterTick: function onMouseEnterTick(event) {
+    console.log(event)
+  },
+
+  onMouseLeaveTick: function onMouseEnterTick(event) {
+    console.log(event)
+  },
+
   renderSliderTicks: function renderSliderTicks() {
     return [1,2,3,4,5,6,7,8,9,10].map(() => {
-      return (<li><div className="vslider_stick"a></div></li>);
+      return (
+        <li>
+          <div className="vslider_stick" onMouseEnter={ this.onMouseEnterTick } onMouseLeave={ this.onMouseLeaveTick }></div>
+        </li>
+      );
     });
   },
 
   render: function render() {
     return (
-      <div className='vslider'>
-        <div className='vslider_bar'></div>
-        <ul className='vslider_sticks'>
-          { this.renderSliderTicks() }
-        </ul>
-      </div>
+      <aside className="c-player__volume">
+        <div className="vslider">
+          <input type="range" value={ this.props.volume } style={{ display: 'none' }} />
+          <div className="vslider_bar"></div>
+          <ul className="vslider_sticks">
+            { this.renderSliderTicks() }
+          </ul>
+        </div>
+      </aside>
     );
   },
 });
