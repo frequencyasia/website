@@ -5,7 +5,7 @@ import { Link } from 'react-router-component';
 import fecha from 'fecha';
 
 import Constants from './../constants';
-import VolumeControl from './volumeControl';
+import VolumeControl from './player/volumeControl';
 
 module.exports = React.createClass({
 
