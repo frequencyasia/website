@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 module.exports = React.createClass({
 
@@ -39,6 +40,25 @@ module.exports = React.createClass({
   //
   // $slider.on('mousedown', startDrag);
 
+  getPercent: function getPercent (event) {
+    var percent = (event.pageX - $('.vslider').offset().left) / $('.vslider_sticks').width();
+    percent = percent >= 0 ? percent : 0;
+    percent = percent <= 1 ? percent : 1;
+    return percent;
+  },
+
+  onSliderMouseDown: function onSliderMouseDown(event) {
+    const onDrag = (e) => {
+      console.log("!" + e);
+    };
+    const stopDrag = (e) => {
+      console.log("!" + e);
+    };
+    console.log(this.getPercent(event));
+    $(document.body).on('mousemove', onDrag);
+    $(document.body).on('mouseup', stopDrag);
+  },
+
   renderSliderTicks: function renderSliderTicks() {
     return [1,2,3,4,5,6,7,8,9,10].map((i) => {
       const style = { opacity: i <= this.props.volume ? 1 : 0 }
@@ -53,7 +73,7 @@ module.exports = React.createClass({
   render: function render() {
     return (
       <aside className="c-player__volume">
-        <div className="vslider">
+        <div className="vslider" onMouseDown={ this.onSliderMouseDown }>
           <input type="range" value={ this.props.volume } style={{ display: 'none' }} />
           <div className="vslider_bar"></div>
           <ul className="vslider_sticks">
