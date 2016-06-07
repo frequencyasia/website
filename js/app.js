@@ -1,33 +1,3 @@
-// var Backbone = require('backbone');
-// var $ = require("jquery");
-// var Router = require('./router');
-// var PlayerView = require('./views/playerView');
-// var NavView = require('./views/navView');
-//
-// window.app = {
-// 	airtimeURL: "http://airtime.frequency.asia",
-// 	init: function () {
-// 		this.views = {
-// 			playerView: new PlayerView({
-// 				el: $("#player-container"),
-// 			}),
-// 			navView: new NavView({
-// 				el: $("#nav-container"),
-// 			}),
-// 		}
-// 		this.views.playerView.render();
-// 		this.views.navView.render();
-// 		// Create and fire up the router
-// 		this.router = new Router();
-// 		this.router.on("route", function(route, params) {
-// 		  window.app.views.navView.setActivePage();
-// 		});
-// 		Backbone.history.start();
-// 	}
-// };
-//
-// window.app.init();
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Location, Locations, NotFound } from 'react-router-component';
@@ -37,6 +7,7 @@ import ArtistList from './components/artistList';
 import Artist from './components/artist';
 import About from './components/about';
 import Nav from './components/nav';
+import NotFoundPage from './components/notFound';
 import Player from './components/player/player';
 import Projects from './components/projects';
 import Schedule from './components/schedule';
@@ -48,11 +19,6 @@ import City from './components/city';
 import CityList from './components/cityList';
 import Wiki from './components/wiki';
 
-const NotFoundPage = React.createClass({
-  render: function render() {
-    return '404';
-  },
-});
 
 const App = React.createClass({
 
