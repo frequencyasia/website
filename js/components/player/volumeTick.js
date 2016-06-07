@@ -22,10 +22,15 @@ module.exports = React.createClass({
     }
   },
 
+  onMouseDown: function onMouseDown() {
+    // Set the volume to this value if user is just clicking on it.
+    this.props.setVolume(this.props.value);
+  },
+
   render: function render() {
     const style = { opacity: this.props.value <= this.props.volume ? 1 : 0 };
     return (
-      <li onMouseEnter={ this.onMouseEnter } onMouseLeave={ this.onMouseLeave }>
+      <li onMouseEnter={ this.onMouseEnter } onMouseLeave={ this.onMouseLeave } onMouseDown={ this.onMouseDown }>
         <div className="vslider_stick" style={style}></div>
       </li>
     );
