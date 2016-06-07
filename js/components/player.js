@@ -5,6 +5,7 @@ import { Link } from 'react-router-component';
 import fecha from 'fecha';
 
 import Constants from './../constants';
+import VolumeControl from './volumeControl';
 
 module.exports = React.createClass({
 
@@ -100,9 +101,7 @@ module.exports = React.createClass({
           <span className={ audioButtonClass }></span>
         </button>
         { this.renderMetadata() }
-        <div className="c-player__volume">
-          <input type="range" value="8" data-steps="10" id="volume-slider" />
-        </div>
+        <VolumeControl className="c-player__volume" />
       </div>
     );
   },
