@@ -45,6 +45,8 @@ module.exports = React.createClass({
 
   setVolume: function setVolume(volume) {
     this.setState({ volume });
+    // var stream = document.getElementById("stream-player");
+    // stream.volume = percent;
   },
 
   setPlayerState: function setPlayerState() {
@@ -101,7 +103,7 @@ module.exports = React.createClass({
     const audioButtonClass = this.state.isPlayingStream ? 'icon-pause2' : 'icon-play3';
     return (
       <div className="c-player">
-        <audio id="stream-player" src="http://airtime.frequency.asia:8000/airtime_128"></audio>
+        <audio id="stream-player" src="http://airtime.frequency.asia:8000/airtime_128" volume={ this.state.volume / 10 }></audio>
         <button id="play-stream" className="c-player__button" onClick={ this.onPlayClicked }>
           <span className={ audioButtonClass }></span>
         </button>
