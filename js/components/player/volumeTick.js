@@ -12,8 +12,8 @@ module.exports = React.createClass({
 
   onMouseEnter: function onMouseEnter(event) {
     // Set volume to this value if mouse is down on enter.
-    console.log(event)
-    if (event.which === 1) {
+    console.log(event.nativeEvent)
+    if (event.nativeEvent.which === 1) {
       this.props.setVolume(this.props.value);
     }
   },
