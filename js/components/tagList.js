@@ -14,6 +14,7 @@ module.exports = React.createClass({
   },
 
   getInitialState: function getInitialState() {
+    console.log(this.props.route)
     return {
       tags: {},
     };
