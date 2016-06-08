@@ -15,14 +15,18 @@ module.exports = React.createClass({
   getInitialState: function getInitialState() {
     return {
       tags: [],
+      alphabetisedTags: {},
     };
   },
 
   componentDidMount: function componentDidMount() {
     $.getJSON(Constants.API_URL + this.props.type)
       .done((data) => {
-        const tags = this.props.useTabs ? this.alphabetiseTags(data.items) : data.items;
-        this.setState({ tags });
+        if (this.props.useTabs) {
+          this.setState({ alphabetisedTags: this.alphabetiseTags(data.items) });
+        } else {
+          this.setState({ tags: data.items });
+        }
       });
   },
 
@@ -44,11 +48,9 @@ module.exports = React.createClass({
   },
 
   renderTabs: function renderTabs() {
-    if (!this.state.tags instanceof Array) {
-      return Object.keys(this.state.tags).map((key) => {
-        return <Tab>{ key }</Tab>;
-      });
-    }
+    return Object.keys(this.state.alphabetisedTags).map((key) => {
+      return <Tab>{ key }</Tab>;
+    });
   },
 
   renderTag: function renderTag(tag) {
@@ -57,15 +59,13 @@ module.exports = React.createClass({
   },
 
   renderPanels: function renderPanels() {
-    if (!this.state.tags instanceof Array) {
-      return Object.keys(this.state.tags).map((key) => {
-        return (
-          <TabPanel>
-            <ul>{ this.state.tags[key].map(this.renderTag) }</ul>
-          </TabPanel>
-        );
-      });
-    }
+    return Object.keys(this.state.alphabetisedTags).map((key) => {
+      return (
+        <TabPanel>
+          <ul>{ this.state.alphabetisedTags[key].map(this.renderTag) }</ul>
+        </TabPanel>
+      );
+    });
   },
 
   render: function render() {
