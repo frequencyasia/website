@@ -3,18 +3,16 @@ import $ from 'jquery';
 import { Link } from 'react-router-component';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-import Constants from './../constants';
+import Constants from './../../constants';
 
 module.exports = React.createClass({
 
   propTypes: {
-    label: React.PropTypes.string.isRequired,
     type: React.PropTypes.string.isRequired,
     useTabs: React.PropTypes.bool,
   },
 
   getInitialState: function getInitialState() {
-    console.log(this.props.route)
     return {
       tags: {},
     };
@@ -65,8 +63,7 @@ module.exports = React.createClass({
       );
     });
   },
-
-  renderTags: function renderTags() {
+  render: function render() {
     if (this.props.useTabs) {
       return (
         <Tabs>
@@ -78,20 +75,5 @@ module.exports = React.createClass({
       );
     }
     return (<ul>{ this.state.tags.map(this.renderTag) }</ul>);
-  },
-
-  render: function render() {
-    return (
-      <div className="o-content-block">
-        <section className="c-content">
-          <div className="row">
-            <div className="col">
-              <h1><Link className="u-no-border" href="/wiki">Wiki</Link> &rsaquo; { this.props.label }</h1>
-              { this.renderTags() }
-            </div>
-          </div>
-        </section>
-      </div>
-    );
   },
 });
