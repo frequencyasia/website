@@ -21,6 +21,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function componentDidMount() {
+    document.title = 'Show | Frequency Asia';
     $.getJSON(Constants.API_URL + 'shows/' + this.props.slug)
       .done((data) => {
         for (let i = 0; i < data.episodes.length; i++) {
@@ -28,6 +29,7 @@ module.exports = React.createClass({
           item.date = fecha.format(new Date(item.start_time), 'dddd / MMMM D YYYY');
         }
         this.setState(data);
+        document.title = this.state.name + ' | Frequency Asia';
       });
   },
 

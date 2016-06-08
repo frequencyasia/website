@@ -1,6 +1,11 @@
 import React from 'react';
 
 module.exports = React.createClass({
+
+  componentDidMount: function componentDidMount() {
+    document.title = 'Projects | Frequency Asia';
+  },
+
   render: function render() {
     return (
       <div className="o-content-block">

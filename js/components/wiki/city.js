@@ -20,6 +20,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function componentDidMount() {
+    document.title = 'City | Frequency Asia';
     $.getJSON(Constants.API_URL + 'cities/' + this.props.slug)
       .done((data) => {
         data.episodes.forEach((episode) => {
@@ -29,6 +30,7 @@ module.exports = React.createClass({
           name: data.name,
           episodes: data.episodes,
         });
+        document.title = data.name + ' | Frequency Asia';
       });
   },
 

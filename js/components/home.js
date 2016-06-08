@@ -15,6 +15,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function componentDidMount() {
+    document.title = 'Frequency Asia';
     $.getJSON(`${Constants.API_URL}episodes/released?length=${this.numShowcaseItems}&showcase=true`)
       .done((data) => {
         this.setState({ episodes: data.episodes });

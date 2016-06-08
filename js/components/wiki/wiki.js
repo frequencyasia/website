@@ -2,6 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-component';
 
 module.exports = React.createClass({
+
+  componentDidMount: function componentDidMount() {
+    document.title = 'Wiki | Frequency Asia';
+  },
+
   render: function render() {
     return (
       <div className="o-content-block">

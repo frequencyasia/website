@@ -13,6 +13,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function componentDidMount() {
+    document.title = 'Shows | Frequency Asia';
     $.getJSON(Constants.API_URL + 'shows')
       .done((data) => {
         this.setState({ shows: data.shows });

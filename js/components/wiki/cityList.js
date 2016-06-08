@@ -4,6 +4,11 @@ import { Link } from 'react-router-component';
 import TagList from './tagList';
 
 module.exports = React.createClass({
+
+  componentDidMount: function componentDidMount() {
+    document.title = 'Cities | Frequency Asia';
+  },
+
   render: function render() {
     return (
       <div className="o-content-block">

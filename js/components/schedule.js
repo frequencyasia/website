@@ -15,6 +15,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function componentDidMount() {
+    document.title = 'Schedule | Frequency Asia';
     $.getJSON(Constants.API_URL + 'episodes/scheduled')
       .done((data) => {
         this.parseScheduleData(data.episodes);
