@@ -14,7 +14,7 @@ module.exports = React.createClass({
 
   getInitialState: function getInitialState() {
     return {
-      tags: {},
+      tags: [],
     };
   },
 
@@ -44,9 +44,11 @@ module.exports = React.createClass({
   },
 
   renderTabs: function renderTabs() {
-    return Object.keys(this.state.tags).map((key) => {
-      return <Tab>{ key }</Tab>;
-    });
+    if (!this.state.tags instanceof Array) {
+      return Object.keys(this.state.tags).map((key) => {
+        return <Tab>{ key }</Tab>;
+      });
+    }
   },
 
   renderTag: function renderTag(tag) {
@@ -55,14 +57,17 @@ module.exports = React.createClass({
   },
 
   renderPanels: function renderPanels() {
-    return Object.keys(this.state.tags).map((key) => {
-      return (
-        <TabPanel>
-          <ul>{ this.state.tags[key].map(this.renderTag) }</ul>
-        </TabPanel>
-      );
-    });
+    if (!this.state.tags instanceof Array) {
+      return Object.keys(this.state.tags).map((key) => {
+        return (
+          <TabPanel>
+            <ul>{ this.state.tags[key].map(this.renderTag) }</ul>
+          </TabPanel>
+        );
+      });
+    }
   },
+
   render: function render() {
     if (this.props.useTabs) {
       return (
