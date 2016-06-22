@@ -1,12 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-component';
+import $ from 'jquery';
 
 import TagList from './tagList';
+import Constants from './../../constants';
 
 module.exports = React.createClass({
 
+  getInitialState: function getInitialState() {
+    return { tags: [] };
+  },
+
   componentDidMount: function componentDidMount() {
     document.title = 'Artists | Frequency Asia';
+    $.getJSON(Constants.API_URL + 'artists')
+      .done((data) => {
+        this.setState({ tags: data.items });
+      });
   },
 
   render: function render() {

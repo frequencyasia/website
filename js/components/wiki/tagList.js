@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 import { Link } from 'react-router-component';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
@@ -9,26 +8,8 @@ module.exports = React.createClass({
 
   propTypes: {
     type: React.PropTypes.string.isRequired,
+    tags: React.PropTypes.array.isRequired,
     useTabs: React.PropTypes.bool,
-  },
-
-  getInitialState: function getInitialState() {
-    return {
-      tags: [],
-      alphabetisedTags: {},
-    };
-  },
-
-  componentDidMount: function componentDidMount() {
-    console.log(this)
-    $.getJSON(Constants.API_URL + this.props.type)
-      .done((data) => {
-        if (this.props.useTabs) {
-          this.setState({ alphabetisedTags: this.alphabetiseTags(data.items) });
-        } else {
-          this.setState({ tags: data.items });
-        }
-      });
   },
 
   isLetter: function isLetter(char) {
@@ -48,8 +29,8 @@ module.exports = React.createClass({
     return alphabetisedTags;
   },
 
-  renderTabs: function renderTabs() {
-    return Object.keys(this.state.alphabetisedTags).map((key) => {
+  renderTabs: function renderTabs(alphabetisedTags) {
+    return Object.keys(alphabetisedTags).map((key) => {
       return <Tab>{ key }</Tab>;
     });
   },
@@ -59,11 +40,11 @@ module.exports = React.createClass({
     return <li className="c-wiki__list__item" key={ tag.slug }><Link href={ link }>{ tag.name }</Link></li>;
   },
 
-  renderPanels: function renderPanels() {
-    return Object.keys(this.state.alphabetisedTags).map((key) => {
+  renderPanels: function renderPanels(alphabetisedTags) {
+    return Object.keys(alphabetisedTags).map((key) => {
       return (
         <TabPanel>
-          <ul>{ this.state.alphabetisedTags[key].map(this.renderTag) }</ul>
+          <ul>{ alphabetisedTags[key].map(this.renderTag) }</ul>
         </TabPanel>
       );
     });
@@ -71,15 +52,16 @@ module.exports = React.createClass({
 
   render: function render() {
     if (this.props.useTabs) {
+      const alphabetisedTags = this.alphabetiseTags(this.props.tags);
       return (
         <Tabs>
           <TabList>
-            { this.renderTabs() }
+            { this.renderTabs(alphabetisedTags) }
           </TabList>
-          { this.renderPanels() }
+          { this.renderPanels(alphabetisedTags) }
         </Tabs>
       );
     }
-    return (<ul>{ this.state.tags.map(this.renderTag) }</ul>);
+    return (<ul>{ this.props.tags.map(this.renderTag) }</ul>);
   },
 });
