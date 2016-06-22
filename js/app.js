@@ -2,10 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Location, Locations, NotFound } from 'react-router-component';
 
-import Home from './components/home';
+import About from './components/about';
 import Artist from './components/wiki/artist';
 import ArtistList from './components/wiki/artistList';
-import About from './components/about';
+// import Chat from './components/chat/chat';
+import City from './components/wiki/city';
+import CityList from './components/wiki/cityList';
+import Country from './components/wiki/country';
+import CountryList from './components/wiki/countryList';
+import Home from './components/home';
 import Nav from './components/nav';
 import NotFoundPage from './components/notFound';
 import Player from './components/player/player';
@@ -13,10 +18,6 @@ import Projects from './components/projects';
 import Schedule from './components/schedule';
 import Show from './components/show';
 import ShowList from './components/showList';
-import Country from './components/wiki/country';
-import CountryList from './components/wiki/countryList';
-import City from './components/wiki/city';
-import CityList from './components/wiki/cityList';
 import Wiki from './components/wiki/wiki';
 
 
@@ -57,3 +58,7 @@ ReactDOM.render((
 ReactDOM.render((
   <App history />
 ), document.getElementById('main-container'));
+
+// ReactDOM.render((
+//   <Chat />
+// ), document.getElementById('chat-container'));

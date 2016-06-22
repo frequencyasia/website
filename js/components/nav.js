@@ -31,6 +31,7 @@ module.exports = React.createClass({
     }
     return (
       <nav className="c-nav" role="navigation">
+        <Link className="u-no-border u-no-padding" href="/"><div className="c-header__content__logo">Home</div></Link>
         <Link href={ this.state.nowPlayingUrl } ><div className="c-nav__item">{ nowPlayingLabel }</div></Link>
         <Link href="/shows"><div className="c-nav__item">shows</div></Link>
         <Link href="/schedule"><div className="c-nav__item">schedule</div></Link>

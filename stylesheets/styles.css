@@ -324,6 +324,47 @@ a:hover {
   padding: 0;
 }
 
+.c-chat {
+  background: #1a1a1a;
+  width: 25vw;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 100%;
+  z-index: 0;
+  transition: left 0.2s;
+  will-change: left;
+  z-index: 1;
+}
+
+.c-chat--visible {
+  left: 75%
+}
+
+.c-chat__toggle {
+  position: fixed;
+  right: 25px;
+  top: 25px;
+}
+
+.c-chat__container {
+  display: flex;
+  margin: 25px;
+  height: 100%;
+  flex-direction: column;
+}
+
+.c-chat__message-list {
+  color: black;
+  background: white;
+  padding: 10px;
+  list-style: none;
+  flex-grow: 1;
+  max-height: 80vh;
+  overflow-y: scroll;
+}
 
 .c-header {
   display: flex;
@@ -994,9 +1035,6 @@ a.post-module {
   }
   .c-player {
     justify-content: space-between;
-  }
-  .c-header__content__logo {
-    margin-top: 20px;
   }
   .o-feature-slider {
     height: 90%;

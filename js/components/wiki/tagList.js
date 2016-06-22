@@ -20,6 +20,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function componentDidMount() {
+    console.log(this)
     $.getJSON(Constants.API_URL + this.props.type)
       .done((data) => {
         if (this.props.useTabs) {
