@@ -54,7 +54,7 @@ module.exports = React.createClass({
     if (this.props.useTabs) {
       const alphabetisedTags = this.alphabetiseTags(this.props.tags);
       return (
-        <Tabs>
+        <Tabs forceRenderTabPanel>
           <TabList>
             { this.renderTabs(alphabetisedTags) }
           </TabList>
