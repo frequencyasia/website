@@ -26,7 +26,7 @@ module.exports = React.createClass({
           <div className="row">
             <div className="col">
               <h1><Link className="u-no-border" href="/wiki">Wiki</Link> &rsaquo; Countries</h1>
-              <TagList type="countries" />
+              <TagList type="countries" tags={ this.state.tags } />
             </div>
           </div>
         </section>
