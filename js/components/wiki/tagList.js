@@ -17,7 +17,10 @@ module.exports = React.createClass({
   },
 
   alphabetiseTags: function alphabetiseTags(tags) {
-    const alphabetisedTags = Object.assign({}, Constants.TABS_TEMPLATE);
+    const alphabetisedTags = {};
+    for (const key of Constants.TABS_TEMPLATE) {
+      alphabetisedTags[key] = [];
+    }
     console.log(alphabetisedTags)
     for (const tag of tags) {
       const initial = tag.slug[0];
