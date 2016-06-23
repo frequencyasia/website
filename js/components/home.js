@@ -32,7 +32,7 @@ module.exports = React.createClass({
     };
     const link = '/shows/' + episode.show.slug;
     return (
-      <div className="swiper-slide" style={ style }>
+      <div className="swiper-slide" style={ style } key={ episode.id }>
         <div className="c-featured-item">
           <div className="c-featured-item__background"></div>
           <article className="c-featured-item__container">
