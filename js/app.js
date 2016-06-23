@@ -20,11 +20,14 @@ import Show from './components/show';
 import ShowList from './components/showList';
 import Wiki from './components/wiki/wiki';
 
+// Fix incoming hashed URLS
+if (window.location.hash.length) {
+  window.location.href = window.location.href + window.location.hash.slice(1, window.location.hash.length);
+}
 
 const App = React.createClass({
 
   render: function render() {
-    console.log(window.location.hash)
     return (
     <Locations component={null}>
       <Location path="/" handler={Home} />
