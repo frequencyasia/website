@@ -1064,3 +1064,12 @@ a.post-module {
 .tabs-menu-item {
   cursor: pointer;
 }
+
+.tabs-menu-item a {
+  padding: 10px;
+}
+
+.tabs-menu-item .is-active {
+  border-bottom: 2px solid #ef5b30;
+  padding-bottom: 10px;
+}
