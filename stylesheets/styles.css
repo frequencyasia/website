@@ -1069,7 +1069,7 @@ a.post-module {
   padding: 10px;
 }
 
-.tabs-menu-item .is-active {
+.tabs-menu-item.is-active {
   border-bottom: 2px solid #ef5b30;
   padding-bottom: 10px;
 }
