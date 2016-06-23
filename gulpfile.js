@@ -15,6 +15,7 @@ var isLocalDev = false;
 
 gulp.task('is-production', () => {
   isProduction = true;
+  process.env.NODE_ENV = 'production';
 });
 
 gulp.task('is-local-dev', () => {
