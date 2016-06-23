@@ -68,4 +68,4 @@ ReactDOM.render((
 //   <Chat />
 // ), document.getElementById('chat-container'));
 
-console.log('Frequency Asia 1.1.0');
+console.log('Frequency Asia 1.1.1');
