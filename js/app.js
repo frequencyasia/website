@@ -24,6 +24,7 @@ import Wiki from './components/wiki/wiki';
 const App = React.createClass({
 
   render: function render() {
+    console.log(window.location.hash)
     return (
     <Locations component={null}>
       <Location path="/" handler={Home} />
@@ -31,7 +32,6 @@ const App = React.createClass({
       <Location path="/projects" handler={Projects} />
       <Location path="/schedule" handler={Schedule} />
       <Location path="/shows" handler={ShowList} />
-      <Location path="/#shows" handler={ShowList} />
       <Location path="/shows/:slug" handler={Show} />
       <Location path="/shows/:slug/:episodeSlug" handler={Show} />
       <Location path="/wiki" handler={Wiki} />
