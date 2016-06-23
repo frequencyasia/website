@@ -22,7 +22,8 @@ import Wiki from './components/wiki/wiki';
 
 // Fix incoming hashed URLS
 if (window.location.hash.length) {
-  window.location.href = window.location.href + window.location.hash.slice(1, window.location.hash.length);
+  window.location.href = window.location.href.split('#')[0] + window.location.hash.slice(1, window.location.hash.length);
+  window.location.hash = '';
 }
 
 const App = React.createClass({
