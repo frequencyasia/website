@@ -49,8 +49,10 @@ module.exports = React.createClass({
   },
 
   render: function render() {
+    console.log(this.props)
     if (this.props.useTabs) {
       const alphabetisedTags = this.alphabetiseTags(this.props.tags);
+      console.log(alphabetisedTags)
       return (
         <Tabs>
           { this.renderTabs(alphabetisedTags) }
