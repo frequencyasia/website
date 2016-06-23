@@ -1051,3 +1051,16 @@ a.post-module {
     display: none;
   }
 }
+
+/* For React Simpletabs*/
+
+.tabs-menu {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+}
+
+.tabs-menu-item {
+  cursor: pointer;
+}
