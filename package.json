@@ -39,7 +39,7 @@
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router-component": "^0.32.2",
-    "react-tabs": "^0.5.3",
+    "react-simpletabs": "^0.7.0",
     "swiper": "^3.2.7"
   }
 }

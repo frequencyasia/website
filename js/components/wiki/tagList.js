@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-component';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import Tabs from 'react-simpletabs';
 
 import Constants from './../../constants';
 
@@ -31,7 +31,7 @@ module.exports = React.createClass({
 
   renderTabs: function renderTabs(alphabetisedTags) {
     return Object.keys(alphabetisedTags).map((key) => {
-      return <Tab>{ key }</Tab>;
+      return <Tabs.Panel title={ key }>{ this.renderPanel(alphabetisedTags[key]) }</Tabs.Panel>;
     });
   },
 
@@ -40,25 +40,20 @@ module.exports = React.createClass({
     return <li className="c-wiki__list__item" key={ tag.slug }><Link href={ link }>{ tag.name }</Link></li>;
   },
 
-  renderPanels: function renderPanels(alphabetisedTags) {
-    return Object.keys(alphabetisedTags).map((key) => {
-      return (
-        <TabPanel>
-          <ul>{ alphabetisedTags[key].map(this.renderTag) }</ul>
-        </TabPanel>
-      );
-    });
+  renderPanel: function renderPanel(tags) {
+    return (
+      <div>
+        <ul>{ tags.map(this.renderTag) }</ul>
+      </div>
+    );
   },
 
   render: function render() {
     if (this.props.useTabs) {
       const alphabetisedTags = this.alphabetiseTags(this.props.tags);
       return (
-        <Tabs forceRenderTabPanel>
-          <TabList>
-            { this.renderTabs(alphabetisedTags) }
-          </TabList>
-          { this.renderPanels(alphabetisedTags) }
+        <Tabs>
+          { this.renderTabs(alphabetisedTags) }
         </Tabs>
       );
     }
