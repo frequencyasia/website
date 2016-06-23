@@ -21,7 +21,6 @@ module.exports = React.createClass({
     for (const key of Constants.TABS_KEYS) {
       alphabetisedTags[key] = [];
     }
-    console.log(alphabetisedTags)
     for (const tag of tags) {
       const initial = tag.slug[0];
       if (this.isLetter(initial)) {
@@ -30,7 +29,6 @@ module.exports = React.createClass({
         alphabetisedTags['#'].push(tag);
       }
     }
-    console.log(alphabetisedTags)
     return alphabetisedTags;
   },
 
@@ -54,7 +52,6 @@ module.exports = React.createClass({
   },
 
   render: function render() {
-    console.log(this.props)
     if (this.props.useTabs) {
       return (
         <Tabs>
