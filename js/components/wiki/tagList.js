@@ -18,6 +18,7 @@ module.exports = React.createClass({
 
   alphabetiseTags: function alphabetiseTags(tags) {
     const alphabetisedTags = Object.assign({}, Constants.TABS_TEMPLATE);
+    console.log(alphabetisedTags)
     for (const tag of tags) {
       const initial = tag.slug[0];
       if (this.isLetter(initial)) {
@@ -26,6 +27,7 @@ module.exports = React.createClass({
         alphabetisedTags['#'].push(tag);
       }
     }
+    console.log(alphabetisedTags)
     return alphabetisedTags;
   },
 
@@ -51,11 +53,9 @@ module.exports = React.createClass({
   render: function render() {
     console.log(this.props)
     if (this.props.useTabs) {
-      const alphabetisedTags = this.alphabetiseTags(this.props.tags);
-      console.log(alphabetisedTags)
       return (
         <Tabs>
-          { this.renderTabs(alphabetisedTags) }
+          { this.renderTabs(this.alphabetiseTags(this.props.tags)) }
         </Tabs>
       );
     }
