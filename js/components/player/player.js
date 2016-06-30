@@ -69,8 +69,10 @@ module.exports = React.createClass({
       .done((data) => {
         if (data && data.current && data.current.name) {
           let [name, url] = data.current.name.split('|');
-          const [_creatorName, showName] = name.split('-'); // Remove leading show name from Airtime.
-          url = url.replace('#', '/'); // NOTE: Temp. fix for fact that url schema is different in react and airtime expects old schema.
+          const splits = name.split('-'); // Remove leading show name from Airtime.
+          splits.shift();
+          const showName = splits.join('-');
+          url = url.replace('#', ''); // NOTE: Temp. fix for fact that url schema is different in react and airtime expects old schema.
           this.setState({
             nowPlayingLabel: showName.trim(),
             nowPlayingLink: url === undefined ? '' : url.trim(), // Return '' if no url.
