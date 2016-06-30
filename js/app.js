@@ -68,4 +68,6 @@ ReactDOM.render((
 //   <Chat />
 // ), document.getElementById('chat-container'));
 
-console.log('Frequency Asia 1.1.1');
+
+const pjson = require('./package.json');
+console.log(pjson.version);
