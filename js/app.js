@@ -70,4 +70,4 @@ ReactDOM.render((
 
 
 const pjson = require('./package.json');
-console.log(pjson.version);
+console.log('Frequency Asia - ' + pjson.version);
