@@ -54,10 +54,12 @@ module.exports = React.createClass({
 
   setPlayerState: function setPlayerState() {
     const stream = document.getElementById('stream-player');
-    if (!this.state.isPlayingStream) {
-      stream.pause();
-    } else {
-      stream.play();
+    if (stream) {
+      if (!this.state.isPlayingStream) {
+        stream.pause();
+      } else {
+        stream.play();
+      }
     }
   },
 
