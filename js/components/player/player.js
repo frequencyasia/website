@@ -5,8 +5,9 @@ import { Link } from 'react-router-component';
 import fecha from 'fecha';
 
 import Constants from './../../constants';
-import MixcloudEmbed from './mixcloudEmbed'
+import MixcloudEmbed from './mixcloudEmbed';
 import VolumeControl from './volumeControl';
+import Utils from './../../utils';
 
 module.exports = React.createClass({
 
@@ -74,7 +75,7 @@ module.exports = React.createClass({
           const showName = splits.join('-');
           url = url.replace('#', ''); // NOTE: Temp. fix for fact that url schema is different in react and airtime expects old schema.
           this.setState({
-            nowPlayingLabel: showName.trim(),
+            nowPlayingLabel: Utils.escapeHtml(showName.trim()),
             nowPlayingLink: url === undefined ? '' : url.trim(), // Return '' if no url.
           });
           PubSub.publish(Constants.PUB_SUB_LABEL.NOW_PLAYING_URL, this.state.nowPlayingLink); // Push url to Nav
@@ -119,7 +120,7 @@ module.exports = React.createClass({
 
   render: function render() {
     if (this.state.selectedMixcloudLink && this.state.selectedMixcloudLink.length) {
-      return <MixcloudEmbed onBackClicked={ this.clearMixcloud } link={ this.state.selectedMixcloudLink }/>
+      return <MixcloudEmbed onBackClicked={ this.clearMixcloud } link={ this.state.selectedMixcloudLink }/>;
     }
     return this.renderStream();
   },
