@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Location, Locations, NotFound } from 'react-router-component';
+import i18next from 'i18next';
 
 import About from './components/about';
 import Artist from './components/wiki/artist';
@@ -19,12 +20,21 @@ import Schedule from './components/schedule';
 import Show from './components/show';
 import ShowList from './components/showList';
 import Wiki from './components/wiki/wiki';
+// import LangENUK from './i18n/en-uk';
 
 // Fix incoming hashed URLS
 if (window.location.hash.length) {
   window.location.href = window.location.href.split('#')[0] + window.location.hash.slice(1, window.location.hash.length);
   window.location.hash = '';
 }
+
+// Initialise i18n
+i18next.init({
+  lng: 'en',
+  resources: {
+    en: require('./i18n/en-uk'),
+  },
+});
 
 const App = React.createClass({
 

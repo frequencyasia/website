@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-component';
 import PubSub from 'pubsub-js';
+import i18next from 'i18next';
 
 import Constants from './../constants';
 
@@ -25,19 +26,19 @@ module.exports = React.createClass({
   },
 
   render: function render() {
-    let nowPlayingLabel = 'home';
+    let nowPlayingLabel = i18next.t('home').toLowerCase();
     if (this.state.nowPlayingUrl !== '/') {
-      nowPlayingLabel = 'now playing';
+      nowPlayingLabel = i18next.t('nowPlaying').toLowerCase();
     }
     return (
       <nav className="c-nav" role="navigation">
-        <Link className="u-no-border u-no-padding" href="/"><div className="c-header__content__logo">Home</div></Link>
+        <Link className="u-no-border u-no-padding" href="/"><div className="c-header__content__logo">{ i18next.t('home').toLowerCase() }</div></Link>
         <Link href={ this.state.nowPlayingUrl } ><div className="c-nav__item">{ nowPlayingLabel }</div></Link>
-        <Link href="/shows"><div className="c-nav__item">shows</div></Link>
-        <Link href="/schedule"><div className="c-nav__item">schedule</div></Link>
-        <Link href="/wiki"><div className="c-nav__item">wiki</div></Link>
-        <Link href="/projects"><div className="c-nav__item">projects</div></Link>
-        <Link href="/about"><div className="c-nav__item">about</div></Link>
+        <Link href="/shows"><div className="c-nav__item">{ i18next.t('shows').toLowerCase() }</div></Link>
+        <Link href="/schedule"><div className="c-nav__item">{ i18next.t('schedule').toLowerCase() }</div></Link>
+        <Link href="/wiki"><div className="c-nav__item">{ i18next.t('wiki').toLowerCase() }</div></Link>
+        <Link href="/projects"><div className="c-nav__item">{ i18next.t('projects').toLowerCase() }</div></Link>
+        <Link href="/about"><div className="c-nav__item">{ i18next.t('about').toLowerCase() }</div></Link>
       </nav>
     );
   },

@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import { Link } from 'react-router-component';
 require('swiper');
+import i18next from 'i18next';
 
 import Constants from './../constants';
 
@@ -38,7 +39,7 @@ module.exports = React.createClass({
           <article className="c-featured-item__container">
             <h1 className="c-featured-item__container__title">{ episode.show.name }</h1>
             <p className="c-featured-item__container__tagline">{ episode.tagline }</p>
-            <p className="c-featured-item__container__tagline"><Link href={ link }>SEE ALL EPISODES</Link></p>
+            <p className="c-featured-item__container__tagline"><Link href={ link }>{ i18next.t('seeAllEpisodes') }</Link></p>
           </article>
         </div>
       </div>

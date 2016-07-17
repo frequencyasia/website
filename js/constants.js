@@ -1,7 +1,9 @@
+import i18next from 'i18next';
+
 module.exports = {
   API_URL: '/api/v1.0/',
   LABELS: {
-    OFFLINE: 'Offline',
+    OFFLINE: i18next.t('offline'),
   },
   LIVE_INFO_URL: 'http://airtime.frequency.asia/api/live-info',
   PUB_SUB_LABEL: {

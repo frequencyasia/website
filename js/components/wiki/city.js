@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import fecha from 'fecha';
+import i18next from 'i18next';
 
 import Constants from './../../constants';
 import EpisodeCard from './../episodeCard';
@@ -20,7 +21,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function componentDidMount() {
-    document.title = 'City | Frequency Asia';
+    document.title = `${i18next.t('city')} | ${i18next.t('freqAsia')}`;
     $.getJSON(Constants.API_URL + 'cities/' + this.props.slug)
       .done((data) => {
         data.episodes.forEach((episode) => {
@@ -30,7 +31,7 @@ module.exports = React.createClass({
           name: data.name,
           episodes: data.episodes,
         });
-        document.title = data.name + ' | Frequency Asia';
+        document.title = `${data.name} | ${i18next.t('freqAsia')}`;
       });
   },
 
@@ -46,7 +47,7 @@ module.exports = React.createClass({
       <section className="c-content">
         <div className="row">
           <div className="col">
-            <h1><Link className="u-no-border" href="/wiki">Wiki</Link> &rsaquo; <Link className="u-no-border" href="/wiki/cities">Cities</Link> &rsaquo; { this.state.name }</h1>
+            <h1><Link className="u-no-border" href="/wiki">{ i18next.t('wiki') }</Link> &rsaquo; <Link className="u-no-border" href="/wiki/cities">{ i18next.t('cities') }</Link> &rsaquo; { this.state.name }</h1>
             <h2 id="location-data"></h2>
             { this.renderEpisodeCards() }
           </div>

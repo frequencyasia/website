@@ -83,7 +83,7 @@ module.exports = React.createClass({
           PubSub.publish(Constants.PUB_SUB_LABEL.NOW_PLAYING_URL, this.state.nowPlayingLink); // Push url to Nav
         } else {
           this.setState({
-            nowPlayingLabel: 'Offline',
+            nowPlayingLabel: Constants.LABELS.OFFLINE,
             nowPlayingLink: '',
           });
         }

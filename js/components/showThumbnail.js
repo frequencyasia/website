@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-component';
+import i18next from 'i18next';
 
 module.exports = React.createClass({
   propTypes: {
@@ -14,10 +15,6 @@ module.exports = React.createClass({
   render: function render() {
     const link = '/shows/' + this.props.slug;
     const thumbnailStyle = { backgroundImage: `url('/static/files/${this.props.image_path}` };
-    let episodes = '1 Episode';
-    if (this.props.num_episodes !== 1) {
-      episodes = this.props.num_episodes + ' Episodes';
-    }
     return (
       <Link href={ link } className="post-module">
         <div className="thumbnail">
@@ -28,7 +25,7 @@ module.exports = React.createClass({
           <h2 className="sub_title">{ this.props.frequency }</h2>
           <p className="description">{ this.props.tagline }</p>
           <div className="post-meta">
-            <span className="timestamp">{ episodes }</span>
+            <span className="timestamp">{ i18next.t('episodes', { num: this.props.num_episodes }) }</span>
           </div>
         </div>
       </Link>

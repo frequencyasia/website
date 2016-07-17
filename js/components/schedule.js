@@ -3,6 +3,7 @@ import $ from 'jquery';
 import fecha from 'fecha';
 import keys from 'lodash/keys';
 import { Link } from 'react-router-component';
+import i18next from 'i18next';
 
 import Constants from './../constants';
 
@@ -15,7 +16,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function componentDidMount() {
-    document.title = 'Schedule | Frequency Asia';
+    document.title = `${i18next.t('schedule')} | ${i18next.t('freqAsia')}`;
     $.getJSON(Constants.API_URL + 'episodes/scheduled')
       .done((data) => {
         this.parseScheduleData(data.episodes);

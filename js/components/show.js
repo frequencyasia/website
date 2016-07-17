@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import fecha from 'fecha';
+import i18next from 'i18next';
 
 import Constants from './../constants';
 import EpisodeCard from './episodeCard';
@@ -21,7 +22,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function componentDidMount() {
-    document.title = 'Show | Frequency Asia';
+    document.title = `${i18next.t('show')} | ${i18next.t('freqAsia')}`;
     $.getJSON(Constants.API_URL + 'shows/' + this.props.slug)
       .done((data) => {
         for (let i = 0; i < data.episodes.length; i++) {
@@ -29,7 +30,7 @@ module.exports = React.createClass({
           item.date = fecha.format(new Date(item.start_time), 'dddd / MMMM D YYYY');
         }
         this.setState(data);
-        document.title = this.state.name + ' | Frequency Asia';
+        document.title = `${this.state.name} | ${i18next.t('freqAsia')}`;
       });
   },
 

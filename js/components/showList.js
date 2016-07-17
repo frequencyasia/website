@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import i18next from 'i18next';
 
 import Constants from './../constants';
 import ShowThumbnail from './showThumbnail';
@@ -13,7 +14,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function componentDidMount() {
-    document.title = 'Shows | Frequency Asia';
+    document.title = `${i18next.t('shows')} | ${i18next.t('freqAsia')}`;
     $.getJSON(Constants.API_URL + 'shows')
       .done((data) => {
         this.setState({ shows: data.shows });

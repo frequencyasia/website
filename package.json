@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "fecha": "^1.1.1",
+    "i18next": "^3.4.1",
     "jquery": "^2.1.4",
     "pubsub-js": "^1.5.3",
     "react": "^15.1.0",

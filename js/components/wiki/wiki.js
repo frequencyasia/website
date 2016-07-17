@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-component';
+import i18next from 'i18next';
 
 module.exports = React.createClass({
 
   componentDidMount: function componentDidMount() {
-    document.title = 'Wiki | Frequency Asia';
+    document.title = `${i18next.t('wiki')} | ${i18next.t('freqAsia')}`;
   },
 
   render: function render() {
@@ -13,11 +14,11 @@ module.exports = React.createClass({
         <section className="c-content">
           <div className="row">
             <div className="col">
-              <h1>Wiki</h1>
+              <h1>{ i18next.t('wiki') }</h1>
               <ul>
-                <li className="c-wiki__list__item"><Link href="/wiki/artists">Artists</Link></li>
-                <li className="c-wiki__list__item"><Link href="/wiki/cities">Cities</Link></li>
-                <li className="c-wiki__list__item"><Link href="/wiki/countries">Countries</Link></li>
+                <li className="c-wiki__list__item"><Link href="/wiki/artists">{ i18next.t('artists') }</Link></li>
+                <li className="c-wiki__list__item"><Link href="/wiki/cities">{ i18next.t('cities') }</Link></li>
+                <li className="c-wiki__list__item"><Link href="/wiki/countries">{ i18next.t('countries') }</Link></li>
               </ul>
             </div>
           </div>

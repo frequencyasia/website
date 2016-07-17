@@ -1,9 +1,10 @@
 import React from 'react';
+import i18next from 'i18next';
 
 module.exports = React.createClass({
 
   componentDidMount: function componentDidMount() {
-    document.title = 'About | Frequency Asia';
+    document.title = `${i18next.t('about')} | ${i18next.t('freqAsia')}`;
   },
 
   render: function render() {

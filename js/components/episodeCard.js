@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-component';
 import PubSub from 'pubsub-js';
+import i18next from 'i18next';
 
 import Constants from './../constants';
 
@@ -68,11 +69,11 @@ module.exports = React.createClass({
   },
 
   render: function render() {
-    let descriptionToggleText = '+ More Info';
+    let descriptionToggleText = '+ ' + i18next.t('moreInfo');
     let descriptionStyle = 'c-episode__description';
     if (this.state.expanded) {
       descriptionStyle += ' c-episode__description--toggled';
-      descriptionToggleText = '- Less Info';
+      descriptionToggleText = '- ' + i18next.t('lessInfo');
     }
     return (
       <article className="c-episode">

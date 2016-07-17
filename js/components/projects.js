@@ -1,9 +1,10 @@
 import React from 'react';
+import i18next from 'i18next';
 
 module.exports = React.createClass({
 
   componentDidMount: function componentDidMount() {
-    document.title = 'Projects | Frequency Asia';
+    document.title = `${i18next.t('projects')} | ${i18next.t('freqAsia')}`;
   },
 
   render: function render() {
@@ -18,7 +19,7 @@ module.exports = React.createClass({
               <h3><a target="_blank" href="http://frequencyasia.bandcamp.com/">Go pick it up or have a listen on Bandcamp.</a></h3>
               <br />
               <h1>FREQUENCY ASIA PODCAST</h1>
-              <p>Before Frequency Aisa was a radio station, it was a podcast. Grab all the past episodes below:</p>
+              <p>Before Frequency Asia was a radio station, it was a podcast. Grab all the past episodes below:</p>
               <h2><a target="_blank" href="http://freqasia.tumblr.com/post/135023709045/episode-033">Episode 033 - December 2015</a></h2>
               <h2><a target="_blank" href="http://freqasia.tumblr.com/post/134049971575/episode-032">Episode 032 - November 2015, Part 2</a></h2>
               <h2><a target="_blank" href="http://freqasia.tumblr.com/post/132651549710/episode-030">Episode 030 - November 2015</a></h2>
