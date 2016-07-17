@@ -25,7 +25,7 @@ module.exports = React.createClass({
           <h2 className="sub_title">{ this.props.frequency }</h2>
           <p className="description">{ this.props.tagline }</p>
           <div className="post-meta">
-            <span className="timestamp">{ i18next.t('episodes', { num: this.props.num_episodes }) }</span>
+            <span className="timestamp">{ i18next.t('numEpisodes', { num: this.props.num_episodes }) }</span>
           </div>
         </div>
       </Link>
