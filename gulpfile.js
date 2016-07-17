@@ -9,6 +9,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const rename = require('gulp-rename');
 const postcss = require('gulp-postcss');
 const uglify = require('gulp-uglify');
+const gulpStylelint = require('gulp-stylelint');
 
 var isProduction = false;
 var isLocalDev = false;
@@ -36,6 +37,16 @@ gulp.task('build-js', () => {
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./dist'))
     .pipe(gulpif(isLocalDev, gulp.dest('./../api/app/static/dist')));
+});
+
+gulp.task('lint-css', () => {
+  return gulp
+    .src('./stylesheets/styles.css')
+    .pipe(gulpStylelint({
+      reporters: [
+        { formatter: 'string', console: true },
+      ],
+    }));
 });
 
 gulp.task('postcss', () => {
@@ -72,6 +83,7 @@ gulp.task('watch-js', function watchStyles() {
 
 gulp.task('default', [
   'is-local-dev',
+  'lint-css',
   'postcss',
   'build-js',
   'watch-styles',
