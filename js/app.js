@@ -26,7 +26,7 @@ const App = React.createClass({
   getInitialState: function getInitialState() {
     return {
       nowPlayingUrl: '/',
-      nowPlayingLabel: Constants.LABELS.OFFLINE,
+      nowPlayingLabel: '',
       nowPlayingSlug: '',
       selectedMixcloudLink: '', // Empty string to denote no Mixcloud show selected.
     };
@@ -62,8 +62,8 @@ const App = React.createClass({
     return (
       <div>
         <header className="c-header" role="banner">
-          <Nav nowPlayingUrl={ this.state.nowPlayingUrl } />
-          <Player { ...this.state } />
+          <Nav nowPlayingUrl={ this.state.nowPlayingUrl }/>
+          <Player { ...this.state }/>
         </header>
         <main className="c-container" role="main">
           <Content history/>

@@ -29,7 +29,7 @@ module.exports = React.createClass({
     PubSub.publish(Constants.PUB_SUB_LABEL.NOW_PLAYING_INFO, {
       label: this.props.name,
       slug: this.props.slug,
-      link: this.props.show.slug + '/' + this.props.slug,
+      link: `/${this.props.show.slug}/${this.props.slug}`,
     });
   },
 
