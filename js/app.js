@@ -49,7 +49,7 @@ const App = React.createClass({
   },
 
   setNowPlayingInfo: function setNowPlayingInfo(pubSubLabel, info) {
-    if (pubSubLabel === Constants.PUB_SUB_LABEL.MIXCLOUD_URL) {
+    if (pubSubLabel === Constants.PUB_SUB_LABEL.NOW_PLAYING_INFO) {
       console.log(info)
       this.setState({
         nowPlayingUrl: info.link,
