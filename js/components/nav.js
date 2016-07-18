@@ -1,39 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-component';
-import PubSub from 'pubsub-js';
 import i18next from 'i18next';
-
-import Constants from './../constants';
 
 module.exports = React.createClass({
 
-  getInitialState: function getInitialState() {
-    return { nowPlayingUrl: '/' };
-  },
-
-  setNowPlayingURL: function setNowPlayingURL(pubSubLabel, url) {
-    if (pubSubLabel === Constants.PUB_SUB_LABEL.NOW_PLAYING_URL) {
-      this.setState({ nowPlayingUrl: url });
-    }
-  },
-
-  componentWillUnmount: function componentWillUnmount() {
-    PubSub.unsubscribe(this.nowPlayingPubSubToken);
-  },
-
-  componentDidMount: function componentDidMount() {
-    this.nowPlayingPubSubToken = PubSub.subscribe(Constants.PUB_SUB_LABEL.NOW_PLAYING_URL, this.setNowPlayingURL);
-  },
-
   render: function render() {
     let nowPlayingLabel = i18next.t('home').toLowerCase();
-    if (this.state.nowPlayingUrl !== '/') {
+    if (this.props.nowPlayingUrl !== '/') {
       nowPlayingLabel = i18next.t('nowPlaying').toLowerCase();
     }
     return (
-      <nav className="c-nav" role="navigation">
+      <nav className="c-nav c-header__content" role="navigation">
         <Link className="u-no-border u-no-padding" href="/"><div className="c-header__content__logo">{ i18next.t('home').toLowerCase() }</div></Link>
-        <Link href={ this.state.nowPlayingUrl } ><div className="c-nav__item">{ nowPlayingLabel }</div></Link>
+        <Link href={ this.props.nowPlayingUrl } ><div className="c-nav__item">{ nowPlayingLabel }</div></Link>
         <Link href="/shows"><div className="c-nav__item">{ i18next.t('shows').toLowerCase() }</div></Link>
         <Link href="/schedule"><div className="c-nav__item">{ i18next.t('schedule').toLowerCase() }</div></Link>
         <Link href="/wiki"><div className="c-nav__item">{ i18next.t('wiki').toLowerCase() }</div></Link>

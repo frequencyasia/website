@@ -13,6 +13,8 @@ module.exports = React.createClass({
     artists: React.PropTypes.array.isRequired,
     episode_image: React.PropTypes.string,
     name: React.PropTypes.string.isRequired,
+    slug: React.PropTypes.string.isRequired,
+    show_slug: React.PropTypes.string.isRequired,
     tagline: React.PropTypes.string.isRequired,
     description: React.PropTypes.string.isRequired,
     date: React.PropTypes.string.isRequired,
@@ -24,6 +26,11 @@ module.exports = React.createClass({
 
   onPlayClicked: function onPlayClicked() {
     PubSub.publish(Constants.PUB_SUB_LABEL.MIXCLOUD_URL, this.props.mixcloud_link);
+    PubSub.publish(Constants.PUB_SUB_LABEL.NOW_PLAYING_INFO, {
+      label: this.props.name,
+      slug: this.props.slug,
+      link: this.props.show_slug + '/' + this.props.slug,
+    });
   },
 
   renderPlayButton: function renderPlayButton() {

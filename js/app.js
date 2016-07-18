@@ -1,26 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Location, Locations, NotFound } from 'react-router-component';
 import i18next from 'i18next';
+import PubSub from 'pubsub-js';
 
-import About from './components/about';
-import Artist from './components/wiki/artist';
-import ArtistList from './components/wiki/artistList';
-// import Chat from './components/chat/chat';
-import City from './components/wiki/city';
-import CityList from './components/wiki/cityList';
-import Country from './components/wiki/country';
-import CountryList from './components/wiki/countryList';
-import Home from './components/home';
+import Constants from './constants';
 import Nav from './components/nav';
-import NotFoundPage from './components/notFound';
 import Player from './components/player/player';
-import Projects from './components/projects';
-import Schedule from './components/schedule';
-import Show from './components/show';
-import ShowList from './components/showList';
-import Wiki from './components/wiki/wiki';
-// import LangENUK from './i18n/en-uk';
+import Content from './components/content';
 
 // Fix incoming hashed URLS
 if (window.location.hash.length) {
@@ -37,46 +23,71 @@ i18next.init({
 });
 
 const App = React.createClass({
+  getInitialState: function getInitialState() {
+    return {
+      nowPlayingUrl: '/',
+      nowPlayingLabel: Constants.LABELS.OFFLINE,
+      nowPlayingSlug: '',
+      selectedMixcloudLink: '', // Empty string to denote no Mixcloud show selected.
+    };
+  },
+
+  componentDidMount: function componentDidMount() {
+    this.mixcloudPubSubToken = PubSub.subscribe(Constants.PUB_SUB_LABEL.MIXCLOUD_URL, this.setMixcloudURL);
+    this.nowPlayingPubSubToken = PubSub.subscribe(Constants.PUB_SUB_LABEL.NOW_PLAYING_INFO, this.setNowPlayingInfo);
+  },
+
+  componentWillUnmount: function componentWillUnmount() {
+    PubSub.unsubscribe(this.mixcloudPubSubToken);
+    PubSub.unsubscribe(this.nowPlayingPubSubToken);
+  },
+
+  setMixcloudURL: function setMixcloudURL(pubSubLabel, url) {
+    if (pubSubLabel === Constants.PUB_SUB_LABEL.MIXCLOUD_URL) {
+      this.setState({ selectedMixcloudLink: url });
+    }
+  },
+
+  setNowPlayingInfo: function setNowPlayingInfo(pubSubLabel, info) {
+    if (pubSubLabel === Constants.PUB_SUB_LABEL.MIXCLOUD_URL) {
+      this.setState({
+        nowPlayingUrl: info.link,
+        nowPlayingLabel: info.label,
+        nowPlayingSlug: info.slug,
+      });
+    }
+  },
 
   render: function render() {
     return (
-    <Locations component={null}>
-      <Location path="/" handler={Home} />
-      <Location path="/about" handler={About} />
-      <Location path="/projects" handler={Projects} />
-      <Location path="/schedule" handler={Schedule} />
-      <Location path="/shows" handler={ShowList} />
-      <Location path="/shows/:slug" handler={Show} />
-      <Location path="/shows/:slug/:episodeSlug" handler={Show} />
-      <Location path="/wiki" handler={Wiki} />
-      <Location path="/wiki/artists" handler={ArtistList} />
-      <Location path="/wiki/artists/:slug" handler={Artist} />
-      <Location path="/wiki/cities" handler={CityList} />
-      <Location path="/wiki/cities/:slug" handler={City} />
-      <Location path="/wiki/countries" handler={CountryList} />
-      <Location path="/wiki/countries/:slug" handler={Country} />
-      <Location path="/wiki/labels" handler={Wiki} />
-      <Location path="/wiki/labels/:slug" handler={Wiki} />
-      <NotFound handler={NotFoundPage} />
-    </Locations>);
+      <div>
+        <header className="c-header" role="banner">
+          <Nav nowPlayingUrl={ this.state.nowPlayingUrl } />
+          <Player { ...this.state } />
+        </header>
+        <main className="c-container" role="main">
+          <Content history/>
+        </main>
+        <aside id="chat-container" className="c-chat"></aside>
+        <aside className="c-social u-mobile-hidden">
+          <a href="/shows.atom"><span className="c-social__icon icon-rss-square"></span></a>
+          <a target="_blank" href="http://www.facebook.com/freqasia"><span className="c-social__icon icon-facebook-square"></span></a>
+          <a target="_blank" href="http://www.twitter.com/freqasia"><span className="c-social__icon icon-twitter-square"></span></a>
+          <a target="_blank" href="https://www.instagram.com/freqasia/"><span className="c-social__icon icon-instagram"></span></a>
+          <a target="_blank" href="http://www.mixcloud.com/frequencyasia"><span className="c-social__icon icon-mixcloud"></span></a>
+        </aside>
+      </div>
+    );
   },
 });
-
-ReactDOM.render((
-  <Nav />
-), document.getElementById('nav-container'));
-
-ReactDOM.render((
-  <Player />
-), document.getElementById('player-container'));
-
-ReactDOM.render((
-  <App history />
-), document.getElementById('main-container'));
 
 // ReactDOM.render((
 //   <Chat />
 // ), document.getElementById('chat-container'));
+
+ReactDOM.render((
+  <App />
+), document.getElementById('app-container'));
 
 
 const pjson = require('./../package.json');

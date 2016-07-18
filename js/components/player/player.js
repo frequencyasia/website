@@ -14,19 +14,10 @@ module.exports = React.createClass({
   getInitialState: function getInitialState() {
     return {
       isPlayingStream: typeof window.orientation === 'undefined', // Should return true if not mobile
-      nowPlayingLabel: Constants.LABELS.OFFLINE,
-      nowPlayingLink: '',
-      selectedMixcloudLink: '', // Empty string to denote no Mixcloud show selected.
       volume: 8, // Max 10
     };
   },
-
-  componentWillUnmount: function componentWillUnmount() {
-    PubSub.unsubscribe(this.mixcloudPubSubToken);
-  },
-
   componentDidMount: function componentDidMount() {
-    this.mixcloudPubSubToken = PubSub.subscribe(Constants.PUB_SUB_LABEL.MIXCLOUD_URL, this.setMixcloudURL);
     this.setPlayerState();
     this.getNowPlaying();
   },
@@ -37,12 +28,6 @@ module.exports = React.createClass({
 
   onPlayClicked: function onPlayClicked() {
     this.setState({ isPlayingStream: !this.state.isPlayingStream });
-  },
-
-  setMixcloudURL: function setMixcloudURL(pubSubLabel, url) {
-    if (pubSubLabel === Constants.PUB_SUB_LABEL.MIXCLOUD_URL) {
-      this.setState({ selectedMixcloudLink: url });
-    }
   },
 
   setVolume: function setVolume(volume) {
@@ -64,7 +49,7 @@ module.exports = React.createClass({
   },
 
   clearMixcloud: function clearMixcloud() {
-    this.setState({ selectedMixcloudLink: '' });
+    PubSub.publish(Constants.PUB_SUB_LABEL.MIXCLOUD_URL, '');
   },
 
   getNowPlaying: function getNowPlaying() {
@@ -76,15 +61,16 @@ module.exports = React.createClass({
           splits.shift();
           const showName = splits.join('-');
           url = url.replace('#', ''); // NOTE: Temp. fix for fact that url schema is different in react and airtime expects old schema.
-          this.setState({
-            nowPlayingLabel: Utils.escapeHtml(showName.trim()),
-            nowPlayingLink: url === undefined ? '' : url.trim(), // Return '' if no url.
+          PubSub.publish(Constants.PUB_SUB_LABEL.NOW_PLAYING_INFO, {
+            label: Utils.escapeHtml(showName.trim()),
+            link: url === undefined ? '' : url.trim(), // Return '' if no url.
+            slug: '',
           });
-          PubSub.publish(Constants.PUB_SUB_LABEL.NOW_PLAYING_URL, this.state.nowPlayingLink); // Push url to Nav
         } else {
-          this.setState({
-            nowPlayingLabel: Constants.LABELS.OFFLINE,
-            nowPlayingLink: '',
+          PubSub.publish(Constants.PUB_SUB_LABEL.NOW_PLAYING_INFO, {
+            label: Constants.LABELS.OFFLINE,
+            link: '',
+            slug: '',
           });
         }
         if (data && data.next && data.next.starts) {
@@ -101,7 +87,7 @@ module.exports = React.createClass({
   renderMetadata: function renderMetadata() {
     return (
       <p className="c-player__text">
-        <Link href={ this.state.nowPlayingLink }>{ this.state.nowPlayingLabel }</ Link>
+        <Link href={ this.props.nowPlayingLink }>{ this.props.nowPlayingLabel }</ Link>
       </p>
     );
   },
@@ -121,8 +107,8 @@ module.exports = React.createClass({
   },
 
   render: function render() {
-    if (this.state.selectedMixcloudLink && this.state.selectedMixcloudLink.length) {
-      return <MixcloudEmbed onBackClicked={ this.clearMixcloud } link={ this.state.selectedMixcloudLink }/>;
+    if (this.props.selectedMixcloudLink && this.props.selectedMixcloudLink.length) {
+      return <MixcloudEmbed onBackClicked={ this.clearMixcloud } link={ this.props.selectedMixcloudLink }/>;
     }
     return this.renderStream();
   },
