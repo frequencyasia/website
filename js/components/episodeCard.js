@@ -14,7 +14,7 @@ module.exports = React.createClass({
     episode_image: React.PropTypes.string,
     name: React.PropTypes.string.isRequired,
     slug: React.PropTypes.string.isRequired,
-    show_slug: React.PropTypes.string.isRequired,
+    show: React.PropTypes.object.isRequired,
     tagline: React.PropTypes.string.isRequired,
     description: React.PropTypes.string.isRequired,
     date: React.PropTypes.string.isRequired,
@@ -29,7 +29,7 @@ module.exports = React.createClass({
     PubSub.publish(Constants.PUB_SUB_LABEL.NOW_PLAYING_INFO, {
       label: this.props.name,
       slug: this.props.slug,
-      link: this.props.show_slug + '/' + this.props.slug,
+      link: this.props.show.slug + '/' + this.props.slug,
     });
   },
 
