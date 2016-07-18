@@ -27,8 +27,7 @@ module.exports = React.createClass({
       <Location path="/projects" handler={Projects} />
       <Location path="/schedule" handler={Schedule} />
       <Location path="/shows" handler={ShowList} />
-      <Location path="/\/shows\/(\d+)\/(\d+)/" handler={Episode} urlPatternOptions={['showSlug', 'slug']} />
-      <Location path="/shows/:slug/:episodeSlug" handler={Episode} />
+      <Location path="/shows/:showSlug/:slug" handler={Episode} />
       <Location path="/shows/:slug" handler={Show} />
       <Location path="/wiki" handler={Wiki} />
       <Location path="/wiki/artists" handler={ArtistList} />
