@@ -56,6 +56,7 @@ module.exports = React.createClass({
 
   clearMixcloud: function clearMixcloud() {
     PubSub.publish(Constants.PUB_SUB_LABEL.MIXCLOUD_URL, '');
+    this.getNowPlaying();
   },
 
   getNowPlaying: function getNowPlaying() {

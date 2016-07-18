@@ -1,6 +1,6 @@
 {
   "name": "frequencyasia",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Frequency Asia website",
   "main": "js/app.js",
   "scripts": {
