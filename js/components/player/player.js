@@ -10,6 +10,11 @@ import VolumeControl from './volumeControl';
 import Utils from './../../utils';
 
 module.exports = React.createClass({
+  propTypes: {
+    nowPlayingUrl: React.PropTypes.string.isRequired,
+    nowPlayingLabel: React.PropTypes.string.isRequired,
+    selectedMixcloudLink: React.PropTypes.string.isRequired,
+  },
 
   getInitialState: function getInitialState() {
     return {
@@ -17,6 +22,7 @@ module.exports = React.createClass({
       volume: 8, // Max 10
     };
   },
+
   componentDidMount: function componentDidMount() {
     this.setPlayerState();
     this.getNowPlaying();
@@ -61,10 +67,15 @@ module.exports = React.createClass({
           splits.shift();
           const showName = splits.join('-');
           url = url.replace('#', ''); // NOTE: Temp. fix for fact that url schema is different in react and airtime expects old schema.
+          const urlSplits = url.split('/');
+          let slug = '';
+          if (urlSplits.length === 3) { // i.e shows, <show_slug>, <episode_slug>
+            slug = urlSplits[2];
+          }
           PubSub.publish(Constants.PUB_SUB_LABEL.NOW_PLAYING_INFO, {
             label: Utils.escapeHtml(showName.trim()),
             link: url === undefined ? '' : url.trim(), // Return '' if no url.
-            slug: '',
+            slug,
           });
         } else {
           PubSub.publish(Constants.PUB_SUB_LABEL.NOW_PLAYING_INFO, {
@@ -87,7 +98,7 @@ module.exports = React.createClass({
   renderMetadata: function renderMetadata() {
     return (
       <p className="c-player__text">
-        <Link href={ this.props.nowPlayingLink }>{ this.props.nowPlayingLabel }</ Link>
+        <Link href={ this.props.nowPlayingUrl }>{ this.props.nowPlayingLabel }</ Link>
       </p>
     );
   },

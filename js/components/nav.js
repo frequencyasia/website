@@ -3,6 +3,9 @@ import { Link } from 'react-router-component';
 import i18next from 'i18next';
 
 module.exports = React.createClass({
+  propTypes: {
+    nowPlayingUrl: React.PropTypes.string.isRequired,
+  },
 
   render: function render() {
     let nowPlayingLabel = i18next.t('home').toLowerCase();
