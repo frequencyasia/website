@@ -8,6 +8,6 @@ module.exports = React.createClass({
   },
 
   render: function render() {
-    return '404';
+    return ('<p>404</p>');
   },
 });
