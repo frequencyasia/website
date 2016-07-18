@@ -10,6 +10,7 @@ module.exports = React.createClass({
 
   propTypes: {
     slug: React.PropTypes.string.isRequired,
+    showSlug: React.PropTypes.string.isRequired,
   },
 
   getInitialState: function getInitialState() {
@@ -23,7 +24,7 @@ module.exports = React.createClass({
 
   componentDidMount: function componentDidMount() {
     document.title = `${i18next.t('show')} | ${i18next.t('freqAsia')}`;
-    $.getJSON(Constants.API_URL + 'shows/' + this.props.slug)
+    $.getJSON(Constants.API_URL + 'shows/' + this.props.showSlug)
       .done((data) => {
         for (let i = 0; i < data.episodes.length; i++) {
           const item = data.episodes[i];
