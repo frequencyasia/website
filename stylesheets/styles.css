@@ -845,6 +845,11 @@ a.post-module {
   margin: 0;
 }
 
+.c-episode__content__now-playing {
+  margin-bottom: 0;
+  color: rgb(239, 91, 48);
+}
+
 .c-episode__content__image {
   max-width: 150px;
   margin-left: auto;

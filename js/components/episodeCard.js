@@ -74,7 +74,7 @@ module.exports = React.createClass({
 
   renderNowPlaying: function renderNowPlaying() {
     if (this.props.slug === this.props.nowPlayingSlug) {
-      return ` [${i18next.t('nowPlaying')}]`;
+      return <p className="c-episode__content__now-playing">{ i18next.t('nowPlaying')}</p>;
     }
     return '';
   },
@@ -95,7 +95,8 @@ module.exports = React.createClass({
         <div className="c-episode__content">
           { this.renderPlayButton() }
           <div className="c-episode__content__info">
-            <h1 className="c-episode__content__title">{ this.props.name }{ this.renderNowPlaying() }</h1>
+            <h1 className="c-episode__content__title">{ this.props.name }</h1>
+            { this.renderNowPlaying() }
             <p>{ this.props.tagline }</p>
             <p className="c-episode__content__date">{ this.props.date }</p>
             <p className="c-episode__content__tags">
