@@ -3,6 +3,7 @@ import PubSub from 'pubsub-js';
 import $ from 'jquery';
 import { Link } from 'react-router-component';
 import fecha from 'fecha';
+import Marquee from 'react-marquee';
 
 import Constants from './../../constants';
 import MixcloudEmbed from './mixcloudEmbed';
@@ -98,9 +99,11 @@ module.exports = React.createClass({
 
   renderMetadata: function renderMetadata() {
     return (
-      <p className="c-player__text">
-        <Link href={ this.props.nowPlayingUrl }>{ this.props.nowPlayingLabel }</ Link>
-      </p>
+      <div className="c-player__text">
+        <Link href={ this.props.nowPlayingUrl }>
+          <Marquee text={ this.props.nowPlayingLabel } loop trailing={ 2000 } hoverToStop/>
+        </ Link>
+      </div>
     );
   },
 

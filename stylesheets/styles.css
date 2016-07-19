@@ -634,6 +634,12 @@ a.post-module {
 }
 
 .c-player__text {
+  font-weight: 100;
+  line-height: 20px;
+  font-family: Gill Sans,Gill Sans MT,Calibri,sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
   flex-grow: 1;
   overflow: hidden;
   white-space: nowrap;
