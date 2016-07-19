@@ -29,6 +29,7 @@ const App = React.createClass({
       nowPlayingLabel: '',
       nowPlayingSlug: '',
       selectedMixcloudLink: '', // Empty string to denote no Mixcloud show selected.
+      currentSection: '',
     };
   },
 
@@ -40,6 +41,16 @@ const App = React.createClass({
   componentWillUnmount: function componentWillUnmount() {
     PubSub.unsubscribe(this.mixcloudPubSubToken);
     PubSub.unsubscribe(this.nowPlayingPubSubToken);
+  },
+
+  setCurrentSection: function setCurrentSection() {
+    // Set current section to match the appropriate url.
+    const pathNames = window.location.pathname.split('/');
+    if (window.location === this.state.nowPlayingUrl) {
+      this.setState({ currentSection: 'nowPlaying' });
+    } else if (pathNames.length > 1) {
+      this.setState({ currentSection: pathNames[1] });
+    }
   },
 
   setMixcloudURL: function setMixcloudURL(pubSubLabel, url) {
@@ -62,11 +73,11 @@ const App = React.createClass({
     return (
       <div>
         <header className="c-header" role="banner">
-          <Nav nowPlayingUrl={ this.state.nowPlayingUrl }/>
+          <Nav nowPlayingUrl={ this.state.nowPlayingUrl } currentSection={ this.state.currentSection }/>
           <Player { ...this.state }/>
         </header>
         <main className="c-container" role="main">
-          <Content history nowPlayingSlug={ this.state.nowPlayingSlug }/>
+          <Content history nowPlayingSlug={ this.state.nowPlayingSlug } setCurrentSection={ this.setCurrentSection }/>
         </main>
         <aside id="chat-container" className="c-chat"></aside>
         <aside className="c-social u-mobile-hidden">

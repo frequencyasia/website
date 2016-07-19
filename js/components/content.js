@@ -21,11 +21,12 @@ import Wiki from './wiki/wiki';
 module.exports = React.createClass({
   propTypes: {
     nowPlayingSlug: React.PropTypes.string.isRequired,
+    setCurrentSection: React.PropTypes.func.isRequired,
   },
 
   render: function render() {
     return (
-    <Locations component={null}>
+    <Locations component={null} onNavigation={this.props.setCurrentSection}>
       <Location path="/" handler={Home} nowPlayingSlug={ this.props.nowPlayingSlug }/>
       <Location path="/about" handler={About} />
       <Location path="/projects" handler={Projects} />
