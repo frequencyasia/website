@@ -12,6 +12,7 @@ module.exports = React.createClass({
 
   propTypes: {
     slug: React.PropTypes.string.isRequired,
+    nowPlayingSlug: React.PropTypes.string.isRequired,
   },
 
   getInitialState: function getInitialState() {
@@ -38,7 +39,7 @@ module.exports = React.createClass({
 
   renderEpisodeCards: function renderEpisodeCards() {
     return this.state.episodes.map((episode) => {
-      return <EpisodeCard key={ episode.slug } { ...episode } />;
+      return <EpisodeCard key={ episode.slug } nowPlayingSlug={ this.props.nowPlayingSlug } { ...episode } />;
     });
   },
 

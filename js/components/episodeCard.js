@@ -18,6 +18,7 @@ module.exports = React.createClass({
     tagline: React.PropTypes.string.isRequired,
     description: React.PropTypes.string.isRequired,
     date: React.PropTypes.string.isRequired,
+    nowPlayingSlug: React.PropTypes.string.isRequired,
   },
 
   getInitialState: function getInitialState() {
@@ -71,6 +72,13 @@ module.exports = React.createClass({
     }
   },
 
+  renderNowPlaying: function renderNowPlaying() {
+    if (this.props.slug === this.props.nowPlayingSlug) {
+      return ` [${i18next.t('nowPlaying')}]`;
+    }
+    return '';
+  },
+
   onMoreInfoClicked: function onMoreInfoClicked() {
     this.setState({ expanded: !this.state.expanded });
   },
@@ -87,7 +95,7 @@ module.exports = React.createClass({
         <div className="c-episode__content">
           { this.renderPlayButton() }
           <div className="c-episode__content__info">
-            <h1 className="c-episode__content__title">{ this.props.name }</h1>
+            <h1 className="c-episode__content__title">{ this.props.name }{ this.renderNowPlaying() }</h1>
             <p>{ this.props.tagline }</p>
             <p className="c-episode__content__date">{ this.props.date }</p>
             <p className="c-episode__content__tags">

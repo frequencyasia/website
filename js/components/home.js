@@ -7,6 +7,11 @@ import i18next from 'i18next';
 import Constants from './../constants';
 
 module.exports = React.createClass({
+
+  propTypes: {
+    nowPlayingSlug: React.PropTypes.string.isRequired,
+  },
+
   numShowcaseItems: 5,
 
   getInitialState: function getInitialState() {
@@ -23,6 +28,13 @@ module.exports = React.createClass({
       });
   },
 
+  renderNowPlaying: function renderNowPlaying(episodeSlug) {
+    if (episodeSlug === this.props.nowPlayingSlug) {
+      return ` [${i18next.t('nowPlaying')}]`;
+    }
+    return '';
+  },
+
   renderSlide: function renderSlide(episode) {
     const style = {
       'background': 'linear-gradient(to right, rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/static/files/' + episode.image_path + '") no-repeat center center',
@@ -37,7 +49,7 @@ module.exports = React.createClass({
         <div className="c-featured-item">
           <div className="c-featured-item__background"></div>
           <article className="c-featured-item__container">
-            <h1 className="c-featured-item__container__title">{ episode.show.name }</h1>
+            <h1 className="c-featured-item__container__title">{ episode.show.name }{ this.renderNowPlaying(episode) }</h1>
             <p className="c-featured-item__container__tagline">{ episode.tagline }</p>
             <p className="c-featured-item__container__tagline"><Link href={ link }>{ i18next.t('seeAllEpisodes') }</Link></p>
           </article>

@@ -19,25 +19,29 @@ import ShowList from './showList';
 import Wiki from './wiki/wiki';
 
 module.exports = React.createClass({
+  propTypes: {
+    nowPlayingSlug: React.PropTypes.string.isRequired,
+  },
+
   render: function render() {
     return (
     <Locations component={null}>
-      <Location path="/" handler={Home} />
+      <Location path="/" handler={Home} nowPlayingSlug={ this.props.nowPlayingSlug }/>
       <Location path="/about" handler={About} />
       <Location path="/projects" handler={Projects} />
       <Location path="/schedule" handler={Schedule} />
       <Location path="/shows" handler={ShowList} />
-      <Location path="/shows/:showSlug/:slug" handler={Episode} />
-      <Location path="/shows/:slug" handler={Show} />
+      <Location path="/shows/:showSlug/:slug" handler={Episode} nowPlayingSlug={ this.props.nowPlayingSlug } />
+      <Location path="/shows/:slug" handler={Show} nowPlayingSlug={ this.props.nowPlayingSlug } />
       <Location path="/wiki" handler={Wiki} />
       <Location path="/wiki/artists" handler={ArtistList} />
-      <Location path="/wiki/artists/:slug" handler={Artist} />
+      <Location path="/wiki/artists/:slug" handler={Artist} nowPlayingSlug={ this.props.nowPlayingSlug } />
       <Location path="/wiki/cities" handler={CityList} />
-      <Location path="/wiki/cities/:slug" handler={City} />
+      <Location path="/wiki/cities/:slug" handler={City} nowPlayingSlug={ this.props.nowPlayingSlug } />
       <Location path="/wiki/countries" handler={CountryList} />
-      <Location path="/wiki/countries/:slug" handler={Country} />
+      <Location path="/wiki/countries/:slug" handler={Country} nowPlayingSlug={ this.props.nowPlayingSlug } />
       <Location path="/wiki/labels" handler={Wiki} />
-      <Location path="/wiki/labels/:slug" handler={Wiki} />
+      <Location path="/wiki/labels/:slug" handler={Wiki} nowPlayingSlug={ this.props.nowPlayingSlug } />
       <NotFound handler={NotFoundPage} />
     </Locations>);
   },

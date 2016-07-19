@@ -66,7 +66,7 @@ const App = React.createClass({
           <Player { ...this.state }/>
         </header>
         <main className="c-container" role="main">
-          <Content history/>
+          <Content history nowPlayingSlug={ this.state.nowPlayingSlug }/>
         </main>
         <aside id="chat-container" className="c-chat"></aside>
         <aside className="c-social u-mobile-hidden">
