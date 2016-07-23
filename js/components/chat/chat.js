@@ -17,7 +17,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function componentDidMount() {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('http://frequency.asia:3000');
     this.socket.on('message', (user, message, timestamp) => {
       const messages = this.state.messages;
       const time = fecha.format(new Date(timestamp), 'hh:mm A');
