@@ -3,6 +3,7 @@ module.exports = {
     about: 'About',
     artist: 'Artist',
     artists: 'Artists',
+    chatUsernameExists: 'That username already exists, please choose another one.',
     city: 'City',
     cities: 'Cities',
     countries: 'Countries',

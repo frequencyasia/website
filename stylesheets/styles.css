@@ -204,14 +204,13 @@ button.swiper-pagination-bullet {
 }
 
 /* icomoon imports */
-
 @font-face {
     font-family: 'icomoon';
-    src:    url('fonts/icomoon.eot?bbpxpm');
-    src:    url('fonts/icomoon.eot?bbpxpm#iefix') format('embedded-opentype'),
-        url('fonts/icomoon.ttf?bbpxpm') format('truetype'),
-        url('fonts/icomoon.woff?bbpxpm') format('woff'),
-        url('fonts/icomoon.svg?bbpxpm#icomoon') format('svg');
+    src:    url('fonts/icomoon.eot?4echfo');
+    src:    url('fonts/icomoon.eot?4echfo#iefix') format('embedded-opentype'),
+        url('fonts/icomoon.ttf?4echfo') format('truetype'),
+        url('fonts/icomoon.woff?4echfo') format('woff'),
+        url('fonts/icomoon.svg?4echfo#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -230,8 +229,9 @@ button.swiper-pagination-bullet {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-.icon-facebook-square:before {
-    content: "\e906";
+
+.icon-chat:before {
+    content: "\e903";
 }
 .icon-instagram:before {
     content: "\e908";
@@ -239,14 +239,14 @@ button.swiper-pagination-bullet {
 .icon-rss-square:before {
     content: "\e907";
 }
+.icon-facebook-square:before {
+    content: "\e906";
+}
 .icon-twitter-square:before {
     content: "\e904";
 }
 .icon-mixcloud:before {
     content: "\e905";
-}
-.icon-arrow-back:before {
-    content: "\e903";
 }
 .icon-play2:before {
     content: "\e900";
@@ -326,28 +326,37 @@ a:hover {
 
 .c-chat {
   background: #1a1a1a;
-  width: 25vw;
-  height: 100%;
+  width: 300px;
+  height: calc(100% - 60px);
   position: fixed;
-  top: 0;
+  top: 60px;
   right: 0;
   bottom: 0;
   left: 100%;
   z-index: 0;
   transition: left 0.2s;
   will-change: left;
-  z-index: 1;
+  z-index: 2;
 }
 
 .c-chat--visible {
-  left: 75%
+  left: calc(100% - 300px);
 }
 
 .c-chat__toggle {
   position: fixed;
-  right: 25px;
-  top: 25px;
+  right: 15px;
+  top: 17px;
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  -webkit-transition: color .2s ease;
+  transition: color .2s ease;
+  outline: 0;
 }
+
 
 .c-chat__container {
   display: flex;
@@ -362,7 +371,7 @@ a:hover {
   padding: 10px;
   list-style: none;
   flex-grow: 1;
-  max-height: 80vh;
+  max-height: 70vh;
   overflow-y: scroll;
 }
 
@@ -430,6 +439,8 @@ a:hover {
   color: #FFF;
   flex-grow: 1;
   flex-basis: 0;
+  /* Padding for chat icon */
+  padding-right: 40px;
 }
 
 .c-player__button {
@@ -1020,6 +1031,25 @@ a.post-module {
   .u-mobile-hidden {
     display: none;
   }
+
+  .c-chat {
+    width: 100%;
+    height: calc(100% - 100px);
+    top: 100px;
+  }
+
+  .c-chat--visible {
+    left: 0;
+  }
+
+  .c-chat__toggle {
+    right: 7px;
+    top: 7px;
+  }
+
+  .c-chat__message-list {
+    max-height: 65vh;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -1046,6 +1076,7 @@ a.post-module {
   }
   .c-player {
     justify-content: space-between;
+    width: 95%;
   }
   .o-feature-slider {
     height: 90%;
@@ -1060,6 +1091,17 @@ a.post-module {
   }
   .c-episode__content__image {
     display: none;
+  }
+
+  .c-chat {
+    height: calc(100% - 140px);
+    top: 140px;
+  }
+  .c-chat__toggle {
+    top: 100px;
+  }
+  .c-chat__message-list {
+    max-height: 60vh;
   }
 }
 
@@ -1083,4 +1125,31 @@ a.post-module {
 .tabs-menu-item.is-active {
   border-bottom: 2px solid #ef5b30;
   padding-bottom: 10px;
+}
+
+/* Chat Message*/
+
+.c-chat-message {
+  margin-top: 10px;
+}
+
+.c-chat-message:hover {
+  background-color: lightgrey;
+}
+
+.c-chat-message__header {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 18px;
+}
+
+.c-chat-message__time {
+  font-size: 12px;
+  color: grey;
+}
+
+.c-chat-message__body {
+  margin: 0;
+  padding: 0;
 }

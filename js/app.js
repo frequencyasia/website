@@ -4,6 +4,7 @@ import i18next from 'i18next';
 import PubSub from 'pubsub-js';
 
 import Constants from './constants';
+import Chat from './components/chat/chat';
 import Nav from './components/nav';
 import Player from './components/player/player';
 import Content from './components/content';
@@ -79,7 +80,7 @@ const App = React.createClass({
         <main className="c-container" role="main">
           <Content history nowPlayingSlug={ this.state.nowPlayingSlug } setCurrentSection={ this.setCurrentSection }/>
         </main>
-        <aside id="chat-container" className="c-chat"></aside>
+        <Chat id="chat-container" className="c-chat" />
         <aside className="c-social u-mobile-hidden">
           <a href="/shows.atom"><span className="c-social__icon icon-rss-square"></span></a>
           <a target="_blank" href="http://www.facebook.com/freqasia"><span className="c-social__icon icon-facebook-square"></span></a>
@@ -91,10 +92,6 @@ const App = React.createClass({
     );
   },
 });
-
-// ReactDOM.render((
-//   <Chat />
-// ), document.getElementById('chat-container'));
 
 ReactDOM.render((
   <App />
