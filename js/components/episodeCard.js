@@ -11,7 +11,7 @@ module.exports = React.createClass({
     countries: React.PropTypes.array.isRequired,
     cities: React.PropTypes.array.isRequired,
     artists: React.PropTypes.array.isRequired,
-    episode_image: React.PropTypes.string,
+    image_path: React.PropTypes.string,
     name: React.PropTypes.string.isRequired,
     slug: React.PropTypes.string.isRequired,
     show: React.PropTypes.object.isRequired,
@@ -66,8 +66,8 @@ module.exports = React.createClass({
   },
 
   renderThumbnail: function renderThumbnail() {
-    if (this.props.episode_image) {
-      const src = '/static/files/' + this.props.episode_image;
+    if (this.props.image_path) {
+      const src = '/static/files/' + this.props.image_path;
       return (<img className="c-episode__content__image" src={ src } alt={ this.props.name } />);
     }
   },
