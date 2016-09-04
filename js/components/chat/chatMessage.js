@@ -19,7 +19,7 @@ module.exports = React.createClass({
       );
     }
     return (
-      <li><em>{ this.props.message }</em></li>
+      <li className="c-chat-message"><em>{ this.props.message }</em></li>
     );
   },
 });

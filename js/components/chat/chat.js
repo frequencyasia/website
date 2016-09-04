@@ -56,6 +56,7 @@ module.exports = React.createClass({
 
   onSetUsernameClick: function onSendClick() {
     this.socket.emit('join', document.getElementById('set-username').value);
+    document.getElementById('set-username').value = '';
   },
 
   renderSelectUsername: function renderSelectUsername() {
@@ -73,7 +74,13 @@ module.exports = React.createClass({
       <div className="c-chat__container">
         <label htmlFor="set-username">Enter a name to use for chat:</label>
         { renderErrorMessage() }
-        <input id="set-username" autoComplete="off" autoFocus onKeyPress={ onKeyPress }/>
+        <input
+          id="set-username"
+          className="c-chat__username-input"
+          autoComplete="off"
+          autoFocus
+          onKeyPress={ onKeyPress }
+        />
         <button onClick={ this.onSetUsernameClick }>Set Username</button>
       </div>
     );

@@ -365,6 +365,10 @@ a:hover {
   flex-direction: column;
 }
 
+.c-chat__username-input {
+  margin: 10px 0;
+}
+
 .c-chat__message-list {
   color: black;
   background: white;
