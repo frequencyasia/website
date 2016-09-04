@@ -37,7 +37,7 @@ module.exports = React.createClass({
 
   renderSlide: function renderSlide(episode) {
     const style = {
-      'background': 'linear-gradient(to right, rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/static/files/' + episode.image_path + '") no-repeat center center',
+      'background': 'linear-gradient(to right, rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5)), url("/static/files/' + episode.wide_image_path + '") no-repeat center center',
       'WebkitBackgroundSize': 'cover',
       'MozBackgroundSize': 'cover',
       'OBackgroundSize': 'cover',
