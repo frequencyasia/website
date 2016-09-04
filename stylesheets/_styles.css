@@ -18,3 +18,4 @@
   /* Explicitly named */
 /* TRUMPS */
   /* Overrides, ususally !important */
+  @import "./trumps.tabsmenu.css";

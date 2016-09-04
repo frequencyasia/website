@@ -1064,7 +1064,7 @@ a.post-module {
     height: 80px;
     flex-grow: 1;
     justify-content: space-around;
-    margin-right: 10px;
+    /*margin-right: 10px;*/
   }
   .c-nav__item {
     padding: 0;
